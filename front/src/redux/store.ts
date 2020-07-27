@@ -32,4 +32,4 @@ const makeStore: MakeStore<RootState> = (ctx: Context) => {
   return store;
 };
 
-export const wrapper = createWrapper<RootState>(makeStore, { debug: true });
+export const wrapper = createWrapper<RootState>(makeStore, { debug: false });

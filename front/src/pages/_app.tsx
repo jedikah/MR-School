@@ -1,7 +1,10 @@
-import React from "react";
+import * as React from "react";
+import withApollo from "next-with-apollo";
+import { ApolloProvider } from "@apollo/react-hooks";
 import App, { AppInitialProps, AppContext } from "next/app";
 
 import { wrapper } from "../redux/store";
+import { apolloClient } from "../api/apollo";
 
 class MyApp extends App<AppInitialProps> {
   public static getInitialProps = async ({ Component, ctx }: AppContext) => {
@@ -20,10 +23,19 @@ class MyApp extends App<AppInitialProps> {
   };
 
   public render() {
-    const { Component, pageProps } = this.props;
+    //@ts-ignore
+    const { Component, pageProps, apollo } = this.props;
 
-    return <Component {...pageProps} />;
+    return (
+      <ApolloProvider client={apollo}>
+        <Component {...pageProps} />
+      </ApolloProvider>
+    );
   }
 }
 
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(
+  withApollo(() => {
+    return apolloClient;
+  })(MyApp)
+);
