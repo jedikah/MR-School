@@ -1,7 +1,7 @@
 import thunk, { ThunkAction } from "redux-thunk";
 import { combineReducers, createStore, applyMiddleware, Action } from "redux";
 import { composeWithDevTools } from "remote-redux-devtools";
-import { MakeStore, createWrapper, Context, HYDRATE } from "next-redux-wrapper";
+import { MakeStore, createWrapper, Context } from "next-redux-wrapper";
 
 import { sessionReducer } from "./session/sessionReducer";
 import { env } from "../configs";
@@ -18,7 +18,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 
-const makeStore: MakeStore<RootState> = () => {
+const makeStore: MakeStore<RootState> = (ctx: Context) => {
   const devToolsEnhancer = composeWithDevTools({
     realtime: env.NODE_ENV === "dev" ? true : false,
     port: 8000,
