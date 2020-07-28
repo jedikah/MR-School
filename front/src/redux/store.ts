@@ -1,10 +1,10 @@
-import thunk, { ThunkAction } from "redux-thunk";
-import { combineReducers, createStore, applyMiddleware, Action } from "redux";
-import { composeWithDevTools } from "remote-redux-devtools";
-import { MakeStore, createWrapper, Context } from "next-redux-wrapper";
+import thunk, { ThunkAction } from 'redux-thunk';
+import { combineReducers, createStore, applyMiddleware, Action } from 'redux';
+import { composeWithDevTools } from 'remote-redux-devtools';
+import { MakeStore, createWrapper, Context } from 'next-redux-wrapper';
 
-import { sessionReducer } from "./session/sessionReducer";
-import { env } from "../configs";
+import { sessionReducer } from './session/sessionReducer';
+import { env } from '../configs';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -20,15 +20,12 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 
 const makeStore: MakeStore<RootState> = (ctx: Context) => {
   const devToolsEnhancer = composeWithDevTools({
-    realtime: env.NODE_ENV === "dev" ? true : false,
+    realtime: env.NODE_ENV === 'dev' ? true : false,
     port: 8000,
-    hostname: "localhost",
+    hostname: 'localhost',
   });
 
-  const store = createStore(
-    rootReducer,
-    devToolsEnhancer(applyMiddleware(thunk))
-  );
+  const store = createStore(rootReducer, devToolsEnhancer(applyMiddleware(thunk)));
   return store;
 };
 

@@ -1,4 +1,4 @@
-import { ConnectAction, CONNECT } from "./types";
+import { ConnectAction, CONNECT } from './types';
 
 export function connect(): ConnectAction {
   return {

@@ -1,10 +1,10 @@
-import "cross-fetch/polyfill";
-import { ApolloClient } from "apollo-client";
-import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
-import { setContext } from "apollo-link-context";
-import { createUploadLink } from "apollo-upload-client";
+import 'cross-fetch/polyfill';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { setContext } from 'apollo-link-context';
+import { createUploadLink } from 'apollo-upload-client';
 
-import { env } from "../configs";
+import { env } from '../configs';
 
 const cache = new InMemoryCache();
 const httpLink = createUploadLink({
@@ -15,15 +15,13 @@ const authLink = setContext(async (_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
 const link = authLink.concat(httpLink);
 
-export const apolloClient: ApolloClient<NormalizedCacheObject> = new ApolloClient(
-  {
-    cache,
-    link,
-  }
-);
+export const apolloClient: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+  cache,
+  link,
+});
