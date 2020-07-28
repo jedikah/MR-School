@@ -1,10 +1,10 @@
-import * as React from "react";
-import withApollo from "next-with-apollo";
-import { ApolloProvider } from "@apollo/react-hooks";
-import App, { AppInitialProps, AppContext } from "next/app";
+import * as React from 'react';
+import withApollo from 'next-with-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
+import App, { AppInitialProps, AppContext } from 'next/app';
 
-import { wrapper } from "../redux/store";
-import { apolloClient } from "../api/apollo";
+import { wrapper } from '../redux/store';
+import { apolloClient } from '../api/apollo';
 
 class MyApp extends App<AppInitialProps> {
   public static getInitialProps = async ({ Component, ctx }: AppContext) => {
@@ -13,9 +13,7 @@ class MyApp extends App<AppInitialProps> {
     return {
       pageProps: {
         // Call page-level getInitialProps
-        ...(Component.getInitialProps
-          ? await Component.getInitialProps(ctx)
-          : {}),
+        ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
         // Some custom thing for all pages
         pathname: ctx.pathname,
       },
@@ -23,6 +21,7 @@ class MyApp extends App<AppInitialProps> {
   };
 
   public render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     const { Component, pageProps, apollo } = this.props;
 

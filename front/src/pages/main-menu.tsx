@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 const MainMenuPage: React.FC = () => <p>Main menu page</p>;
 

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 const SchoolFeesPage: React.FC = () => <p>School fees page</p>;
 
