@@ -1,19 +1,22 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import "fontsource-roboto";
 
+import { ContextProvider } from "./contexts";
 import { apolloClient } from "./graphql/apollo";
+import LoginPage from "./pages/Login";
 
 function App() {
   return (
     <Router>
-      <ApolloProvider client={apolloClient}>
-        <Button variant="contained" color="primary">
-          Hello mr school
-        </Button>
-      </ApolloProvider>
+      <ContextProvider>
+        <ApolloProvider client={apolloClient}>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+        </ApolloProvider>
+      </ContextProvider>
     </Router>
   );
 }
