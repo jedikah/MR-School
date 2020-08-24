@@ -1,4 +1,5 @@
 import * as React from "react";
+import logger from "use-reducer-logger";
 import produce, { Draft } from "immer";
 
 // Actions
@@ -26,13 +27,6 @@ const initialState: SessionState = {
   appReady: false,
 };
 
-export const SessionStateContext = React.createContext<
-  SessionState | undefined
->(undefined);
-export const SessionDispatchContext = React.createContext<
-  SessionDispatch | undefined
->(undefined);
-
 const sessionReducer = produce(
   (draft: Draft<SessionState>, action: SessionActions) => {
     switch (action.type) {
@@ -47,8 +41,18 @@ const sessionReducer = produce(
   }
 );
 
+export const SessionStateContext = React.createContext<
+  SessionState | undefined
+>(undefined);
+export const SessionDispatchContext = React.createContext<
+  SessionDispatch | undefined
+>(undefined);
+
 export const SessionProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = React.useReducer(sessionReducer, initialState);
+  const [state, dispatch] = React.useReducer(
+    logger(sessionReducer),
+    initialState
+  );
 
   return (
     <SessionStateContext.Provider value={state}>
