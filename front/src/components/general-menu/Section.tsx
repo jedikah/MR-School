@@ -70,7 +70,8 @@ const Section: React.FC<SectionProps> = ({ sections }) => {
             ))}
             arrowLeft={<LeftArrow />}
             arrowRight={<RightArrow />}
-            alignCenter={false}
+            alignCenter={true}
+            alignOnResize={true}
             itemStyle={{ marginRight: 25 }}
             menuStyle={{ marginBottom: 25 }}
           />
