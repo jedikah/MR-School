@@ -33,7 +33,7 @@ const SectionMenu: React.FC<SectionMenuProps> = ({ color, item }) => {
   const classes = useStyles();
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea className={["hvr-grow"].join(" ")}>
         <Box
           display="flex"
           justifyContent="center"

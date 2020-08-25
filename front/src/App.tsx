@@ -12,6 +12,10 @@ import GeneralMenuPage from "./pages/GeneralMenu";
 function App() {
   return (
     <Router>
+      <head>
+        <link rel="stylesheet" href={require("hover.css/css/hover-min.css")} />
+      </head>
+
       <ContextProvider>
         <ApolloProvider client={apolloClient}>
           <Route path="/login">
