@@ -6,8 +6,8 @@ import avatarUser from "../../assets/50.jpg";
 const useStyles = makeStyles((theme) => ({
   avatar: {
     marginLeft: 10,
-    width: theme.spacing(14),
-    height: theme.spacing(14),
+    width: theme.spacing(10),
+    height: theme.spacing(10),
   },
 
   username: {

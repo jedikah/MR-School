@@ -1,5 +1,11 @@
 import * as React from "react";
+import ScrollMenu from "react-horizontal-scrolling-menu";
 import { Typography, makeStyles, Box } from "@material-ui/core";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+
+import { SectionItem } from "./SectionMenu";
+import SectionMenu from "./SectionMenu";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -11,23 +17,7 @@ const useStyles = makeStyles((theme) => ({
   sectionContainer: {
     marginBottom: theme.spacing(4),
   },
-
-  sectionItem: {
-    minWidth: "25%",
-    minHeight: theme.spacing(35),
-    marginLeft: theme.spacing(3),
-    padding: theme.spacing(2),
-  },
-
-  sectionName: {
-    color: "#fff",
-    fontWeight: 900,
-  },
 }));
-
-interface SectionItem {
-  name: string;
-}
 
 interface Section {
   title: string;
@@ -48,22 +38,16 @@ const Section: React.FC<SectionProps> = ({ sections }) => {
           <Typography className={classes.title} variant="h4">
             {section.title}
           </Typography>
-          <Box display="flex" className={classes.sectionContainer}>
-            {section.sectionItems.map((sectionItem, i) => (
-              <Box
-                key={i}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                className={classes.sectionItem}
-                style={{ backgroundColor: section.color }}
-              >
-                <Typography variant="h5" className={classes.sectionName}>
-                  {sectionItem.name}
-                </Typography>
-              </Box>
+          <ScrollMenu
+            data={section.sectionItems.map((sectionItem, i) => (
+              <SectionMenu key={i} color={section.color} item={sectionItem} />
             ))}
-          </Box>
+            arrowLeft={<ArrowBackIosIcon />}
+            arrowRight={<ArrowForwardIosIcon />}
+            alignCenter={false}
+            itemStyle={{ marginRight: 25 }}
+            menuStyle={{ marginBottom: 25 }}
+          />
         </div>
       ))}
     </div>
@@ -77,6 +61,30 @@ Section.defaultProps = {
 
       color: "#451515",
       sectionItems: [
+        {
+          name: "Liste des eleves",
+        },
+        {
+          name: "Frais de scolarite",
+        },
+        {
+          name: "Liste des eleves",
+        },
+        {
+          name: "Frais de scolarite",
+        },
+        {
+          name: "Liste des eleves",
+        },
+        {
+          name: "Frais de scolarite",
+        },
+        {
+          name: "Liste des eleves",
+        },
+        {
+          name: "Frais de scolarite",
+        },
         {
           name: "Liste des eleves",
         },
