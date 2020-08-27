@@ -8,6 +8,8 @@ import { apolloClient } from "./graphql/apollo";
 
 import LoginPage from "./pages/Login";
 import GeneralMenuPage from "./pages/GeneralMenu";
+import Drawer from './pages/drawer';
+
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
           </Route>
           <Route path="/general-menu">
             <GeneralMenuPage />
+          </Route>
+          <Route path="/drawer">
+            <Drawer />
           </Route>
         </ApolloProvider>
       </ContextProvider>
