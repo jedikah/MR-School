@@ -1,32 +1,32 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { makeStyles, Theme, Box, Avatar } from '@material-ui/core';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { makeStyles, Theme, Box, Avatar } from "@material-ui/core";
 
-import Drawer from '../components/main/drawer';
-import setting from '../assets/settings.png';
-import Navbar from '../components/main/NavBar';
+import Drawer from "../components/main/drawer";
+import setting from "../assets/settings.png";
+import Navbar from "../components/main/NavBar";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex'
+    display: "flex",
   },
   left: {
-    width: '30%'
+    width: "30%",
   },
   right: {
-    width: '100%'
+    width: "100%",
   },
   nav: {
-    height: 'fit-content'
+    height: "fit-content",
   },
   content: {
-    height: '100%'
+    height: "100%",
   },
   setting: {
     margin: 10,
     width: theme.spacing(6),
-    height: theme.spacing(6)
-  }
+    height: theme.spacing(6),
+  },
 }));
 
 const Main: React.FC = () => {
@@ -39,20 +39,26 @@ const Main: React.FC = () => {
         <div className={classes.nav}>
           <Box display="flex" justifyContent="flex-end">
             <Avatar
-              alt={'user-avatar'}
+              alt={"user-avatar"}
               src={setting}
               className={classes.setting}
             />
           </Box>
-          <Navbar></Navbar>
+          <Navbar />
         </div>
         <div className={classes.content}>
           <Switch>
             <Route
               path="/main/frais"
               component={
-                require('../components/frais-de-scolarite/FraisDeScolarite')
+                require("../components/frais-de-scolarite/FraisDeScolarite")
                   .default
+              }
+            />
+            <Route
+              path="/main/list-eleve"
+              component={
+                require("../components/student-list/StudentList").default
               }
             />
           </Switch>

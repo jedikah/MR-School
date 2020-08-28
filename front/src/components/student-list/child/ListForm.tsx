@@ -31,13 +31,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const EcollageForm: React.FC = () => {
+const NewFormStudent: React.FC = () => {
   const classes = useStyles();
 
   return (
     <form noValidate autoComplete="off">
       <Typography variant="h6" gutterBottom>
-        Nouveau Etudiant
+        Ecolage
       </Typography>
       <Grid container alignItems="center" justify="center">
         <Grid
@@ -84,4 +84,4 @@ const EcollageForm: React.FC = () => {
   );
 };
 
-export default EcollageForm;
+export default NewFormStudent;

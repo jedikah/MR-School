@@ -1,29 +1,29 @@
 export const items = [
   {
-    label: 'Accueil',
-    path: '/home',
-    children: []
+    label: "Accueil",
+    path: "/home",
+    children: [],
   },
   {
-    label: 'Gestion des élèves',
-    path: '/drawer',
+    label: "Gestion des élèves",
+    path: "/main/list-eleve",
     children: [
       {
-        label: 'Listes des élèves',
-        path: ''
-      }
-    ]
+        label: "Listes des élèves",
+        path: "/main/list-eleve",
+      },
+    ],
   },
   {
-    label: 'Frais de scolarité',
-    path: '/main/frais',
-    children: []
+    label: "Frais de scolarité",
+    path: "/main/frais",
+    children: [],
   },
   {
-    label: 'Gestion des responsables',
-    path: '/drawer',
-    children: []
-  }
+    label: "Gestion des responsables",
+    path: "/drawer",
+    children: [],
+  },
 ];
 
 //Four parents items

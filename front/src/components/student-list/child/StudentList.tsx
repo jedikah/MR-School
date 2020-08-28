@@ -59,7 +59,7 @@ const rows = [
   createData("photo 4", "nom4", "prenom4", "contact4", "adresse4"),
 ];
 
-const UserList: React.FC = () => {
+const ListStudent: React.FC = () => {
   const classes = useStyles();
 
   return (
@@ -71,7 +71,7 @@ const UserList: React.FC = () => {
           id="tableTitle"
           component="div"
         >
-          LIST DES ELEVES
+          USERS
         </Typography>
       </Toolbar>
       <Table className={classes.table} aria-label="simple table">
@@ -107,4 +107,4 @@ const UserList: React.FC = () => {
   );
 };
 
-export default UserList;
+export default ListStudent;
