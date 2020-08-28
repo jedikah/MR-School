@@ -8,8 +8,7 @@ import { apolloClient } from "./graphql/apollo";
 
 import LoginPage from "./pages/Login";
 import GeneralMenuPage from "./pages/GeneralMenu";
-import Drawer from './pages/drawer';
-
+import Drawer from "./pages/drawer";
 
 function App() {
   return (
