@@ -7,8 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { items, isOpen } from './items';
 import { Avatar, Box, Collapse, Typography } from '@material-ui/core';
 import avatarUser from '../../assets/50.jpg';
-import { ExpandLess, ExpandMore } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { ListItemLink } from './listItemLink';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -17,14 +16,14 @@ const useStyles = makeStyles((theme: Theme) => {
       width: 220
     },
     paper: {
-      backgroundColor: '#1C0808',
+      background: 'linear-gradient(90turn, #110505, #240B0B)',
       color: '#9e9e9e'
     },
     list: {
       textAlign: 'center'
     },
     nested: {
-      paddingLeft: theme.spacing(4)
+      paddingLeft: theme.spacing(5)
     },
     avatar: {
       width: theme.spacing(15),
@@ -34,10 +33,6 @@ const useStyles = makeStyles((theme: Theme) => {
     }
   });
 });
-
-function ListItemLink(props: any) {
-  return <ListItem button component={Link} {...props} />;
-}
 
 const SwipeableTemporaryDrawer: React.FC = () => {
   const styles = useStyles();
@@ -77,22 +72,13 @@ const SwipeableTemporaryDrawer: React.FC = () => {
         {items.map((item, index) => (
           <div key={index}>
             <ListItemLink
-              button
-              to={`/drawer/${item.value}`}
-              onClick={() => expandClick(index)}
+              expandClick={() => expandClick(index)}
+              length={item.children.length}
+              open={state[index]}
+              primary={item.label}
               className={styles.list}
-            >
-              <ListItemText primary={item.label} />
-              {item.children.length > 0 ? (
-                state[index] ? (
-                  <ExpandLess />
-                ) : (
-                  <ExpandMore />
-                )
-              ) : (
-                ''
-              )}
-            </ListItemLink>
+              to={item.path}
+            />
             {item.children.map((child, num) => (
               <Collapse
                 in={state[index]}
