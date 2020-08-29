@@ -37,7 +37,7 @@ const EcollageForm: React.FC = () => {
   return (
     <form noValidate autoComplete="off">
       <Typography variant="h6" gutterBottom>
-        Nouveau Etudiant
+        Ecolage
       </Typography>
       <Grid container alignItems="center" justify="center">
         <Grid

@@ -71,7 +71,7 @@ const UserList: React.FC = () => {
           id="tableTitle"
           component="div"
         >
-          LIST DES ELEVES
+          USERS
         </Typography>
       </Toolbar>
       <Table className={classes.table} aria-label="simple table">

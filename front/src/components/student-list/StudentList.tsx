@@ -28,13 +28,13 @@ const FraisDeScolarite: React.FC = () => {
     <Grid container>
       <Grid item xs={8}>
         <div className={classes.paper}>
-          <NewFormStudent />
+          <ListStudent />
         </div>
       </Grid>
       <Grid item xs={4}>
         <div className={classes.paper}>
           <Paper className={classes.paper}>
-            <ListStudent />
+            <NewFormStudent />
           </Paper>
         </div>
       </Grid>

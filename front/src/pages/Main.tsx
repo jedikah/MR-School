@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   nav: {
     height: "fit-content",
   },
-  content: {
-    height: "100%",
-  },
   setting: {
     margin: 10,
     width: theme.spacing(6),
@@ -46,7 +43,7 @@ const Main: React.FC = () => {
           </Box>
           <Navbar />
         </div>
-        <div className={classes.content}>
+        <div>
           <Switch>
             <Route
               path="/main/frais"
