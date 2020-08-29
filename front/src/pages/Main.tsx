@@ -58,6 +58,10 @@ const Main: React.FC = () => {
                 require("../components/student-list/StudentList").default
               }
             />
+            <Route
+              path="/main/note-eleve"
+              component={require("../components/note-eleve/NoteEleve").default}
+            />
           </Switch>
         </div>
       </div>
