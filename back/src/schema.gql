@@ -2,6 +2,54 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateAccountInput {
+  eleve: Eleve
+  fonction: CreateFonctionInput
+  type: String
+  utilisateur: Utilisateur!
+}
+
+input CreateFonctionInput {
+  designation: String!
+}
+
+type CreateFonctionOutput {
+  designation: String
+  idFonction: ID
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input Eleve {
+  matricule: String!
+  naissance: DateTime!
+  sexe: String!
+}
+
+type FonctionByDesignationOutput {
+  designation: String
+  idFonction: ID
+}
+
+type Mutation {
+  createAccount(input: CreateAccountInput!): String!
+  createFonction(input: CreateFonctionInput!): CreateFonctionOutput!
+}
+
 type Query {
+  fonctionByDesignation(input: String!): FonctionByDesignationOutput!
   helloMrSchool: String!
+}
+
+input Utilisateur {
+  adresse: String!
+  contact: String!
+  id: ID
+  motDePasse: String!
+  nom: String!
+  photo: String
+  prenom: String!
 }
