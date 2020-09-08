@@ -11,6 +11,10 @@ import { AppService } from './app.service';
 import { UtilisateurModule } from './utilisateur/utilisateur.module';
 import { AppResolver } from './app.resolver';
 import { UtilsModule } from './utils/utils.module';
+import { ResponsableModule } from './responsable/responsable.module';
+import { FonctionModule } from './fonction/fonction.module';
+import { AvoirModule } from './avoir/avoir.module';
+import { EleveModule } from './eleve/eleve.module';
 
 @Module({
   imports: [
@@ -39,6 +43,10 @@ import { UtilsModule } from './utils/utils.module';
     }),
     UtilisateurModule,
     UtilsModule,
+    ResponsableModule,
+    FonctionModule,
+    AvoirModule,
+    EleveModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
