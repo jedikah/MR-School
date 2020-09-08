@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Avoir } from './avoir.entity';
 import { Repository } from 'typeorm';
-import { Responsable } from 'src/responsable/responsable.entity';
+import { Responsable } from '../responsable/responsable.entity';
 
 @Injectable()
 export class AvoirService {

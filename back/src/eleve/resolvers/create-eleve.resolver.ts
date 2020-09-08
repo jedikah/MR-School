@@ -7,7 +7,7 @@ import { EleveService } from '../../eleve/eleve.service';
 import { EleveInput } from '../eleve.type';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Eleve } from '../eleve.entity';
-import { UtilisateurInput } from 'src/utilisateur/utilisateur.type';
+import { UtilisateurInput } from '../../utilisateur/utilisateur.type';
 
 @Resolver()
 export class CreateEleveResolver {

@@ -1,6 +1,6 @@
 import { Entity, JoinColumn, RelationId, OneToOne, Column } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Utilisateur } from 'src/utilisateur/utilisateur.entity';
+import { Utilisateur } from '../utilisateur/utilisateur.entity';
 
 @ObjectType()
 @Entity({ name: 'eleve' })

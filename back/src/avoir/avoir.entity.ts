@@ -1,6 +1,6 @@
 import { Entity, ManyToOne, JoinColumn, RelationId } from 'typeorm';
-import { Fonction } from 'src/fonction/fonction.entity';
-import { Responsable } from 'src/responsable/responsable.entity';
+import { Fonction } from '../fonction/fonction.entity';
+import { Responsable } from '../responsable/responsable.entity';
 import { ObjectType } from '@nestjs/graphql';
 
 @ObjectType()

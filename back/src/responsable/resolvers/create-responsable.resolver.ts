@@ -2,16 +2,16 @@ import { Resolver, Mutation, Args } from '@nestjs/graphql';
 
 import { UtilisateurService } from '../../utilisateur/utilisateur.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { ResponsableService } from 'src/responsable/responsable.service';
-import { Responsable } from 'src/responsable/responsable.entity';
+import { ResponsableService } from '../../responsable/responsable.service';
+import { Responsable } from '../../responsable/responsable.entity';
 import { Utilisateur } from '../../utilisateur/utilisateur.entity';
-import { CryptService } from 'src/utils/crypt.service';
-import { FonctionService } from 'src/fonction/fonction.service';
-import { AvoirService } from 'src/avoir/avoir.service';
-import { Avoir } from 'src/avoir/avoir.entity';
+import { CryptService } from '../../utils/crypt.service';
+import { FonctionService } from '../../fonction/fonction.service';
+import { AvoirService } from '../../avoir/avoir.service';
+import { Avoir } from '../../avoir/avoir.entity';
 import { ResponsableInput } from '../responsable.type';
-import { Fonction } from 'src/fonction/fonction.entity';
-import { FonctionInput } from 'src/fonction/fonction.type';
+import { Fonction } from '../../fonction/fonction.entity';
+import { FonctionInput } from '../../fonction/fonction.type';
 import { UtilisateurInput } from '../../utilisateur/utilisateur.type';
 
 @Resolver()

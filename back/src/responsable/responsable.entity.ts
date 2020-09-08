@@ -1,6 +1,6 @@
 import { Entity, OneToOne, JoinColumn, RelationId } from 'typeorm';
 import { Utilisateur } from '../utilisateur/utilisateur.entity';
-import { InputType, Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { Fonction } from '../fonction/fonction.entity';
 
 @ObjectType()

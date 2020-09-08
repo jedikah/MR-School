@@ -15,11 +15,9 @@ export class ResponsableFieldResolver {
   async fonctions(@Root() responsable: Responsable): Promise<Array<Fonction>> {
     const avoirs = await this.avoirService.getResponsableFonctions(responsable);
 
-    const service = this.fonctionService;
-
     return Promise.all(
-      avoirs.map(function(avoirs) {
-        return service.fonctionById(avoirs.idFonction);
+      avoirs.map(avoirs => {
+        return this.fonctionService.fonctionById(avoirs.idFonction);
       }),
     );
   }

@@ -3,12 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Responsable } from './responsable.entity';
 import { ResponsableService } from './responsable.service';
 import { responsableResolvers } from './resolvers';
-import { Fonction } from 'src/fonction/fonction.entity';
-import { Utilisateur } from 'src/utilisateur/utilisateur.entity';
-import { Avoir } from 'src/avoir/avoir.entity';
-import { UtilisateurService } from 'src/utilisateur/utilisateur.service';
-import { FonctionService } from 'src/fonction/fonction.service';
-import { AvoirService } from 'src/avoir/avoir.service';
+import { Fonction } from '../fonction/fonction.entity';
+import { Utilisateur } from '../utilisateur/utilisateur.entity';
+import { Avoir } from '../avoir/avoir.entity';
+import { UtilisateurService } from '../utilisateur/utilisateur.service';
+import { FonctionService } from '../fonction/fonction.service';
+import { AvoirService } from '../avoir/avoir.service';
+import { resolverField } from './resolver-fields';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AvoirService } from 'src/avoir/avoir.service';
   providers: [
     ResponsableService,
     ...responsableResolvers,
+    ...resolverField,
     UtilisateurService,
     FonctionService,
     AvoirService,
