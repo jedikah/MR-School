@@ -1,14 +1,15 @@
 import { Entity, JoinColumn, RelationId, OneToOne, Column } from 'typeorm';
-import { InputType, Field } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { Utilisateur } from 'src/utilisateur/utilisateur.entity';
 
-@InputType()
+@ObjectType()
 @Entity({ name: 'eleve' })
 export class Eleve {
   @OneToOne(() => Utilisateur, { primary: true })
+  @Field()
   @JoinColumn()
-  utilisater: Utilisateur;
-  @RelationId((eleve: Eleve) => eleve.utilisater)
+  utilisateur: Utilisateur;
+  @RelationId((eleve: Eleve) => eleve.utilisateur)
   idUtilisateur: number;
 
   @Field()

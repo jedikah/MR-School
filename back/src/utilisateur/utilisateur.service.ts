@@ -8,14 +8,18 @@ import { Utilisateur } from './utilisateur.entity';
 export class UtilisateurService {
   constructor(
     @InjectRepository(Utilisateur)
-    private utilisateurRepositoery: Repository<Utilisateur>,
+    private utilisateurRepository: Repository<Utilisateur>,
   ) {}
 
+  utilisateurByContact(contact: string): Promise<Utilisateur> {
+    return this.utilisateurRepository.findOne({ where: [{ contact }] });
+  }
+
   nombreUtalisateur(): Promise<number> {
-    return this.utilisateurRepositoery.count();
+    return this.utilisateurRepository.count();
   }
 
   createUtilisateur(newUtilisateur: Utilisateur): Promise<Utilisateur> {
-    return this.utilisateurRepositoery.save(newUtilisateur);
+    return this.utilisateurRepository.save(newUtilisateur);
   }
 }

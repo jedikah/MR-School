@@ -1,13 +1,18 @@
 import { Entity, OneToOne, JoinColumn, RelationId } from 'typeorm';
-import { Utilisateur } from 'src/utilisateur/utilisateur.entity';
-import { InputType } from '@nestjs/graphql';
+import { Utilisateur } from '../utilisateur/utilisateur.entity';
+import { InputType, Field, ObjectType } from '@nestjs/graphql';
+import { Fonction } from '../fonction/fonction.entity';
 
-@InputType()
+@ObjectType()
 @Entity({ name: 'responsable' })
 export class Responsable {
   @OneToOne(() => Utilisateur, { primary: true })
+  @Field()
   @JoinColumn()
-  utilisater: Utilisateur;
-  @RelationId((responsable: Responsable) => responsable.utilisater)
+  utilisateur: Utilisateur;
+  @RelationId((responsable: Responsable) => responsable.utilisateur)
   idUtilisateur: number;
+
+  @Field(() => [Fonction])
+  fonctions: Fonction[];
 }

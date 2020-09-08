@@ -1,12 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { Field, ID, InputType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 
-@InputType()
+@ObjectType()
 @Entity({ name: 'utilisateur' })
 export class Utilisateur {
-  @Field(() => ID, { nullable: true })
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
-  id?: number;
+  id: number;
 
   @Field()
   @Column({ length: 20 })
@@ -28,7 +28,6 @@ export class Utilisateur {
   @Column({ nullable: true })
   photo?: string;
 
-  @Field()
   @Column({ name: 'mot_de_passe', length: 60 })
-  motDePasse: string;
+  motDePasse?: string;
 }

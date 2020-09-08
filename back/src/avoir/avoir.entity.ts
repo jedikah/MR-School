@@ -1,9 +1,9 @@
 import { Entity, ManyToOne, JoinColumn, RelationId } from 'typeorm';
 import { Fonction } from 'src/fonction/fonction.entity';
 import { Responsable } from 'src/responsable/responsable.entity';
-import { InputType } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
 
-@InputType()
+@ObjectType()
 @Entity({ name: 'avoir' })
 export class Avoir {
   @ManyToOne(() => Responsable, { primary: true })

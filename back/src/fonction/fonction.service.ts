@@ -17,4 +17,8 @@ export class FonctionService {
   fonctionByDesignation(designation: string): Promise<Fonction> {
     return this.fonctionRepository.findOne({ where: [{ designation }] });
   }
+
+  fonctionById(id: number): Promise<Fonction> {
+    return this.fonctionRepository.findOne({ where: [{ id }] });
+  }
 }

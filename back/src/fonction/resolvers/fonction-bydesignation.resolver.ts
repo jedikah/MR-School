@@ -1,27 +1,14 @@
-import {
-  Resolver,
-  Args,
-  Query,
-  PartialType,
-  ObjectType,
-} from '@nestjs/graphql';
+import { Resolver, Args, Query } from '@nestjs/graphql';
+
 import { FonctionService } from '../fonction.service';
 import { Fonction } from '../fonction.entity';
 
-@ObjectType()
-export class FonctionByDesignationOutput extends PartialType(
-  Fonction,
-  ObjectType,
-) {}
-
-@Resolver(of => Function)
+@Resolver(() => Fonction)
 export class FonctionByDesignationResolver {
   constructor(private fonctionService: FonctionService) {}
 
-  @Query(() => FonctionByDesignationOutput)
-  fonctionByDesignation(
-    @Args('input') input: string,
-  ): Promise<FonctionByDesignationOutput> {
+  @Query(() => Fonction)
+  fonctionByDesignation(@Args('input') input: string): Promise<Fonction> {
     return this.fonctionService.fonctionByDesignation(input);
   }
 }
