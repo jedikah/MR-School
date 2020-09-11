@@ -15,6 +15,7 @@ import { ResponsableModule } from './responsable/responsable.module';
 import { FonctionModule } from './fonction/fonction.module';
 import { AvoirModule } from './avoir/avoir.module';
 import { EleveModule } from './eleve/eleve.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { EleveModule } from './eleve/eleve.module';
           ...graphqlConfigs,
           autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
           sortSchema: true,
+          context: ({req}) => ({req})
         };
       },
     }),
@@ -47,6 +49,8 @@ import { EleveModule } from './eleve/eleve.module';
     FonctionModule,
     AvoirModule,
     EleveModule,
+    /**Login*/
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],

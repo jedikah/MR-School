@@ -30,15 +30,22 @@ input FonctionInput {
   designation: String!
 }
 
+input LoginInput {
+  contact: String!
+  motDePasse: String!
+}
+
 type Mutation {
   createEleve(input: EleveInput!): Eleve!
   createFonction(input: FonctionInput!): Fonction!
   createResponsable(input: ResponsableInput!): Responsable!
+  login(input: LoginInput!): TokenDto!
 }
 
 type Query {
   fonctionByDesignation(input: String!): Fonction!
   helloMrSchool: String!
+  WhoAmI: Utilisateur!
 }
 
 type Responsable {
@@ -49,6 +56,10 @@ type Responsable {
 input ResponsableInput {
   fonction: FonctionInput!
   utilisateur: UtilisateurInput!
+}
+
+type TokenDto {
+  token: String
 }
 
 type Utilisateur {
