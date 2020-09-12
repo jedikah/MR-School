@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[SwitchNavigator] rendering should renders without crashing 1`] = `
+<body>
+  <div>
+    <div
+      style="text-align: center;"
+    >
+      <div
+        class="sc-AxgMl jXmnMG"
+      >
+        <div
+          class="sc-AxheI ezLxAz"
+        >
+          <span
+            class="sc-AxmLO gkEgeX"
+          />
+          <span
+            class="sc-AxmLO gkEgeX"
+          />
+          <span
+            class="sc-AxmLO gkEgeX"
+          />
+        </div>
+        <div
+          class="sc-Axmtr TvOmY"
+        >
+          <button
+            class="sc-AxjAm cwAnes"
+            style="display: flex; height: 60px;"
+          >
+            <div
+              class="sc-AxirZ gvdnJD"
+            >
+              <img
+                class="sc-AxhCb doTzn"
+                src="test-file-stub"
+              />
+              <span
+                class="sc-AxiKw kvcIxV"
+              >
+                Login
+              </span>
+            </div>
+          </button>
+          <button
+            class="sc-AxjAm cwAnes"
+            style="display: flex; height: 60px;"
+          >
+            <div
+              class="sc-AxirZ gvdnJD"
+            >
+              <span
+                class="sc-AxiKw kvcIxV"
+              >
+                Navigate
+              </span>
+            </div>
+          </button>
+          <button
+            class="sc-AxjAm cwAnes"
+            style="display: flex; height: 60px;"
+          >
+            <div
+              class="sc-AxirZ gvdnJD"
+            >
+              <span
+                class="sc-AxiKw kvcIxV"
+              >
+                Change theme
+              </span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
