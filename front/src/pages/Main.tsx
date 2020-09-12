@@ -1,10 +1,10 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
 import { makeStyles, Theme, Box, Avatar } from "@material-ui/core";
 
 import Drawer from "../components/main/drawer";
 import setting from "../assets/settings.png";
 import Navbar from "../components/main/NavBar";
+import MainNavigation from "../navigations/MainNavigation";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -44,25 +44,7 @@ const Main: React.FC = () => {
           <Navbar />
         </div>
         <div>
-          <Switch>
-            <Route
-              path="/main/frais"
-              component={
-                require("../components/frais-de-scolarite/FraisDeScolarite")
-                  .default
-              }
-            />
-            <Route
-              path="/main/list-eleve"
-              component={
-                require("../components/student-list/StudentList").default
-              }
-            />
-            <Route
-              path="/main/note-eleve"
-              component={require("../components/note-eleve/NoteEleve").default}
-            />
-          </Switch>
+          <MainNavigation />
         </div>
       </div>
     </div>
