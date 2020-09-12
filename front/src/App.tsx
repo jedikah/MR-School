@@ -1,15 +1,18 @@
 import React, { ReactElement } from 'react';
 import { hydrate, render } from 'react-dom';
 
+import { ApolloCustomProvider } from './graphql/apollo';
 import RootProvider from './providers';
 import SwitchNavigator from './components/navigation/SwitchNavigator';
 
 const rootElement = document.getElementById('app') as HTMLElement;
 
 const Component = (): ReactElement => (
-  <RootProvider>
-    <SwitchNavigator />
-  </RootProvider>
+  <ApolloCustomProvider>
+    <RootProvider>
+      <SwitchNavigator />
+    </RootProvider>
+  </ApolloCustomProvider>
 );
 
 const renderApp = (): void => {
