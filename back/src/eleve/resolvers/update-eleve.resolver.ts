@@ -1,7 +1,7 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 
 import { EleveService } from '../../eleve/eleve.service';
-import { EleveInput } from '../eleve.type';
+import { EleveInput, UpdateEleveInput } from '../eleve.type';
 import { Eleve } from '../eleve.entity';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Utilisateur } from '../../utilisateur/utilisateur.entity';
@@ -17,11 +17,10 @@ export class UpdateleveResolver {
 
   @Mutation(() => Eleve)
   async updateEleve(
-    @Args('id') id: string,
-    @Args('eleveInput') eleveInput: EleveInput,
-    @Args('utilisateurInput') utilisateurInput: UtilisateurInput,
-  ) {
-    const eleve = await this.eleveService.eleveByMatricule(id);
+    @Args('matricule') matricule: string,
+    @Args('input') updateEleveInput: UpdateEleveInput,
+  ): Promise<Eleve> {
+    const eleve = await this.eleveService.eleveByMatricule(matricule);
     if (!eleve) {
       throw new HttpException(
         `Cette élève n'existe pas`,
@@ -29,17 +28,20 @@ export class UpdateleveResolver {
       );
     }
 
-    const utilisateur = await this.utilisateurService.utilisateurById(
+    let utilisateur = await this.utilisateurService.utilisateurById(
       eleve.idUtilisateur,
     );
 
     Object.assign<Utilisateur, UtilisateurInput>(utilisateur, {
-      ...utilisateurInput,
+      ...updateEleveInput.utilisateur,
     });
 
-    await this.utilisateurService.updateUtilisateur(utilisateur);
+    utilisateur = await this.utilisateurService.updateUtilisateur(utilisateur);
 
-    Object.assign<Eleve, EleveInput>(eleve, eleveInput);
+    Object.assign<Eleve, EleveInput>(eleve, updateEleveInput);
+
+    eleve.utilisateur = utilisateur;
+
     return this.eleveService.updateEleve(eleve);
   }
 }

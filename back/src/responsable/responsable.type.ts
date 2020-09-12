@@ -14,3 +14,6 @@ export class ResponsableInput extends PartialType(
   @Field(() => FonctionInput)
   fonction: FonctionInput;
 }
+
+@InputType()
+export class CreateResponsableInput extends ResponsableInput {}

@@ -7,6 +7,7 @@ export class EleveInput extends PartialType(
   OmitType(Eleve, ['utilisateur']),
   InputType,
 ) {
+  @Field()
   utilisateur: UtilisateurInput;
 
   @Field()
@@ -18,3 +19,9 @@ export class EleveInput extends PartialType(
   @Field()
   naissance: Date;
 }
+
+@InputType()
+export class CreateEleveInput extends EleveInput {}
+
+@InputType()
+export class UpdateEleveInput extends EleveInput {}
