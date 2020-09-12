@@ -18,7 +18,6 @@ input EleveInput {
   matricule: String!
   naissance: DateTime!
   sexe: String!
-  utilisateur: UtilisateurInput!
 }
 
 type Fonction {
@@ -40,6 +39,7 @@ type Mutation {
   createFonction(input: FonctionInput!): Fonction!
   createResponsable(input: ResponsableInput!): Responsable!
   login(input: LoginInput!): TokenDto!
+  updateEleve(eleveInput: EleveInput!, id: String!, utilisateurInput: UtilisateurInput!): Eleve!
 }
 
 type Query {
@@ -66,6 +66,7 @@ type Utilisateur {
   adresse: String!
   contact: String!
   id: ID!
+  motDePasse: String
   nom: String!
   photo: String
   prenom: String!

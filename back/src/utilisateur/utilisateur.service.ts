@@ -15,11 +15,19 @@ export class UtilisateurService {
     return this.utilisateurRepository.findOne({ where: [{ contact }] });
   }
 
+  utilisateurById(id: number): Promise<Utilisateur> {
+    return this.utilisateurRepository.findOne({ where: [{ id }] });
+  }
+
   nombreUtalisateur(): Promise<number> {
     return this.utilisateurRepository.count();
   }
 
   createUtilisateur(newUtilisateur: Utilisateur): Promise<Utilisateur> {
+    return this.utilisateurRepository.save(newUtilisateur);
+  }
+
+  updateUtilisateur(newUtilisateur: Utilisateur) {
     return this.utilisateurRepository.save(newUtilisateur);
   }
 }

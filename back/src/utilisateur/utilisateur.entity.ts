@@ -29,5 +29,6 @@ export class Utilisateur {
   photo?: string;
 
   @Column({ name: 'mot_de_passe', length: 60 })
+  @Field({ nullable: true })
   motDePasse?: string;
 }
