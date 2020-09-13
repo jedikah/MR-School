@@ -12,6 +12,11 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type CreateResponsableInput = {
+  fonction: FonctionInput;
+  utilisateur: UtilisateurInput;
+};
+
 
 export type Eleve = {
   __typename?: 'Eleve';
@@ -49,6 +54,7 @@ export type Mutation = {
   createFonction: Fonction;
   createResponsable: Responsable;
   login: TokenDto;
+  updateEleve: Eleve;
 };
 
 
@@ -63,12 +69,18 @@ export type MutationCreateFonctionArgs = {
 
 
 export type MutationCreateResponsableArgs = {
-  input: ResponsableInput;
+  input: CreateResponsableInput;
 };
 
 
 export type MutationLoginArgs = {
   input: LoginInput;
+};
+
+
+export type MutationUpdateEleveArgs = {
+  input: UpdateEleveInput;
+  matricule: Scalars['String'];
 };
 
 export type Query = {
@@ -89,14 +101,16 @@ export type Responsable = {
   utilisateur: Utilisateur;
 };
 
-export type ResponsableInput = {
-  fonction: FonctionInput;
-  utilisateur: UtilisateurInput;
-};
-
 export type TokenDto = {
   __typename?: 'TokenDto';
   token?: Maybe<Scalars['String']>;
+};
+
+export type UpdateEleveInput = {
+  matricule: Scalars['String'];
+  naissance: Scalars['DateTime'];
+  sexe: Scalars['String'];
+  utilisateur: UtilisateurInput;
 };
 
 export type Utilisateur = {
@@ -104,6 +118,7 @@ export type Utilisateur = {
   adresse: Scalars['String'];
   contact: Scalars['String'];
   id: Scalars['ID'];
+  motDePasse?: Maybe<Scalars['String']>;
   nom: Scalars['String'];
   photo?: Maybe<Scalars['String']>;
   prenom: Scalars['String'];

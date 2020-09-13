@@ -1,54 +1,61 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   FormControl,
   TextField,
   makeStyles,
   Typography,
-  Button
-} from '@material-ui/core';
+  Button,
+} from "@material-ui/core";
 
-import logo from '../../assets/logo.png';
+import logo from "../../assets/logo.png";
+import { LoginInput } from "../../graphql/types";
+import { UseLogin } from "../../graphql/auth/login/login.service";
 
 const useStyles = makeStyles((theme) => ({
   componentStyle: {
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'column'
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
   },
   logo: {
     width: 100,
     height: 60,
-    position: 'absolute'
+    position: "absolute",
   },
   Heading: {
-    position: 'relative',
+    position: "relative",
     top: 100,
-    fontWeight: 'bold',
-    margin: theme.spacing(7)
+    fontWeight: "bold",
+    margin: theme.spacing(7),
   },
   form: {
     margin: theme.spacing(7),
-    top: 100
+    top: 100,
   },
   field: {
-    marginBottom: theme.spacing(6)
+    marginBottom: theme.spacing(6),
   },
   button: {
-    position: 'absolute',
-    color: 'white',
-    backgroundColor: '#6a353d',
-    borderRadius: '50px 50px 50px 50px',
+    position: "absolute",
+    color: "white",
+    backgroundColor: "#6a353d",
+    borderRadius: "50px 50px 50px 50px",
     width: 200,
-    right: 25
+    right: 25,
   },
   foot: {
     margin: theme.spacing(7),
-    position: 'absolute',
-    bottom: 0
-  }
+    position: "absolute",
+    bottom: 0,
+  },
 }));
 
-export const LoginForm: React.FC = () => {
+export const LoginForm: React.FC<UseLogin> = ({
+  submitLogin,
+  loginInput,
+  loginLoading,
+  handleChangeLoginForm,
+}) => {
   const classes = useStyles();
 
   return (
@@ -66,21 +73,25 @@ export const LoginForm: React.FC = () => {
         <TextField
           className={classes.field}
           error={false}
-          id="id"
-          label="Identifiant"
-          defaultValue="Hello World"
+          label="Contact"
+          value={loginInput.contact}
+          onChange={(e) => handleChangeLoginForm("contact", e.target.value)}
         />
 
         <TextField
           className={classes.field}
           error={false}
-          id="id"
-          label="Identifiant"
-          defaultValue="Hello World"
+          label="Mot de passe"
+          value={loginInput.motDePasse}
+          onChange={(e) => handleChangeLoginForm("motDePasse", e.target.value)}
         />
 
         <div className={classes.field}>
-          <Button size="small" className={classes.button}>
+          <Button
+            size="small"
+            className={classes.button}
+            onClick={() => submitLogin()}
+          >
             Se connecter
           </Button>
         </div>
