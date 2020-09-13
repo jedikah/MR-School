@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { LoginInput } from './types/login.input';
+import { LoginInput } from './input/login.input';
 import { Utilisateur } from '../utilisateur/utilisateur.entity';
 import { UtilisateurService } from '../utilisateur/utilisateur.service';
 import { CryptService } from '../utils/crypt.service';
@@ -15,14 +15,13 @@ export class AuthService {
   {}
   async validateUser(utilisatateurLogin: LoginInput): Promise<Utilisateur> {
     const utilisateur = await this.utilisateurService.utilisateurByContact(utilisatateurLogin.contact);
-    if(!utilisateur) throw Error('Erreur d\'authentification');
+    if(!utilisateur) throw new  UnauthorizedException('Erreur d\'authentification');
     const isPasswordMatching = this.cryptService.compare(utilisatateurLogin.motDePasse, utilisateur.motDePasse);
-    if(isPasswordMatching) return utilisateur
-    return null
+    return isPasswordMatching ? utilisateur : null
   }
   async login(utilisatateurLogin: LoginInput): Promise<string> {
     const utilisateur = await this.validateUser(utilisatateurLogin);
-    const payload = {id: utilisateur.id , contact: utilisateur.contact, motDePasse: utilisateur.motDePasse}
-    return await this.jwtService.signAsync(payload);
+    const payload = {id: utilisateur.id, contact: utilisateur.contact}
+    return await this.jwtService.signAsync({payload});
   }
 }
