@@ -1,10 +1,11 @@
 import { Module, Global } from '@nestjs/common';
 
 import { CryptService } from './crypt.service';
+import { GeneratePassword } from './generate_password';
 
 @Global()
 @Module({
-  providers: [CryptService],
-  exports: [CryptService],
+  providers: [CryptService, GeneratePassword],
+  exports: [CryptService, GeneratePassword],
 })
 export class UtilsModule {}

@@ -9,7 +9,7 @@ import { CryptService } from '../../utils/crypt.service';
 import { FonctionService } from '../../fonction/fonction.service';
 import { AvoirService } from '../../avoir/avoir.service';
 import { Avoir } from '../../avoir/avoir.entity';
-import { ResponsableInput } from '../responsable.type';
+import { CreateResponsableInput, ResponsableInput } from '../responsable.type';
 import { Fonction } from '../../fonction/fonction.entity';
 import { FonctionInput } from '../../fonction/fonction.type';
 import { UtilisateurInput } from '../../utilisateur/utilisateur.type';
@@ -26,7 +26,7 @@ export class CreateResponsableResolver {
 
   @Mutation(() => Responsable)
   async createResponsable(
-    @Args('input') input: ResponsableInput,
+    @Args('input') input: CreateResponsableInput,
   ): Promise<Responsable> {
     let mdpHash: string = null;
     const utilisateur = new Utilisateur();
