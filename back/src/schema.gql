@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AnneeScolaire {
+  debut: DateTime!
+  fin: DateTime!
+  id: ID!
+}
+
 input CreateResponsableInput {
   fonction: FonctionInput!
   utilisateur: UtilisateurInput!
@@ -48,6 +54,11 @@ type Mutation {
   updateEleve(input: UpdateEleveInput!, matricule: String!): Eleve!
 }
 
+type Niveau {
+  designation: String!
+  id: ID!
+}
+
 type Query {
   fonctionByDesignation(input: String!): Fonction!
   helloMrSchool: String!
@@ -57,6 +68,11 @@ type Query {
 type Responsable {
   fonctions: [Fonction!]!
   utilisateur: Utilisateur!
+}
+
+type Section {
+  designation: String!
+  id: ID!
 }
 
 type TokenDto {
