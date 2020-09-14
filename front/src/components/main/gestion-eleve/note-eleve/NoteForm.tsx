@@ -2,8 +2,12 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Typography, Grid, Avatar, Button, Box } from "@material-ui/core";
-import avatarUser from "../../../assets/user.png";
-import echelle from "../../../assets/furniture-and-household.png";
+import avatarUser from "../../../../assets/user.png";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,13 +35,21 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const EcollageForm: React.FC = () => {
+const NoteForm: React.FC = () => {
   const classes = useStyles();
+
+  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
+    new Date()
+  );
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
 
   return (
     <form noValidate autoComplete="off">
       <Typography variant="h6" gutterBottom>
-        Ecolage
+        Note
       </Typography>
       <Grid container alignItems="center" justify="center">
         <Grid
@@ -57,31 +69,37 @@ const EcollageForm: React.FC = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="matricule"
-            label="Matricule"
-            placeholder="Matricule"
-          />
-          <TextField required id="nom" label="Nom" placeholder="Nom" />
-          <TextField required id="prenom" label="Prenom" placeholder="Prenom" />
+          <TextField required id="matricule" label="Matricule" />
+          <TextField required label="Classe" />
+          <TextField required label="Matiere" />
         </Grid>
-        <Box justifyContent="flex-end" className={classes.select}>
-          <Box display="flex" alignItems="center">
-            <Avatar sizes="large" alt={"user-avatar"} src={echelle} />
-            <span>Mois de</span>
-          </Box>
-        </Box>
+
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            style={{ width: "50%" }}
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            label="Annee scolaire"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date",
+            }}
+          />
+        </MuiPickersUtilsProvider>
+
         <Grid item xs={12} sm={6}></Grid>
       </Grid>
 
       <Box display="flex" justifyContent="flex-end">
         <Button variant="contained" className={classes.button} disableElevation>
-          Payé
+          Enregistrer
         </Button>
       </Box>
     </form>
   );
 };
 
-export default EcollageForm;
+export default NoteForm;

@@ -14,7 +14,7 @@ import {
   FormControlLabel,
   Radio,
 } from "@material-ui/core";
-import avatarUser from "../../../assets/user.png";
+import avatarUser from "../../../../../assets/user.png";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,

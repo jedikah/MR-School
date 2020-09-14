@@ -1,22 +1,13 @@
-import * as React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import * as React from "react";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 const MainNavigation: React.FC = () => {
+  const match = useRouteMatch();
   return (
     <Switch>
       <Route
-        path="/main/frais"
-        component={
-          require('../components/frais-de-scolarite/FraisDeScolarite').default
-        }
-      />
-      <Route
-        path="/main/list-eleve"
-        component={require('../components/student-list/StudentList').default}
-      />
-      <Route
-        path="/main/note-eleve"
-        component={require('../components/note-eleve/NoteEleve').default}
+        path={`${match.url}/gestion-eleve`}
+        component={require("./GestionEleveNavigation").default}
       />
     </Switch>
   );
