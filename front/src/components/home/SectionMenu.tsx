@@ -1,23 +1,24 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Box,
   Typography,
   makeStyles,
   Card,
-  CardActionArea,
-} from "@material-ui/core";
+  CardActionArea
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   sectionItem: {
-    minWidth: theme.spacing(40),
-    minHeight: theme.spacing(20),
-    padding: theme.spacing(2),
+    minWidth: theme.spacing(20),
+    minHeight: theme.spacing(10),
+    padding: theme.spacing(1)
   },
 
   sectionName: {
-    color: "#fff",
-    fontWeight: 900,
-  },
+    color: '#fff',
+    fontWeight: 500,
+    fontSize: '1.2em'
+  }
 }));
 
 export interface SectionItem {
@@ -33,7 +34,7 @@ const SectionMenu: React.FC<SectionMenuProps> = ({ color, item }) => {
   const classes = useStyles();
   return (
     <Card>
-      <CardActionArea className={["hvr-grow"].join(" ")}>
+      <CardActionArea className={['hvr-grow'].join(' ')}>
         <Box
           display="flex"
           justifyContent="center"

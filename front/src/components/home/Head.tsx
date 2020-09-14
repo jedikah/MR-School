@@ -1,19 +1,19 @@
-import * as React from "react";
-import { Box, Typography, Avatar, makeStyles } from "@material-ui/core";
+import * as React from 'react';
+import { Box, Typography, Avatar, makeStyles } from '@material-ui/core';
 
-import avatarUser from "../../assets/50.jpg";
+import avatarUser from '../../assets/50.jpg';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
     marginLeft: 10,
-    width: theme.spacing(10),
-    height: theme.spacing(10),
+    width: theme.spacing(5),
+    height: theme.spacing(5)
   },
 
   username: {
-    fontWeight: "bold",
-    color: "#848484",
-  },
+    fontWeight: 'bold',
+    color: '#848484'
+  }
 }));
 
 const Head: React.FC = () => {
@@ -21,11 +21,11 @@ const Head: React.FC = () => {
   return (
     <Box display="flex" justifyContent="flex-end">
       <Box display="flex" alignItems="center">
-        <Typography variant="h4" className={classes.username}>
-          {"John Doe"}
+        <Typography variant="h6" className={classes.username}>
+          {'John Doe'}
         </Typography>
         <Avatar
-          alt={"user-avatar"}
+          alt={'user-avatar'}
           src={avatarUser}
           className={classes.avatar}
         />

@@ -1,18 +1,18 @@
-import * as React from "react";
-import ScrollMenu from "react-horizontal-scrolling-menu";
-import { Typography, makeStyles, IconButton } from "@material-ui/core";
+import * as React from 'react';
+import ScrollMenu from 'react-horizontal-scrolling-menu';
+import { Typography, makeStyles, IconButton } from '@material-ui/core';
 
-import { SectionItem } from "./SectionMenu";
-import SectionMenu from "./SectionMenu";
+import { SectionItem } from './SectionMenu';
+import SectionMenu from './SectionMenu';
 
-import rightArrow from "../../assets/031-right-arrow-10.png";
-import leftArrow from "../../assets/047-left-arrow-10.png";
+import rightArrow from '../../assets/031-right-arrow-10.png';
+import leftArrow from '../../assets/047-left-arrow-10.png';
 
 const useArrowStyle = makeStyles((theme) => ({
   small: {
     width: theme.spacing(3),
-    height: theme.spacing(3),
-  },
+    height: theme.spacing(3)
+  }
 }));
 
 const RightArrow = () => {
@@ -35,14 +35,14 @@ const LeftArrow = () => {
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    fontWeight: "bold",
-    color: "#919191",
-    marginBottom: 25,
+    fontWeight: 'bold',
+    color: '#919191',
+    marginBottom: 25
   },
 
   sectionContainer: {
-    marginBottom: theme.spacing(4),
-  },
+    marginBottom: theme.spacing(4)
+  }
 }));
 
 interface Section {
@@ -61,7 +61,7 @@ const Section: React.FC<SectionProps> = ({ sections }) => {
     <div>
       {sections!.map((section, i) => (
         <div key={i}>
-          <Typography className={classes.title} variant="h4">
+          <Typography className={classes.title} variant="h5">
             {section.title}
           </Typography>
           <ScrollMenu
@@ -84,52 +84,52 @@ const Section: React.FC<SectionProps> = ({ sections }) => {
 Section.defaultProps = {
   sections: [
     {
-      title: "Gestion des eleves",
+      title: 'Gestion des eleves',
 
-      color: "#451515",
+      color: '#451515',
       sectionItems: [
         {
-          name: "Liste des eleves",
+          name: 'Liste des eleves'
         },
         {
-          name: "Frais de scolarite",
+          name: 'Frais de scolarite'
         },
         {
-          name: "Liste des eleves",
+          name: 'Liste des eleves'
         },
         {
-          name: "Frais de scolarite",
+          name: 'Frais de scolarite'
         },
         {
-          name: "Liste des eleves",
+          name: 'Liste des eleves'
         },
         {
-          name: "Frais de scolarite",
+          name: 'Frais de scolarite'
         },
         {
-          name: "Liste des eleves",
+          name: 'Liste des eleves'
         },
         {
-          name: "Frais de scolarite",
+          name: 'Frais de scolarite'
         },
         {
-          name: "Liste des eleves",
+          name: 'Liste des eleves'
         },
         {
-          name: "Frais de scolarite",
-        },
-      ],
+          name: 'Frais de scolarite'
+        }
+      ]
     },
     {
-      title: "Gestion des responsables",
-      color: "#770103",
+      title: 'Gestion des responsables',
+      color: '#770103',
       sectionItems: [
         {
-          name: "Liste des responsables",
-        },
-      ],
-    },
-  ],
+          name: 'Liste des responsables'
+        }
+      ]
+    }
+  ]
 };
 
 export default Section;

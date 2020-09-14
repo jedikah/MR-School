@@ -26,15 +26,18 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column'
   },
   logo: {
-    width: 100,
-    height: 60
+    width: '30%',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
   Heading: {
     position: 'relative',
     top: 50,
     paddingBottom: theme.spacing(5),
-    fontWeight: 'bold',
-    margin: theme.spacing(7)
+    fontWeight: 'bolder',
+    margin: theme.spacing(7),
+    fontSize: '2em',
+    color: mrStyle.iconColor
   },
   form: {
     margin: theme.spacing(0),
@@ -51,8 +54,11 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(7)
   },
   foot: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    justifyContent: 'flex-end',
     margin: theme.spacing(7),
-    position: 'absolute',
     bottom: 0
   }
 }));
@@ -73,14 +79,8 @@ export const LoginForm: React.FC<UseLogin> = ({
 
   return (
     <div className={classes.componentStyle}>
-      <Typography
-        className={classes.Heading}
-        color="textSecondary"
-        variant="h4"
-        component="h1"
-      >
-        AUTHENTIFICATION
-      </Typography>
+      <p className={classes.Heading}>AUTHENTIFICATION</p>
+      <Typography className={classes.Heading}>AUTHENTIFICATION</Typography>
       <FormControl required size="small" className={classes.form}>
         <TextField
           variant="outlined"
@@ -141,10 +141,12 @@ export const LoginForm: React.FC<UseLogin> = ({
         </Button>
       </FormControl>
 
-      <img className={classes.logo} src={logo} alt="MisRol_logo" />
       <div className={classes.foot}>
-        <p>Mot de passe oublier ?</p>
-        <p>Veuilliez vous renseigner au près du responssable.</p>
+        <img className={classes.logo} src={logo} alt="MisRol_logo" />
+        <p>
+          Mot de passe oublier ? <br /> Veuilliez vous renseigner au près du
+          responssable.{' '}
+        </p>
       </div>
     </div>
   );
