@@ -14,10 +14,16 @@ export class AuthService {
   )
   {}
   async validateUser(utilisatateurLogin: LoginInput): Promise<Utilisateur> {
+
     const utilisateur = await this.utilisateurService.utilisateurByContact(utilisatateurLogin.contact);
-    if(!utilisateur) throw new  UnauthorizedException('Erreur d\'authentification');
-    const isPasswordMatching = this.cryptService.compare(utilisatateurLogin.motDePasse, utilisateur.motDePasse);
-    return isPasswordMatching ? utilisateur : null
+    if(!utilisateur)
+      throw new  UnauthorizedException('Utilisateur introuvable');
+
+    const isPasswordMatching = await this.cryptService.compare(utilisatateurLogin.motDePasse, utilisateur.motDePasse);
+    if(!isPasswordMatching)
+      throw new  UnauthorizedException('Mot de passe incorrect');
+
+    return utilisateur
   }
   async login(utilisatateurLogin: LoginInput): Promise<string> {
     const utilisateur = await this.validateUser(utilisatateurLogin);
