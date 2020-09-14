@@ -6,7 +6,7 @@ const configsDev: ConnectionOptions = {
   host: 'localhost',
   port: 3306,
   username: 'root',
-  password: '',
+  password: 'root',
   database: 'mr_school',
   entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: false,
