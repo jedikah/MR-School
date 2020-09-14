@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 import { useLoginForm, UseLoginForm } from "./useLoginForm";
 import { LoginData, LOGIN } from "./login.gql";
@@ -20,6 +21,7 @@ export type UseLogin = UseLoginForm & {
 };
 
 export const useLogin = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const form = useLoginForm();
   const [login, { loading: loginLoading }] = useMutation<
@@ -30,7 +32,13 @@ export const useLogin = () => {
       handleOnCompletedLogin(data, navigateToHome);
     },
     onError: (error) => {
-      console.log(error.message);
+      enqueueSnackbar(error.message, {
+        variant: "error",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "left",
+        },
+      });
     },
   });
 

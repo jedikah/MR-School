@@ -1,5 +1,6 @@
 import React from "react";
 import { ApolloProvider } from "@apollo/client";
+import { SnackbarProvider } from "notistack";
 import "fontsource-roboto";
 import "hover.css/css/hover-min.css";
 
@@ -11,7 +12,9 @@ function App() {
   return (
     <ContextProvider>
       <ApolloProvider client={apolloClient}>
-        <RootNavigation />
+        <SnackbarProvider maxSnack={1}>
+          <RootNavigation />
+        </SnackbarProvider>
       </ApolloProvider>
     </ContextProvider>
   );

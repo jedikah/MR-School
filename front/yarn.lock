@@ -1575,16 +1575,16 @@
     tslib "~2.0.0"
 
 "@graphql-codegen/typescript-react-apollo@1.17.8":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-react-apollo/-/typescript-react-apollo-2.0.6.tgz#da5a515f3cf9b1438a58ae64d0d96f9c62a0c3c7"
-  integrity sha512-DAIUp7K2HWNn8h6w2D+R5ZKntZbHVumrT8ZIYNR6kzjdBrjDR2qPf71pSIljv+y47eR6sbQlj5i7ABZcQXPo7Q==
+  version "2.0.7-alpha-be23c522.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-react-apollo/-/typescript-react-apollo-2.0.7-alpha-be23c522.0.tgz#7f8d3ba635cdee8fdc9e606d9fc13b28a2170580"
+  integrity sha512-zJjo3SSfHRKfnkVMAIJQX39jAW583w51p2C2s1FJeH6yFFuoOFsUQcFjm2cDpUReJCEGAB6+EMaD0pTiEM52+Q==
   dependencies:
     "@graphql-codegen/plugin-helpers" "^1.17.8"
-    "@graphql-codegen/visitor-plugin-common" "^1.17.13"
+    "@graphql-codegen/visitor-plugin-common" "1.17.15-alpha-be23c522.0"
     auto-bind "~4.0.0"
     camel-case "^4.1.1"
     pascal-case "^3.1.1"
-    tslib "~2.0.0"
+    tslib "~2.0.1"
 
 "@graphql-codegen/typescript@1.17.8":
   version "1.17.8"
@@ -1604,6 +1604,21 @@
     "@graphql-codegen/plugin-helpers" "^1.17.8"
     "@graphql-codegen/visitor-plugin-common" "^1.17.14"
     auto-bind "~4.0.0"
+    tslib "~2.0.1"
+
+"@graphql-codegen/visitor-plugin-common@1.17.15-alpha-be23c522.0":
+  version "1.17.15-alpha-be23c522.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-1.17.15-alpha-be23c522.0.tgz#9e91ecc684570004ec21da9cfe1d99212c47ee90"
+  integrity sha512-FwE0WEM54w7aQQexjiobpHSnwCDAzZBmhGEiNQP0ublWO/SmwpDcNhB7DZK1CgbZa8T0lCmI5O5XOlKPlyraGQ==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^1.17.8"
+    "@graphql-tools/relay-operation-optimizer" "^6"
+    array.prototype.flatmap "^1.2.3"
+    auto-bind "~4.0.0"
+    dependency-graph "^0.9.0"
+    graphql-tag "^2.11.0"
+    parse-filepath "^1.0.2"
+    pascal-case "^3.1.1"
     tslib "~2.0.1"
 
 "@graphql-codegen/visitor-plugin-common@^1.17.13", "@graphql-codegen/visitor-plugin-common@^1.17.14":
@@ -1766,7 +1781,7 @@
     tslib "~2.0.1"
     yaml-ast-parser "^0.0.43"
 
-"@graphql-tools/relay-operation-optimizer@^6.0.18":
+"@graphql-tools/relay-operation-optimizer@^6", "@graphql-tools/relay-operation-optimizer@^6.0.18":
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/@graphql-tools/relay-operation-optimizer/-/relay-operation-optimizer-6.2.2.tgz#136ccca5ea33466391a9295c33408b27fe675fe6"
   integrity sha512-4kU+X/IpTNtO1MS/rBxW1ybflFonZ1WeBV9gv4tqXGPpHywJsO3y085PwMumoNfBpF755UfEu6XjE43SPg0m1g==
@@ -4052,7 +4067,7 @@ clone-deep@^4.0.1:
     kind-of "^6.0.2"
     shallow-clone "^3.0.0"
 
-clsx@^1.0.2, clsx@^1.0.4:
+clsx@^1.0.2, clsx@^1.0.4, clsx@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
@@ -6382,7 +6397,7 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.2:
+hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -8850,6 +8865,14 @@ normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
+
+notistack@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/notistack/-/notistack-1.0.0.tgz#849ac58fad484852833284ee40bda5e04fbfe649"
+  integrity sha512-kIGwVy8qs2hpcDegLhjTQMlGkJvr7OVUg6mnOcjqwKOCZhCnkMt5h53kP9bPRKQQ3UckCzhkvuEPbyMbyYyRNQ==
+  dependencies:
+    clsx "^1.1.0"
+    hoist-non-react-statics "^3.3.0"
 
 npm-run-path@^2.0.0:
   version "2.0.2"

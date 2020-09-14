@@ -1,46 +1,44 @@
-import * as React from 'react';
+import * as React from "react";
 
-import LoginFormCtn from '../components/login/LoginForm.ctn';
-import { makeStyles, Typography } from '@material-ui/core';
-import books from '../assets/books.jpg';
+import LoginFormCtn from "../components/login/LoginForm.ctn";
+import { makeStyles, Typography } from "@material-ui/core";
+import books from "../assets/books.jpg";
 
 const useStyles = makeStyles((theme) => ({
   pageStyle: {
-    height: '100vh',
-    width: '100vw',
-    display: 'flex',
-    flexDirection: 'row'
+    height: "100vh",
+    width: "100vw",
+    display: "flex",
+    flexDirection: "row",
   },
   leftDiv: {
-    width: '35%',
-    height: '100%'
+    width: "35%",
+    height: "100%",
   },
   rightDiv: {
-    width: '65%',
-    height: '100%',
+    width: "65%",
+    height: "100%",
     backgroundImage: `url(${books})`,
-    backgroundPosition: 'center',
-    backgroundSize: '135% '
+    backgroundPosition: "center",
+    backgroundSize: "135% ",
   },
   blackDiv: {
-    position: 'fixed',
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'black',
-    opacity: 0.5
+    position: "fixed",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "black",
+    opacity: 0.5,
   },
   rightDiv_P: {
-    position: 'relative',
-    color: 'white',
-    fontSize: '4em',
-    lineHeight: 2
-  }
+    position: "relative",
+    color: "white",
+    fontSize: "4em",
+    lineHeight: 2,
+  },
 }));
 
 const LoginPage: React.FC = () => {
   const classes = useStyles();
-
-  console.log(window.innerHeight);
 
   return (
     <div className={classes.pageStyle}>
@@ -51,7 +49,7 @@ const LoginPage: React.FC = () => {
         <div className={classes.blackDiv}></div>
         <Typography
           className={classes.rightDiv_P}
-          style={{ fontWeight: 'bold', paddingLeft: 175, top: 25 }}
+          style={{ fontWeight: "bold", paddingLeft: 175, top: 25 }}
         >
           BIENVENUE
         </Typography>
