@@ -7,7 +7,7 @@ import { Utilisateur } from '../utilisateur/utilisateur.entity';
 export class Eleve {
   @OneToOne(() => Utilisateur, { primary: true })
   @Field()
-  @JoinColumn()
+  @JoinColumn({name: 'id_utilisateur'})
   utilisateur: Utilisateur;
   @RelationId((eleve: Eleve) => eleve.utilisateur)
   idUtilisateur: number;

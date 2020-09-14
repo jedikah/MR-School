@@ -16,6 +16,12 @@ import { FonctionModule } from './fonction/fonction.module';
 import { AvoirModule } from './avoir/avoir.module';
 import { EleveModule } from './eleve/eleve.module';
 import { AuthModule } from './auth/auth.module';
+import { ParentModule } from './parent/parent.module';
+import { NiveauModule } from './niveau/niveau.module';
+import { SectionModule } from './section/section.module';
+import { SectionNiveauModule } from './section-niveau/section-niveau.module';
+import { AnneeScolaireModule } from './annee-scolaire/annee-scolaire.module';
+import { ClassificationModule } from './classification/classification.module';
 
 @Module({
   imports: [
@@ -50,7 +56,13 @@ import { AuthModule } from './auth/auth.module';
     AvoirModule,
     EleveModule,
     /**Login*/
-    AuthModule
+    AuthModule,
+    ParentModule,
+    NiveauModule,
+    SectionModule,
+    SectionNiveauModule,
+    AnneeScolaireModule,
+    ClassificationModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
