@@ -23,6 +23,7 @@
     "material-ui-image": "^3.2.3",
     "notistack": "^1.0.0",
     "react": "^16.13.1",
+    "react-apollo-network-status": "^5.0.0",
     "react-dom": "^16.13.1",
     "react-horizontal-scrolling-menu": "^0.7.7",
     "react-router-dom": "^5.2.0",

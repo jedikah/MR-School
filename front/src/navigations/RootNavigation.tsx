@@ -4,8 +4,10 @@ import { Switch, BrowserRouter as Router, Redirect } from "react-router-dom";
 import PrivateRoute from "../utils/PrivateRoute";
 import PublicRoute from "../utils/PublicRoute";
 import { useCheckToken } from "../utils/useCheckToken";
+import { useGlobalError } from "../graphql/apollo";
 
 const RootNavigation: React.FC = () => {
+  useGlobalError();
   const sessionState = useCheckToken();
 
   if (!sessionState.appReady) return <></>;
@@ -14,19 +16,16 @@ const RootNavigation: React.FC = () => {
     <Router>
       <Switch>
         <PublicRoute
-          exact
           path="/login"
           component={require("../pages/Login").default}
         />
 
         <PrivateRoute
-          exact
           path="/home"
           component={require("../pages/Home").default}
         />
 
         <PrivateRoute
-          exact
           path="/main"
           component={require("../pages/Main").default}
         />
