@@ -10445,6 +10445,11 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-apollo-network-status@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-apollo-network-status/-/react-apollo-network-status-5.0.0.tgz#0049c134222848089a780f8df87f3e626512136a"
+  integrity sha512-lroW7YpD/oRj3wSqooNssiO5FmTvcOknunlDyhDuaKZ8JKUHyHxxvT2mXHw7LIA0l0wwgOZkQFS7XxLyY4o3ug==
+
 react-app-polyfill@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-1.0.6.tgz#890f8d7f2842ce6073f030b117de9130a5f385f0"
