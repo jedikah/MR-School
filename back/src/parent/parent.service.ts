@@ -28,7 +28,7 @@ export class ParentService {
     return this.ParentRepository.count();
   }
 
-  createParent(newParent: ParentInput): Promise<Parent> {
+  createParent(newParent: Parent): Promise<Parent> {
     return this.ParentRepository.save(newParent);
   }
 

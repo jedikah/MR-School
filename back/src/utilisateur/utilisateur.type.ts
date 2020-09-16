@@ -21,7 +21,19 @@ export class UtilisateurInput extends PartialType(
   @Field()
   motDePasse: string;
 }
-
+@InputType()
 export class CreateUtilisateurInput_Eleve extends OmitType(UtilisateurInput, [
   'motDePasse',
-]) {}
+]) {
+  @Field()
+  nom: string;
+
+  @Field()
+  prenom: string;
+
+  @Field()
+  adresse: string;
+
+  @Field()
+  contact: string;
+}

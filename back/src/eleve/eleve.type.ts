@@ -34,4 +34,13 @@ export class CreateEleveInput {
 }
 
 @InputType()
-export class UpdateEleveInput extends CreateEleveInput {}
+export class UpdateEleveInput {
+  @Field(() => EleveInput)
+  eleve: EleveInput;
+
+  @Field(() => UtilisateurInput)
+  utilisateur: UtilisateurInput;
+
+  @Field(() => ParentInput)
+  parent: ParentInput;
+}

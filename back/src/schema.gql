@@ -9,11 +9,9 @@ type AnneeScolaire {
 }
 
 input CreateEleveInput {
-  matricule: String!
-  naissance: DateTime!
+  eleve: EleveInput!
   parent: ParentInput!
-  sexe: String!
-  utilisateur: UtilisateurInput!
+  utilisateur: CreateUtilisateurInput_Eleve!
 }
 
 input CreateParentInput {
@@ -29,6 +27,14 @@ input CreateResponsableInput {
   utilisateur: UtilisateurInput!
 }
 
+input CreateUtilisateurInput_Eleve {
+  adresse: String!
+  contact: String!
+  nom: String!
+  photo: String
+  prenom: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -40,6 +46,12 @@ type Eleve {
   parent: Parent!
   sexe: String!
   utilisateur: Utilisateur!
+}
+
+input EleveInput {
+  matricule: String!
+  naissance: DateTime!
+  sexe: String!
 }
 
 type Fonction {
@@ -108,10 +120,8 @@ type TokenDto {
 }
 
 input UpdateEleveInput {
-  matricule: String!
-  naissance: DateTime!
+  eleve: EleveInput!
   parent: ParentInput!
-  sexe: String!
   utilisateur: UtilisateurInput!
 }
 

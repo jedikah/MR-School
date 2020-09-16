@@ -11,6 +11,7 @@ import { UtilisateurInput } from '../../utilisateur/utilisateur.type';
 import { Parent } from '../../parent/parent.entity';
 import { ParentService } from '../../parent/parent.service';
 import { GeneratePassword } from '../../utils/generate_password';
+import { ParentInput } from '../../parent/parent.type';
 
 @Resolver()
 export class CreateEleveResolver {
@@ -24,31 +25,40 @@ export class CreateEleveResolver {
 
   @Mutation(() => Eleve)
   async createEleve(@Args('input') input: CreateEleveInput): Promise<Eleve> {
-    let mdp: string = this.generatePassword.makePassword();
+    const mdp: string = this.generatePassword.makePassword();
+    let mdpHash: string;
     let newEleve: Eleve;
     const isEleveExist = await this.eleveService.eleveByMatricule(
       input.eleve.matricule,
     );
 
     if (!isEleveExist) {
-      mdp = await this.cryptService.hash(mdp);
+      mdpHash = await this.cryptService.hash(mdp);
 
       //creer utilisateur
       const utilisateur = new Utilisateur();
       Object.assign<Utilisateur, UtilisateurInput>(utilisateur, {
         ...input.utilisateur,
-        motDePasse: mdp,
+        motDePasse: mdpHash,
       });
+
       const createdUtilisateur = await this.utilisateurService.createUtilisateur(
         utilisateur,
       );
+
+      // creation parent
 
       let parent = await this.parentService.ParentByContact(
         input.parent.contact,
       );
 
-      if (!parent) parent = await this.parentService.createParent(input.parent);
-
+      if (!parent) {
+        parent = new Parent();
+        parent = Object.assign<Parent, ParentInput>(parent, {
+          ...input.parent,
+        });
+        parent = await this.parentService.createParent(parent);
+      }
       // creation eleve
       const createEleve = new Eleve();
       Object.assign<Eleve, Omit<Eleve, 'id' | 'idParent' | 'idUtilisateur'>>(
@@ -61,6 +71,7 @@ export class CreateEleveResolver {
       );
 
       newEleve = await this.eleveService.createEleve(createEleve);
+      newEleve.utilisateur.motDePasse = mdp;
     } else
       throw new HttpException(
         `Cette élève possede déja un compte.`,

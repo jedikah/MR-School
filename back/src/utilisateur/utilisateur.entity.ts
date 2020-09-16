@@ -21,7 +21,7 @@ export class Utilisateur {
   adresse: string;
 
   @Field()
-  @Column({ length: 10 })
+  @Column({ unique: true, length: 10 })
   contact: string;
 
   @Field({ nullable: true })

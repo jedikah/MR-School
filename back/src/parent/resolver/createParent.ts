@@ -13,7 +13,10 @@ export class CreateParentResolver {
     let parent = await this.parentService.ParentByContact(input.contact);
 
     if (!parent) {
+      parent = new Parent();
       Object.assign<Parent, ParentInput>(parent, input);
+
+      console.log(parent);
 
       parent = await this.parentService.createParent(parent);
     } else

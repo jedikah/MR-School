@@ -17,14 +17,14 @@ export class Parent {
   mere: string;
 
   @Field()
-  @Column({ unique: true, length: 60 })
+  @Column({ length: 60 })
   tuteur: string;
 
   @Field()
-  @Column({ unique: true, length: 60 })
+  @Column({ length: 60 })
   adresse: string;
 
   @Field()
-  @Column({ length: 60 })
+  @Column({ unique: true, length: 60 })
   contact: string;
 }
