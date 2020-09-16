@@ -13,9 +13,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Toolbar, Typography, Avatar } from "@material-ui/core";
-import user from "../../../../../assets/user.png";
+import user from "../../../../assets/user.png";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     table: {
       minWidth: 650,
@@ -59,7 +59,7 @@ const rows = [
   createData("photo 4", "nom4", "prenom4", "contact4", "adresse4"),
 ];
 
-const ListStudent: React.FC = () => {
+const Eleves: React.FC = () => {
   const classes = useStyles();
 
   return (
@@ -107,4 +107,4 @@ const ListStudent: React.FC = () => {
   );
 };
 
-export default ListStudent;
+export default Eleves;

@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Grid, Paper } from "@material-ui/core";
-import NewFormStudent from "./child/ListForm";
-import ListStudent from "./child/StudentList";
+import { Grid } from "@material-ui/core";
+import EleveForm from "../EleveForm";
+import Eleves from "./Eleves";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,24 +22,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const FraisDeScolarite: React.FC = () => {
+const StudentList: React.FC = () => {
   const classes = useStyles();
   return (
     <Grid container>
       <Grid item xs={8}>
         <div className={classes.paper}>
-          <ListStudent />
+          <Eleves />
         </div>
       </Grid>
       <Grid item xs={4}>
-        <div className={classes.paper}>
-          <Paper className={classes.paper}>
-            <NewFormStudent />
-          </Paper>
-        </div>
+        <EleveForm />
       </Grid>
     </Grid>
   );
 };
 
-export default FraisDeScolarite;
+export default StudentList;

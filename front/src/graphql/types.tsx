@@ -12,6 +12,27 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type AnneeScolaire = {
+  __typename?: 'AnneeScolaire';
+  debut: Scalars['DateTime'];
+  fin: Scalars['DateTime'];
+  id: Scalars['ID'];
+};
+
+export type CreateEleveInput = {
+  eleve: EleveInput;
+  parent: ParentInput;
+  utilisateur: UtilisateurInput;
+};
+
+export type CreateParentInput = {
+  adresse: Scalars['String'];
+  contact: Scalars['String'];
+  mere: Scalars['String'];
+  pere: Scalars['String'];
+  tuteur: Scalars['String'];
+};
+
 export type CreateResponsableInput = {
   fonction: FonctionInput;
   utilisateur: UtilisateurInput;
@@ -22,6 +43,7 @@ export type Eleve = {
   __typename?: 'Eleve';
   matricule: Scalars['String'];
   naissance: Scalars['DateTime'];
+  parent: Parent;
   sexe: Scalars['String'];
   utilisateur: Utilisateur;
 };
@@ -30,7 +52,6 @@ export type EleveInput = {
   matricule: Scalars['String'];
   naissance: Scalars['DateTime'];
   sexe: Scalars['String'];
-  utilisateur: UtilisateurInput;
 };
 
 export type Fonction = {
@@ -52,6 +73,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createEleve: Eleve;
   createFonction: Fonction;
+  createParent: Parent;
   createResponsable: Responsable;
   login: TokenDto;
   updateEleve: Eleve;
@@ -59,12 +81,17 @@ export type Mutation = {
 
 
 export type MutationCreateEleveArgs = {
-  input: EleveInput;
+  input: CreateEleveInput;
 };
 
 
 export type MutationCreateFonctionArgs = {
   input: FonctionInput;
+};
+
+
+export type MutationCreateParentArgs = {
+  input: CreateParentInput;
 };
 
 
@@ -81,6 +108,30 @@ export type MutationLoginArgs = {
 export type MutationUpdateEleveArgs = {
   input: UpdateEleveInput;
   matricule: Scalars['String'];
+};
+
+export type Niveau = {
+  __typename?: 'Niveau';
+  designation: Scalars['String'];
+  id: Scalars['ID'];
+};
+
+export type Parent = {
+  __typename?: 'Parent';
+  adresse: Scalars['String'];
+  contact: Scalars['String'];
+  id: Scalars['ID'];
+  mere: Scalars['String'];
+  pere: Scalars['String'];
+  tuteur: Scalars['String'];
+};
+
+export type ParentInput = {
+  adresse: Scalars['String'];
+  contact: Scalars['String'];
+  mere: Scalars['String'];
+  pere: Scalars['String'];
+  tuteur: Scalars['String'];
 };
 
 export type Query = {
@@ -101,15 +152,20 @@ export type Responsable = {
   utilisateur: Utilisateur;
 };
 
+export type Section = {
+  __typename?: 'Section';
+  designation: Scalars['String'];
+  id: Scalars['ID'];
+};
+
 export type TokenDto = {
   __typename?: 'TokenDto';
   token?: Maybe<Scalars['String']>;
 };
 
 export type UpdateEleveInput = {
-  matricule: Scalars['String'];
-  naissance: Scalars['DateTime'];
-  sexe: Scalars['String'];
+  eleve: EleveInput;
+  parent: ParentInput;
   utilisateur: UtilisateurInput;
 };
 
