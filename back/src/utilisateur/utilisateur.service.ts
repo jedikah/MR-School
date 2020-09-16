@@ -27,7 +27,7 @@ export class UtilisateurService {
     return this.utilisateurRepository.save(newUtilisateur);
   }
 
-  updateUtilisateur(newUtilisateur: Utilisateur) {
+  updateUtilisateur(newUtilisateur: Utilisateur): Promise<Utilisateur> {
     return this.utilisateurRepository.save(newUtilisateur);
   }
 }

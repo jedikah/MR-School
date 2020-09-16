@@ -9,7 +9,7 @@ import { CryptService } from '../../utils/crypt.service';
 import { FonctionService } from '../../fonction/fonction.service';
 import { AvoirService } from '../../avoir/avoir.service';
 import { Avoir } from '../../avoir/avoir.entity';
-import { CreateResponsableInput, ResponsableInput } from '../responsable.type';
+import { CreateResponsableInput } from '../responsable.type';
 import { Fonction } from '../../fonction/fonction.entity';
 import { FonctionInput } from '../../fonction/fonction.type';
 import { UtilisateurInput } from '../../utilisateur/utilisateur.type';
@@ -32,7 +32,6 @@ export class CreateResponsableResolver {
     const utilisateur = new Utilisateur();
     const responsable = new Responsable();
     const newAvoir = new Avoir();
-    let fonction;
 
     if (input.fonction.designation === 'SU') {
       const newFonction = new Fonction();
@@ -40,6 +39,16 @@ export class CreateResponsableResolver {
 
       await this.fonctionService.createFonction(newFonction);
     }
+
+    let fonction = await this.fonctionService.fonctionByDesignation(
+      input.fonction.designation,
+    );
+
+    if (!fonction)
+      throw new HttpException(
+        `La fonction "${input.fonction.designation}" n'existe pas.`,
+        HttpStatus.UNAUTHORIZED,
+      );
 
     const isResponsableExist = await this.utilisateurService.utilisateurByContact(
       input.utilisateur.contact,

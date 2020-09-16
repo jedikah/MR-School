@@ -8,6 +8,22 @@ type AnneeScolaire {
   id: ID!
 }
 
+input CreateEleveInput {
+  matricule: String!
+  naissance: DateTime!
+  parent: ParentInput!
+  sexe: String!
+  utilisateur: UtilisateurInput!
+}
+
+input CreateParentInput {
+  adresse: String!
+  contact: String!
+  mere: String!
+  pere: String!
+  tuteur: String!
+}
+
 input CreateResponsableInput {
   fonction: FonctionInput!
   utilisateur: UtilisateurInput!
@@ -21,15 +37,9 @@ scalar DateTime
 type Eleve {
   matricule: String!
   naissance: DateTime!
+  parent: Parent!
   sexe: String!
   utilisateur: Utilisateur!
-}
-
-input EleveInput {
-  matricule: String!
-  naissance: DateTime!
-  sexe: String!
-  utilisateur: UtilisateurInput!
 }
 
 type Fonction {
@@ -47,8 +57,9 @@ input LoginInput {
 }
 
 type Mutation {
-  createEleve(input: EleveInput!): Eleve!
+  createEleve(input: CreateEleveInput!): Eleve!
   createFonction(input: FonctionInput!): Fonction!
+  createParent(input: CreateParentInput!): Parent!
   createResponsable(input: CreateResponsableInput!): Responsable!
   login(input: LoginInput!): TokenDto!
   updateEleve(input: UpdateEleveInput!, matricule: String!): Eleve!
@@ -57,6 +68,23 @@ type Mutation {
 type Niveau {
   designation: String!
   id: ID!
+}
+
+type Parent {
+  adresse: String!
+  contact: String!
+  id: ID!
+  mere: String!
+  pere: String!
+  tuteur: String!
+}
+
+input ParentInput {
+  adresse: String!
+  contact: String!
+  mere: String!
+  pere: String!
+  tuteur: String!
 }
 
 type Query {
@@ -82,6 +110,7 @@ type TokenDto {
 input UpdateEleveInput {
   matricule: String!
   naissance: DateTime!
+  parent: ParentInput!
   sexe: String!
   utilisateur: UtilisateurInput!
 }

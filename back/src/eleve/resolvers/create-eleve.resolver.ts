@@ -4,10 +4,12 @@ import { UtilisateurService } from '../../utilisateur/utilisateur.service';
 import { Utilisateur } from '../../utilisateur/utilisateur.entity';
 import { CryptService } from '../../utils/crypt.service';
 import { EleveService } from '../../eleve/eleve.service';
-import { EleveInput } from '../eleve.type';
+import { CreateEleveInput } from '../eleve.type';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Eleve } from '../eleve.entity';
 import { UtilisateurInput } from '../../utilisateur/utilisateur.type';
+import { Parent } from '../../parent/parent.entity';
+import { ParentService } from '../../parent/parent.service';
 
 @Resolver()
 export class CreateEleveResolver {
@@ -15,15 +17,15 @@ export class CreateEleveResolver {
     private utilisateurService: UtilisateurService,
     private cryptService: CryptService,
     private eleveService: EleveService,
+    private parentService: ParentService,
   ) {}
 
   @Mutation(() => Eleve)
-  async createEleve(@Args('input') input: EleveInput): Promise<Eleve> {
+  async createEleve(@Args('input') input: CreateEleveInput): Promise<Eleve> {
     let mdpHash: string = null;
     let newEleve: Eleve;
-    const isEleveExist = await this.eleveService.eleveByMatriculeSexe(
+    const isEleveExist = await this.eleveService.eleveByMatricule(
       input.matricule,
-      input.sexe,
     );
 
     if (!isEleveExist) {
@@ -39,12 +41,22 @@ export class CreateEleveResolver {
         utilisateur,
       );
 
+      let parent = await this.parentService.ParentByContact(
+        input.parent.contact,
+      );
+
+      if (!parent) parent = await this.parentService.createParent(input.parent);
+
       // creation eleve
       const createEleve = new Eleve();
-      Object.assign<Eleve, Partial<Eleve>>(createEleve, {
-        ...input,
-        utilisateur: createdUtilisateur,
-      });
+      Object.assign<Eleve, Omit<Eleve, 'id' | 'idParent' | 'idUtilisateur'>>(
+        createEleve,
+        {
+          ...input,
+          utilisateur: createdUtilisateur,
+          parent,
+        },
+      );
 
       newEleve = await this.eleveService.createEleve(createEleve);
     } else
