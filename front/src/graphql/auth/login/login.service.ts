@@ -6,12 +6,16 @@ import { useLoginForm, UseLoginForm } from "./useLoginForm";
 import { LoginData, LOGIN } from "./login.gql";
 import { MutationLoginArgs } from "../../types";
 import { env } from "../../../configs";
+import { useSessionDispatch } from "../../../contexts/session/session.consumer";
+import { SessionDispatch } from "../../../contexts/session/session.context";
 
 export const handleOnCompletedLogin = (
   data: LoginData,
-  navigateToHome: () => void
+  navigateToHome: () => void,
+  sessionDispatch: SessionDispatch
 ) => {
   localStorage.setItem(env.TOKEN_NAME, data.login.token || "");
+  sessionDispatch({ type: "CONNECT" });
   navigateToHome();
 };
 
@@ -21,6 +25,7 @@ export type UseLogin = UseLoginForm & {
 };
 
 export const useLogin = () => {
+  const sessionDispatch = useSessionDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const form = useLoginForm();
@@ -29,7 +34,7 @@ export const useLogin = () => {
     MutationLoginArgs
   >(LOGIN, {
     onCompleted: (data) => {
-      handleOnCompletedLogin(data, navigateToHome);
+      handleOnCompletedLogin(data, navigateToHome, sessionDispatch);
     },
     onError: (error) => {
       enqueueSnackbar(error.message, {

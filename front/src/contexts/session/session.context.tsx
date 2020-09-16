@@ -12,7 +12,11 @@ interface DisconnectAction {
   type: "DISCONNECT";
 }
 
-type SessionActions = ConnectAction | DisconnectAction;
+interface SetAppReadyAction {
+  type: "APP_READY";
+}
+
+type SessionActions = ConnectAction | DisconnectAction | SetAppReadyAction;
 export type SessionDispatch = (action: SessionActions) => void;
 
 // Context
@@ -36,6 +40,10 @@ const sessionReducer = produce(
 
       case "DISCONNECT":
         draft.connected = false;
+        break;
+
+      case "APP_READY":
+        draft.appReady = true;
         break;
     }
   }
