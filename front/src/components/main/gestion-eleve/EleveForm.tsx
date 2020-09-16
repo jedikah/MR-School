@@ -50,6 +50,10 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     marginLeft: 15,
   },
+
+  marginBottom: {
+    marginBottom: 8,
+  },
 }));
 
 const EleveForm: React.FC = () => {
@@ -83,7 +87,7 @@ const EleveForm: React.FC = () => {
             </Typography>
           </Box>
 
-          <Box display="flex" marginBottom>
+          <Box display="flex">
             <RadioGroup row aria-label="gender" name="gender1" value={"homme"}>
               <FormControlLabel
                 value="homme"
@@ -97,8 +101,8 @@ const EleveForm: React.FC = () => {
               />
             </RadioGroup>
           </Box>
-          <Box display="flex" marginBottom>
-            <TextField variant="outlined" placeholder="Matricul *" fullWidth />
+          <Box display="flex">
+            <TextField variant="outlined" placeholder="matricul *" fullWidth />
           </Box>
           <Box>
             <KeyboardDatePicker
@@ -121,26 +125,30 @@ const EleveForm: React.FC = () => {
         <Divider style={{ marginTop: 15, marginBottom: 15 }} />
 
         <div className={classes.section}>
-          <Box display="flex" alignItems="center" marginBottom>
+          <Box
+            display="flex"
+            alignItems="center"
+            className={classes.marginBottom}
+          >
             <Avatar src={parentIcon} alt="student" />
             <Typography variant="h5" style={{ marginLeft: 10 }}>
               Information parent
             </Typography>
           </Box>
 
-          <Box display="flex" marginBottom>
+          <Box display="flex" className={classes.marginBottom}>
             <TextField variant="outlined" placeholder="pere *" fullWidth />
           </Box>
 
-          <Box display="flex" marginBottom>
+          <Box display="flex" className={classes.marginBottom}>
             <TextField variant="outlined" placeholder="mere *" fullWidth />
           </Box>
 
-          <Box display="flex" marginBottom>
+          <Box display="flex" className={classes.marginBottom}>
             <TextField variant="outlined" placeholder="tuteur *" fullWidth />
           </Box>
 
-          <Box display="flex" marginBottom>
+          <Box display="flex" className={classes.marginBottom}>
             <TextField
               variant="outlined"
               placeholder="adresse *"
@@ -154,22 +162,26 @@ const EleveForm: React.FC = () => {
         <Divider style={{ marginTop: 15, marginBottom: 15 }} />
 
         <div className={classes.section}>
-          <Box display="flex" alignItems="center" marginBottom>
+          <Box
+            display="flex"
+            alignItems="center"
+            className={classes.marginBottom}
+          >
             <Avatar src={infoIcon} alt="student" />
             <Typography variant="h5" style={{ marginLeft: 10 }}>
               Information generale
             </Typography>
           </Box>
 
-          <Box display="flex" marginBottom>
+          <Box display="flex" className={classes.marginBottom}>
             <TextField variant="outlined" placeholder="nom *" fullWidth />
           </Box>
 
-          <Box display="flex" marginBottom>
+          <Box display="flex" className={classes.marginBottom}>
             <TextField variant="outlined" placeholder="prenom *" fullWidth />
           </Box>
 
-          <Box display="flex" marginBottom>
+          <Box display="flex" className={classes.marginBottom}>
             <TextField
               variant="outlined"
               placeholder="contacte *"
