@@ -9,10 +9,8 @@ type AnneeScolaire {
 }
 
 input CreateEleveInput {
-  matricule: String!
-  naissance: DateTime!
+  eleve: EleveInput!
   parent: ParentInput!
-  sexe: String!
   utilisateur: UtilisateurInput!
 }
 
@@ -40,6 +38,12 @@ type Eleve {
   parent: Parent!
   sexe: String!
   utilisateur: Utilisateur!
+}
+
+input EleveInput {
+  matricule: String!
+  naissance: DateTime!
+  sexe: String!
 }
 
 type Fonction {
@@ -108,10 +112,8 @@ type TokenDto {
 }
 
 input UpdateEleveInput {
-  matricule: String!
-  naissance: DateTime!
+  eleve: EleveInput!
   parent: ParentInput!
-  sexe: String!
   utilisateur: UtilisateurInput!
 }
 
