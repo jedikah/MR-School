@@ -7,12 +7,16 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 import { Utilisateur } from '../../utilisateur/utilisateur.entity';
 import { UtilisateurService } from '../../utilisateur/utilisateur.service';
 import { UtilisateurInput } from '../../utilisateur/utilisateur.type';
+import { ParentService } from '../../parent/parent.service';
+import { Parent } from '../../parent/parent.entity';
+import { ParentInput } from '../../parent/parent.type';
 
 @Resolver()
 export class UpdateleveResolver {
   constructor(
     private eleveService: EleveService,
     private utilisateurService: UtilisateurService,
+    private parentService: ParentService,
   ) {}
 
   @Mutation(() => Eleve)
@@ -38,7 +42,16 @@ export class UpdateleveResolver {
 
     utilisateur = await this.utilisateurService.updateUtilisateur(utilisateur);
 
-    Object.assign<Eleve, EleveInput>(eleve, updateEleveInput);
+    let parent = await this.parentService.ParentById(eleve.idParent);
+
+    Object.assign<Parent, ParentInput>(parent, { ...updateEleveInput.parent });
+
+    parent = await this.parentService.updateParent(parent);
+
+    Object.assign<Eleve, Omit<Eleve, 'id' | 'idParent' | 'idUtilisateur'>>(
+      eleve,
+      { ...updateEleveInput.eleve, parent, utilisateur },
+    );
 
     eleve.utilisateur = utilisateur;
 

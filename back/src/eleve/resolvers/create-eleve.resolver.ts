@@ -25,7 +25,7 @@ export class CreateEleveResolver {
     let mdpHash: string = null;
     let newEleve: Eleve;
     const isEleveExist = await this.eleveService.eleveByMatricule(
-      input.matricule,
+      input.eleve.matricule,
     );
 
     if (!isEleveExist) {
@@ -52,7 +52,7 @@ export class CreateEleveResolver {
       Object.assign<Eleve, Omit<Eleve, 'id' | 'idParent' | 'idUtilisateur'>>(
         createEleve,
         {
-          ...input,
+          ...input.eleve,
           utilisateur: createdUtilisateur,
           parent,
         },

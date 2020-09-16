@@ -9,12 +9,6 @@ export class EleveInput extends PartialType(
   InputType,
 ) {
   @Field()
-  utilisateur: UtilisateurInput;
-
-  @Field()
-  parent: ParentInput;
-
-  @Field()
   matricule: string;
 
   @Field()
@@ -25,7 +19,16 @@ export class EleveInput extends PartialType(
 }
 
 @InputType()
-export class CreateEleveInput extends EleveInput {}
+export class CreateEleveInput {
+  @Field(() => EleveInput)
+  eleve: EleveInput;
+
+  @Field(() => UtilisateurInput)
+  utilisateur: UtilisateurInput;
+
+  @Field(() => ParentInput)
+  parent: ParentInput;
+}
 
 @InputType()
-export class UpdateEleveInput extends EleveInput {}
+export class UpdateEleveInput extends CreateEleveInput {}
