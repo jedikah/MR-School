@@ -1,6 +1,8 @@
 import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import { SnackbarProvider } from "notistack";
+import DateFnsUtils from "@date-io/date-fns";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "fontsource-roboto";
 import "hover.css/css/hover-min.css";
 
@@ -13,7 +15,9 @@ function App() {
     <ContextProvider>
       <ApolloProvider client={apolloClient}>
         <SnackbarProvider maxSnack={1}>
-          <RootNavigation />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <RootNavigation />
+          </MuiPickersUtilsProvider>
         </SnackbarProvider>
       </ApolloProvider>
     </ContextProvider>

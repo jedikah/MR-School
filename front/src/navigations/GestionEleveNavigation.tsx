@@ -15,7 +15,7 @@ const GestionEleveNavigation: React.FC = () => {
       <Route
         path={`${match.url}/list`}
         component={
-          require("../components/main/gestion-eleve/student-list/StudentList")
+          require("../components/main/gestion-eleve/liste-eleve/ListeEleve")
             .default
         }
       />
