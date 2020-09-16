@@ -1,6 +1,9 @@
 import { InputType, Field, PartialType, OmitType } from '@nestjs/graphql';
 import { Eleve } from './eleve.entity';
-import { UtilisateurInput } from '../utilisateur/utilisateur.type';
+import {
+  CreateUtilisateurInput_Eleve,
+  UtilisateurInput,
+} from '../utilisateur/utilisateur.type';
 import { ParentInput } from '../parent/parent.type';
 
 @InputType()
@@ -23,8 +26,8 @@ export class CreateEleveInput {
   @Field(() => EleveInput)
   eleve: EleveInput;
 
-  @Field(() => UtilisateurInput)
-  utilisateur: UtilisateurInput;
+  @Field(() => CreateUtilisateurInput_Eleve)
+  utilisateur: CreateUtilisateurInput_Eleve;
 
   @Field(() => ParentInput)
   parent: ParentInput;

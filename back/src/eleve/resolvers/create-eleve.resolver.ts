@@ -10,6 +10,7 @@ import { Eleve } from '../eleve.entity';
 import { UtilisateurInput } from '../../utilisateur/utilisateur.type';
 import { Parent } from '../../parent/parent.entity';
 import { ParentService } from '../../parent/parent.service';
+import { GeneratePassword } from '../../utils/generate_password';
 
 @Resolver()
 export class CreateEleveResolver {
@@ -18,24 +19,25 @@ export class CreateEleveResolver {
     private cryptService: CryptService,
     private eleveService: EleveService,
     private parentService: ParentService,
+    private generatePassword: GeneratePassword,
   ) {}
 
   @Mutation(() => Eleve)
   async createEleve(@Args('input') input: CreateEleveInput): Promise<Eleve> {
-    let mdpHash: string = null;
+    let mdp: string = this.generatePassword.makePassword();
     let newEleve: Eleve;
     const isEleveExist = await this.eleveService.eleveByMatricule(
       input.eleve.matricule,
     );
 
     if (!isEleveExist) {
-      mdpHash = await this.cryptService.hash(input.utilisateur.motDePasse);
+      mdp = await this.cryptService.hash(mdp);
 
       //creer utilisateur
       const utilisateur = new Utilisateur();
       Object.assign<Utilisateur, UtilisateurInput>(utilisateur, {
         ...input.utilisateur,
-        motDePasse: mdpHash,
+        motDePasse: mdp,
       });
       const createdUtilisateur = await this.utilisateurService.createUtilisateur(
         utilisateur,
