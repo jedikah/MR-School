@@ -20,12 +20,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import studentIcon from "../../../assets/student.png";
 import parentIcon from "../../../assets/001-family.png";
 import infoIcon from "../../../assets/001-information.png";
-import {
-  EleveInput,
-  ParentInput,
-  UtilisateurInput,
-  CreateEleveInput,
-} from "../../../graphql/types";
 
 const useStyles = makeStyles((theme) => ({
   container: {
