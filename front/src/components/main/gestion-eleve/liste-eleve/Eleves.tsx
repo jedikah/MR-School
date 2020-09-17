@@ -45,26 +45,11 @@ const StyledTableCell = withStyles((theme: Theme) =>
   })
 )(TableCell);
 
-function createData(
-  photo: string,
-  nom: string,
-  prenom: string,
-  contact: string,
-  adresse: string
-) {
-  return { photo, nom, prenom, contact, adresse };
-}
-
-const rows = [
-  createData("photo 1", "nom1", "prenom1", "contact1", "adresse1"),
-  createData("photo 2", "nom2", "prenom2", "contact2", "adresse2"),
-  createData("photo 3", "nom3", "prenom3", "contact3", "adresse3"),
-  createData("photo 4", "nom4", "prenom4", "contact4", "adresse4"),
-];
-
-const Eleves: React.FC<UseEleves> = ({ elevesData }) => {
+const Eleves: React.FC<UseEleves> = ({ elevesData, elevesLoading }) => {
   const classes = useStyles();
-  console.log(elevesData);
+
+  const data = elevesData && !elevesLoading ? elevesData.eleves.eleves : [];
+
   return (
     <TableContainer component={Paper}>
       <Toolbar variant="dense" className={classes.toolbar}>
@@ -81,15 +66,15 @@ const Eleves: React.FC<UseEleves> = ({ elevesData }) => {
         <TableHead>
           <TableRow>
             <StyledTableCell align="center">Photo</StyledTableCell>
+            <StyledTableCell align="center">Matricule</StyledTableCell>
             <StyledTableCell align="center">Nom</StyledTableCell>
             <StyledTableCell align="center">Prenom</StyledTableCell>
-            <StyledTableCell align="center">Contact</StyledTableCell>
-            <StyledTableCell align="center">Adresse</StyledTableCell>
+            <StyledTableCell align="center">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
-            <TableRow key={index}>
+          {data.map((eleve) => (
+            <TableRow key={eleve.utilisateur.id}>
               <TableCell align="center">
                 <Avatar
                   sizes="small"
@@ -98,10 +83,10 @@ const Eleves: React.FC<UseEleves> = ({ elevesData }) => {
                   className={classes.center}
                 />
               </TableCell>
-              <TableCell align="center">{row.nom}</TableCell>
-              <TableCell align="center">{row.prenom}</TableCell>
-              <TableCell align="center">{row.contact}</TableCell>
-              <TableCell align="center">{row.adresse}</TableCell>
+              <TableCell align="center">{eleve.matricule}</TableCell>
+              <TableCell align="center">{eleve.utilisateur.nom}</TableCell>
+              <TableCell align="center">{eleve.utilisateur.prenom}</TableCell>
+              <TableCell align="center">modifier / classer</TableCell>
             </TableRow>
           ))}
         </TableBody>
