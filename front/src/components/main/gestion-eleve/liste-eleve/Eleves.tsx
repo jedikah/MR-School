@@ -1,44 +1,46 @@
-import React from "react";
+import React from 'react';
 import {
   makeStyles,
   withStyles,
   createStyles,
-  Theme,
-} from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { Toolbar, Typography, Avatar } from "@material-ui/core";
-import user from "../../../../assets/user.png";
+  Theme
+} from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { Toolbar, Typography, Avatar } from '@material-ui/core';
+import user from '../../../../assets/user.png';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     table: {
       minWidth: 650,
+      boxShadow: 'null'
     },
     toolbar: {
-      backgroundColor: "teal",
-      color: "white",
+      backgroundColor: theme.palette.secondary.main,
+      color: 'white'
     },
     center: {
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
   })
 );
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
-      backgroundColor: "rgba(0,0,0,0.1)",
+      backgroundColor: theme.palette.secondary.light,
+      color: 'white'
     },
     body: {
-      fontSize: 14,
-    },
+      fontSize: 14
+    }
   })
 )(TableCell);
 
@@ -53,10 +55,10 @@ function createData(
 }
 
 const rows = [
-  createData("photo 1", "nom1", "prenom1", "contact1", "adresse1"),
-  createData("photo 2", "nom2", "prenom2", "contact2", "adresse2"),
-  createData("photo 3", "nom3", "prenom3", "contact3", "adresse3"),
-  createData("photo 4", "nom4", "prenom4", "contact4", "adresse4"),
+  createData('photo 1', 'nom1', 'prenom1', 'contact1', 'adresse1'),
+  createData('photo 2', 'nom2', 'prenom2', 'contact2', 'adresse2'),
+  createData('photo 3', 'nom3', 'prenom3', 'contact3', 'adresse3'),
+  createData('photo 4', 'nom4', 'prenom4', 'contact4', 'adresse4')
 ];
 
 const Eleves: React.FC = () => {
@@ -64,7 +66,7 @@ const Eleves: React.FC = () => {
 
   return (
     <TableContainer component={Paper}>
-      <Toolbar className={classes.toolbar}>
+      <Toolbar variant="dense" className={classes.toolbar}>
         <Typography
           variant="h6"
           className={classes.center}
@@ -74,7 +76,7 @@ const Eleves: React.FC = () => {
           Lists étudiants
         </Typography>
       </Toolbar>
-      <Table className={classes.table} aria-label="simple table">
+      <Table size="small" className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
             <StyledTableCell align="center">Photo</StyledTableCell>
@@ -90,7 +92,7 @@ const Eleves: React.FC = () => {
               <TableCell align="center">
                 <Avatar
                   sizes="small"
-                  alt={"user"}
+                  alt={'user'}
                   src={user}
                   className={classes.center}
                 />

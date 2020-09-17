@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Typography,
   Paper,
@@ -12,48 +12,48 @@ import {
   Divider,
   Button,
   CircularProgress,
-  IconButton,
-} from "@material-ui/core";
-import { KeyboardDatePicker } from "@material-ui/pickers";
-import EditIcon from "@material-ui/icons/Edit";
+  IconButton
+} from '@material-ui/core';
+import { KeyboardDatePicker } from '@material-ui/pickers';
+import EditIcon from '@material-ui/icons/Edit';
 
-import studentIcon from "../../../assets/student.png";
-import parentIcon from "../../../assets/001-family.png";
-import infoIcon from "../../../assets/001-information.png";
+import studentIcon from '../../../assets/student.png';
+import parentIcon from '../../../assets/001-family.png';
+import infoIcon from '../../../assets/001-information.png';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(2)
   },
 
   eleveAvatar: {
     width: theme.spacing(15),
     height: theme.spacing(15),
-    marginBottom: 10,
+    marginBottom: 10
   },
 
   section: {
     paddingLeft: 10,
-    paddingRight: 10,
+    paddingRight: 10
   },
 
   submitBtn: {
-    borderRadius: "50px 50px 50px 50px",
+    borderRadius: '50px 50px 50px 50px',
     paddingLeft: 20,
     paddingRight: 20,
     marginTop: 15,
     marginBottom: 15,
-    marginRight: 10,
+    marginRight: 10
   },
 
   circularProgress: {
-    color: "#fff",
-    marginLeft: 15,
+    color: '#fff',
+    marginLeft: 15
   },
 
   marginBottom: {
-    marginBottom: 8,
-  },
+    marginBottom: 8
+  }
 }));
 
 const EleveForm: React.FC = () => {
@@ -68,11 +68,11 @@ const EleveForm: React.FC = () => {
           alignItems="center"
           style={{ marginTop: 25 }}
         >
-          <div style={{ position: "relative" }}>
+          <div style={{ position: 'relative' }}>
             <Avatar alt="eleve profile" className={classes.eleveAvatar} />
             <IconButton
               aria-label="edit photo eleve"
-              style={{ position: "absolute", left: -20, bottom: 0 }}
+              style={{ position: 'absolute', left: -20, bottom: 0 }}
             >
               <EditIcon fontSize="large" />
             </IconButton>
@@ -82,30 +82,71 @@ const EleveForm: React.FC = () => {
         <div className={classes.section}>
           <Box display="flex" alignItems="center">
             <Avatar src={studentIcon} alt="student" />
-            <Typography variant="h5" style={{ marginLeft: 10 }}>
+            <Typography variant="h6" style={{ marginLeft: 10 }}>
               Information eleve
             </Typography>
           </Box>
 
           <Box display="flex">
-            <RadioGroup row aria-label="gender" name="gender1" value={"homme"}>
+            <RadioGroup row aria-label="gender" name="gender1" value={'homme'}>
               <FormControlLabel
-                value="homme"
+                value="garçon"
                 control={<Radio />}
-                label="homme"
+                label="Garçon"
               />
               <FormControlLabel
-                value="femme"
+                value="fille"
                 control={<Radio />}
-                label="femme"
+                label="Fille"
               />
             </RadioGroup>
           </Box>
-          <Box display="flex">
-            <TextField variant="outlined" placeholder="matricul *" fullWidth />
+          <Box display="flex" className={classes.marginBottom}>
+            <TextField
+              size="small"
+              variant="outlined"
+              placeholder="matricul *"
+              fullWidth
+            />
           </Box>
+
+          <Box display="flex" className={classes.marginBottom}>
+            <TextField
+              size="small"
+              variant="outlined"
+              placeholder="nom *"
+              fullWidth
+            />
+          </Box>
+
+          <Box display="flex" className={classes.marginBottom}>
+            <TextField
+              size="small"
+              variant="outlined"
+              placeholder="prenom *"
+              fullWidth
+            />
+          </Box>
+
+          <Box display="flex">
+            <TextField
+              size="small"
+              variant="outlined"
+              placeholder="contacte *"
+              fullWidth
+              style={{ marginRight: 5 }}
+            />
+            <TextField
+              size="small"
+              variant="outlined"
+              placeholder="adresse *"
+              fullWidth
+            />
+          </Box>
+
           <Box>
             <KeyboardDatePicker
+              size="small"
               fullWidth
               inputVariant="outlined"
               disableToolbar
@@ -116,13 +157,13 @@ const EleveForm: React.FC = () => {
               value={new Date()}
               onChange={() => {}}
               KeyboardButtonProps={{
-                "aria-label": "change date",
+                'aria-label': 'change date'
               }}
             />
           </Box>
         </div>
 
-        <Divider style={{ marginTop: 15, marginBottom: 15 }} />
+        <Divider style={{ marginTop: 5, marginBottom: 5 }} />
 
         <div className={classes.section}>
           <Box
@@ -131,64 +172,52 @@ const EleveForm: React.FC = () => {
             className={classes.marginBottom}
           >
             <Avatar src={parentIcon} alt="student" />
-            <Typography variant="h5" style={{ marginLeft: 10 }}>
+            <Typography variant="h6" style={{ marginLeft: 10 }}>
               Information parent
             </Typography>
           </Box>
 
           <Box display="flex" className={classes.marginBottom}>
-            <TextField variant="outlined" placeholder="pere *" fullWidth />
-          </Box>
-
-          <Box display="flex" className={classes.marginBottom}>
-            <TextField variant="outlined" placeholder="mere *" fullWidth />
-          </Box>
-
-          <Box display="flex" className={classes.marginBottom}>
-            <TextField variant="outlined" placeholder="tuteur *" fullWidth />
+            <TextField
+              size="small"
+              variant="outlined"
+              placeholder="pere *"
+              fullWidth
+            />
           </Box>
 
           <Box display="flex" className={classes.marginBottom}>
             <TextField
+              size="small"
+              variant="outlined"
+              placeholder="mere *"
+              fullWidth
+            />
+          </Box>
+
+          <Box display="flex" className={classes.marginBottom}>
+            <TextField
+              size="small"
+              variant="outlined"
+              placeholder="tuteur *"
+              fullWidth
+            />
+          </Box>
+
+          <Box display="flex" className={classes.marginBottom}>
+            <TextField
+              size="small"
               variant="outlined"
               placeholder="adresse *"
               fullWidth
               style={{ marginRight: 5 }}
             />
-            <TextField variant="outlined" placeholder="contacte *" fullWidth />
-          </Box>
-        </div>
-
-        <Divider style={{ marginTop: 15, marginBottom: 15 }} />
-
-        <div className={classes.section}>
-          <Box
-            display="flex"
-            alignItems="center"
-            className={classes.marginBottom}
-          >
-            <Avatar src={infoIcon} alt="student" />
-            <Typography variant="h5" style={{ marginLeft: 10 }}>
-              Information generale
-            </Typography>
-          </Box>
-
-          <Box display="flex" className={classes.marginBottom}>
-            <TextField variant="outlined" placeholder="nom *" fullWidth />
-          </Box>
-
-          <Box display="flex" className={classes.marginBottom}>
-            <TextField variant="outlined" placeholder="prenom *" fullWidth />
-          </Box>
-
-          <Box display="flex" className={classes.marginBottom}>
             <TextField
+              size="small"
               variant="outlined"
               placeholder="contacte *"
               fullWidth
-              style={{ marginRight: 5 }}
             />
-            <TextField variant="outlined" placeholder="adresse *" fullWidth />
           </Box>
         </div>
 

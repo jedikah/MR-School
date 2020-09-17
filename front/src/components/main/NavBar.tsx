@@ -76,7 +76,7 @@ const NavBar: React.FC = () => {
   return (
     <div className={classes.root}>
       <AppBar color="transparent" position="static">
-        <Toolbar>
+        <Toolbar variant="dense">
           <Box display="flex" alignItems="center" className={classes.title}>
             <Avatar
               variant="square"

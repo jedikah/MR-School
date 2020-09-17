@@ -1,29 +1,29 @@
-import React from "react";
-import { makeStyles, Theme, Box, Avatar } from "@material-ui/core";
+import React from 'react';
+import { makeStyles, Theme, Box, Avatar } from '@material-ui/core';
 
-import Drawer from "../components/main/drawer";
-import setting from "../assets/settings.png";
-import Navbar from "../components/main/NavBar";
-import MainNavigation from "../navigations/MainNavigation";
+import Drawer from '../components/main/drawer';
+import setting from '../assets/settings.png';
+import Navbar from '../components/main/NavBar';
+import MainNavigation from '../navigations/MainNavigation';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: "flex",
+    display: 'flex'
   },
   left: {
-    width: "30%",
+    width: '30%'
   },
   right: {
-    width: "100%",
+    width: '100%'
   },
   nav: {
-    height: "fit-content",
+    height: 'fit-content'
   },
   setting: {
-    margin: 10,
-    width: theme.spacing(6),
-    height: theme.spacing(6),
-  },
+    margin: 5,
+    width: theme.spacing(4),
+    height: theme.spacing(4)
+  }
 }));
 
 const Main: React.FC = () => {
@@ -36,7 +36,7 @@ const Main: React.FC = () => {
         <div className={classes.nav}>
           <Box display="flex" justifyContent="flex-end">
             <Avatar
-              alt={"user-avatar"}
+              alt={'user-avatar'}
               src={setting}
               className={classes.setting}
             />
