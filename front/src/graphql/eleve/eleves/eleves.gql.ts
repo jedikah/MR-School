@@ -12,8 +12,14 @@ export interface ElevesData {
 }
 
 export const ELEVES = gql`
-  query Eleves($paginationInput: PaginationInput!) {
-    eleves(paginationInput: $paginationInput) {
+  query Eleves(
+    $paginationInput: PaginationInput!
+    $elevesFilterInput: ElevesFilterInput!
+  ) {
+    eleves(
+      paginationInput: $paginationInput
+      elevesFilterInput: $elevesFilterInput
+    ) {
       eleves {
         ...EleveFrag
         utilisateur {
