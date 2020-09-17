@@ -1,5 +1,4 @@
 import * as React from "react";
-import logger from "use-reducer-logger";
 import produce, { Draft } from "immer";
 
 // Actions
@@ -57,10 +56,7 @@ export const SessionDispatchContext = React.createContext<
 >(undefined);
 
 export const SessionProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = React.useReducer(
-    logger(sessionReducer),
-    initialState
-  );
+  const [state, dispatch] = React.useReducer(sessionReducer, initialState);
 
   return (
     <SessionStateContext.Provider value={state}>

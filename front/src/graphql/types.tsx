@@ -22,7 +22,7 @@ export type AnneeScolaire = {
 export type CreateEleveInput = {
   eleve: EleveInput;
   parent: ParentInput;
-  utilisateur: UtilisateurInput;
+  utilisateur: CreateUtilisateurInput_Eleve;
 };
 
 export type CreateParentInput = {
@@ -36,6 +36,14 @@ export type CreateParentInput = {
 export type CreateResponsableInput = {
   fonction: FonctionInput;
   utilisateur: UtilisateurInput;
+};
+
+export type CreateUtilisateurInput_Eleve = {
+  adresse: Scalars['String'];
+  contact: Scalars['String'];
+  nom: Scalars['String'];
+  photo?: Maybe<Scalars['String']>;
+  prenom: Scalars['String'];
 };
 
 
@@ -52,6 +60,12 @@ export type EleveInput = {
   matricule: Scalars['String'];
   naissance: Scalars['DateTime'];
   sexe: Scalars['String'];
+};
+
+export type ElevesResult = {
+  __typename?: 'ElevesResult';
+  eleves: Array<Eleve>;
+  paginationMeta: PaginationMeta;
 };
 
 export type Fonction = {
@@ -116,6 +130,20 @@ export type Niveau = {
   id: Scalars['ID'];
 };
 
+export type PaginationInput = {
+  limit: Scalars['Float'];
+  page: Scalars['Float'];
+};
+
+export type PaginationMeta = {
+  __typename?: 'PaginationMeta';
+  currentPage: Scalars['Float'];
+  itemCount: Scalars['Float'];
+  itemsPerPage: Scalars['Float'];
+  totalItems: Scalars['Float'];
+  totalPages: Scalars['Float'];
+};
+
 export type Parent = {
   __typename?: 'Parent';
   adresse: Scalars['String'];
@@ -136,9 +164,15 @@ export type ParentInput = {
 
 export type Query = {
   __typename?: 'Query';
+  eleves: ElevesResult;
   fonctionByDesignation: Fonction;
   helloMrSchool: Scalars['String'];
   WhoAmI: Utilisateur;
+};
+
+
+export type QueryElevesArgs = {
+  paginationInput: PaginationInput;
 };
 
 

@@ -1,10 +1,18 @@
-import { InputType, Field, PartialType, OmitType } from '@nestjs/graphql';
+import {
+  InputType,
+  Field,
+  PartialType,
+  OmitType,
+  ObjectType,
+} from '@nestjs/graphql';
+
 import { Eleve } from './eleve.entity';
 import {
   CreateUtilisateurInput_Eleve,
   UtilisateurInput,
 } from '../utilisateur/utilisateur.type';
 import { ParentInput } from '../parent/parent.type';
+import { PaginationMeta } from '../types';
 
 @InputType()
 export class EleveInput extends PartialType(
@@ -44,3 +52,16 @@ export class UpdateEleveInput {
   @Field(() => ParentInput)
   parent: ParentInput;
 }
+
+// query eleves
+
+@ObjectType()
+export class ElevesResult {
+  @Field(() => [Eleve])
+  eleves: Eleve[];
+
+  @Field(() => PaginationMeta)
+  paginationMeta: PaginationMeta;
+}
+
+// fin query eleves

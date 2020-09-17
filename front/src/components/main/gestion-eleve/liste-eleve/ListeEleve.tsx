@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import EleveForm from "../EleveForm";
-import Eleves from "./Eleves";
+import ElevesCtn from "./Eleves.ctn";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +28,7 @@ const StudentList: React.FC = () => {
     <Grid container>
       <Grid item xs={8}>
         <div className={classes.paper}>
-          <Eleves />
+          <ElevesCtn />
         </div>
       </Grid>
       <Grid item xs={4}>
