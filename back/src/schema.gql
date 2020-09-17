@@ -54,6 +54,10 @@ input EleveInput {
   sexe: String!
 }
 
+input ElevesFilterInput {
+  matricule: String!
+}
+
 type ElevesResult {
   eleves: [Eleve!]!
   paginationMeta: PaginationMeta!
@@ -118,7 +122,7 @@ input ParentInput {
 }
 
 type Query {
-  eleves(paginationInput: PaginationInput!): ElevesResult!
+  eleves(elevesFilterInput: ElevesFilterInput!, paginationInput: PaginationInput!): ElevesResult!
   fonctionByDesignation(input: String!): Fonction!
   helloMrSchool: String!
   WhoAmI: Utilisateur!

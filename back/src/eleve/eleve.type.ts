@@ -64,4 +64,10 @@ export class ElevesResult {
   paginationMeta: PaginationMeta;
 }
 
+@InputType()
+export class ElevesFilterInput {
+  @Field()
+  matricule: string;
+}
+
 // fin query eleves

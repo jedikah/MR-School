@@ -40,4 +40,12 @@ export class EleveService {
   getAllEleves(): SelectQueryBuilder<Eleve> {
     return this.eleveRepository.createQueryBuilder('eleve');
   }
+
+  searchEleveByMatricule(matricule: string): SelectQueryBuilder<Eleve> {
+    return this.eleveRepository
+      .createQueryBuilder('eleve')
+      .where('eleve.matricule like :matricule', {
+        matricule: `%${matricule}%`,
+      });
+  }
 }
