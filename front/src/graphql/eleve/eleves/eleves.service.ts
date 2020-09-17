@@ -1,7 +1,8 @@
 import { ELEVES, ElevesData } from "./eleves.gql";
 import { useQuery } from "@apollo/client";
 import { QueryElevesArgs } from "../../types";
-import { useElevesForm, UseElevesForm } from "./useElevesForm";
+import { UseElevesForm } from "./elevesForm.context";
+import { useElevesFormCtx } from "./elevesForm.consumer";
 
 export type UseEleves = UseElevesForm & {
   elevesData: ElevesData | undefined;
@@ -9,7 +10,7 @@ export type UseEleves = UseElevesForm & {
 };
 
 export const useEleves = (): UseEleves => {
-  const elevesForm = useElevesForm();
+  const elevesForm = useElevesFormCtx();
   const { data: elevesData, loading: elevesLoading } = useQuery<
     ElevesData,
     QueryElevesArgs

@@ -6,7 +6,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "fontsource-roboto";
 import "hover.css/css/hover-min.css";
 
-import { ContextProvider } from "./contexts";
+import { ContextProvider } from "./ContextProvider";
 import { apolloClient } from "./graphql/apollo";
 import RootNavigation from "./navigations/RootNavigation";
 

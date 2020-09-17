@@ -10,7 +10,7 @@ import {
 export const useSessionState = (): SessionState => {
   const context = React.useContext(SessionStateContext);
   if (context === undefined) {
-    throw new Error("userSessionState must by used within a SessionProvider");
+    throw new Error("userSessionState must be used within a SessionProvider");
   }
   return context;
 };
@@ -18,7 +18,7 @@ export const useSessionState = (): SessionState => {
 export const useSessionDispatch = (): SessionDispatch => {
   const context = React.useContext(SessionDispatchContext);
   if (context === undefined) {
-    throw new Error("useSessionDispatch must by used within a SessionProvider");
+    throw new Error("useSessionDispatch must be used within a SessionProvider");
   }
   return context;
 };
