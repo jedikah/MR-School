@@ -16,6 +16,12 @@ export const ELEVES = gql`
     eleves(paginationInput: $paginationInput) {
       eleves {
         ...EleveFrag
+        utilisateur {
+          ...UtilisateurFrag
+        }
+        parent {
+          ...ParentFrag
+        }
       }
 
       paginationMeta {
@@ -25,5 +31,7 @@ export const ELEVES = gql`
   }
 
   ${ELEVE_FRAG}
+  ${UTILISATEUR_FRAG}
+  ${PARENT_FRAG}
   ${PAGINATION_META_FRAG}
 `;
