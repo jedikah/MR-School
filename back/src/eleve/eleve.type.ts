@@ -5,6 +5,7 @@ import {
   OmitType,
   ObjectType,
 } from '@nestjs/graphql';
+
 import { Eleve } from './eleve.entity';
 import {
   CreateUtilisateurInput_Eleve,
@@ -52,7 +53,7 @@ export class UpdateEleveInput {
   parent: ParentInput;
 }
 
-// QUERY eleves
+// query eleves
 
 @ObjectType()
 export class ElevesResult {
@@ -62,3 +63,5 @@ export class ElevesResult {
   @Field(() => PaginationMeta)
   paginationMeta: PaginationMeta;
 }
+
+// fin query eleves
