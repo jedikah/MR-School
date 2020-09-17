@@ -23,4 +23,8 @@ export class EleveService {
       where: { matricule },
     });
   }
+
+  getAllEleves(): Promise<Eleve[]> {
+    return this.eleveRepository.createQueryBuilder('eleve').getMany();
+  }
 }

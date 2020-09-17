@@ -100,6 +100,7 @@ input ParentInput {
 }
 
 type Query {
+  eleves: [Eleve!]!
   fonctionByDesignation(input: String!): Fonction!
   helloMrSchool: String!
   WhoAmI: Utilisateur!
