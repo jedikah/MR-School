@@ -10,11 +10,11 @@ export class AnneeScolaire {
   id: number;
 
   @Field()
-  @Column()
+  @Column({ type: 'date' })
   debut: Date;/**YYY-MM-DD*/
 
   @Field()
-  @Column()
+  @Column({ type: 'date' })
   fin: Date;/**YYY-MM-DD*/
 
 }

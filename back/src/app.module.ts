@@ -19,9 +19,10 @@ import { AuthModule } from './auth/auth.module';
 import { ParentModule } from './parent/parent.module';
 import { NiveauModule } from './niveau/niveau.module';
 import { SectionModule } from './section/section.module';
-import { SectionNiveauModule } from './section-niveau/section-niveau.module';
+import { ClasseSectionModule } from './classe-section/classe-section.module';
 import { AnneeScolaireModule } from './annee-scolaire/annee-scolaire.module';
 import { ClassificationModule } from './classification/classification.module';
+import { ClasseModule } from './classe/classe.module';
 
 @Module({
   imports: [
@@ -60,9 +61,10 @@ import { ClassificationModule } from './classification/classification.module';
     ParentModule,
     NiveauModule,
     SectionModule,
-    SectionNiveauModule,
+    ClasseSectionModule,
     AnneeScolaireModule,
     ClassificationModule,
+    ClasseModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],

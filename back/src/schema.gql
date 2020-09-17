@@ -8,10 +8,47 @@ type AnneeScolaire {
   id: ID!
 }
 
+type Classe {
+  designation: String!
+  id: Float!
+  niveau: Niveau!
+  sections: [Section!]!
+}
+
+type Classification {
+  anneeScolaire: AnneeScolaire!
+  eleve: Eleve!
+  niveau: Niveau!
+  numAppel: Float!
+  section: Section!
+}
+
+input CreateAnneeScolaireInput {
+  debut: DateTime!
+  fin: DateTime!
+}
+
+input CreateClasseInput {
+  designation: String
+  idNiveau: Float!
+}
+
+input CreateClassificationInput {
+  idAnneeScolaire: Float!
+  idEleve: Float!
+  idNiveau: Float!
+  idSection: Float!
+  numAppel: Float!
+}
+
 input CreateEleveInput {
   eleve: EleveInput!
   parent: ParentInput!
   utilisateur: CreateUtilisateurInput_Eleve!
+}
+
+input CreateNiveauInput {
+  designation: String
 }
 
 input CreateParentInput {
@@ -25,6 +62,10 @@ input CreateParentInput {
 input CreateResponsableInput {
   fonction: FonctionInput!
   utilisateur: UtilisateurInput!
+}
+
+input CreateSectionInput {
+  designation: String
 }
 
 input CreateUtilisateurInput_Eleve {
@@ -74,15 +115,23 @@ input LoginInput {
 }
 
 type Mutation {
+  createAnneeScolaire(createAnneeScolaireInput: CreateAnneeScolaireInput!): AnneeScolaire!
+  createClasse(createClasseInput: CreateClasseInput!): Classe!
+  createClassification(createClassificationInput: CreateClassificationInput!): Classification!
   createEleve(input: CreateEleveInput!): Eleve!
   createFonction(input: FonctionInput!): Fonction!
+  createNiveau(createNiveauInput: CreateNiveauInput!): Niveau!
   createParent(input: CreateParentInput!): Parent!
   createResponsable(input: CreateResponsableInput!): Responsable!
+  createSection(createSectionInput: CreateSectionInput!): Section!
   login(input: LoginInput!): TokenDto!
+  updateAnneeScolaire(updateAnneeScolaireInput: UpdateAnneeScolaireInput!): AnneeScolaire!
   updateEleve(input: UpdateEleveInput!, matricule: String!): Eleve!
+  updateSection(updateSectionInput: UpdateSectionInput!): Section!
 }
 
 type Niveau {
+  classes: [Classe!]!
   designation: String!
   id: ID!
 }
@@ -120,6 +169,7 @@ input ParentInput {
 type Query {
   eleves(paginationInput: PaginationInput!): ElevesResult!
   fonctionByDesignation(input: String!): Fonction!
+  getAllNiveaux: [Niveau!]!
   helloMrSchool: String!
   WhoAmI: Utilisateur!
 }
@@ -138,10 +188,21 @@ type TokenDto {
   token: String
 }
 
+input UpdateAnneeScolaireInput {
+  debut: DateTime!
+  fin: DateTime!
+  id: Float!
+}
+
 input UpdateEleveInput {
   eleve: EleveInput!
   parent: ParentInput!
   utilisateur: UtilisateurInput!
+}
+
+input UpdateSectionInput {
+  designation: String
+  id: ID
 }
 
 type Utilisateur {

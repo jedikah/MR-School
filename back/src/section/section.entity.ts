@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
@@ -10,7 +10,7 @@ export class Section {
   id: number;
 
   @Field()
-  @Column({ length: 25 })
+  @Column({ length: 5, unique: true })
   designation: string;/**YYY-MM-DD*/
 
 }
