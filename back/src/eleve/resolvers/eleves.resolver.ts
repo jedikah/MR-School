@@ -1,13 +1,25 @@
-import { Query, Resolver } from '@nestjs/graphql';
-import { Eleve } from '../eleve.entity';
-import { EleveService } from '../eleve.service';
+import { Query, Resolver, Args } from '@nestjs/graphql';
 
-@Resolver(() => Eleve)
+import { EleveService } from '../eleve.service';
+import { ElevesResult } from '../eleve.type';
+import { PaginationInput } from '../../types';
+
+@Resolver()
 export class ElevesResolver {
   constructor(private eleveService: EleveService) {}
 
-  @Query(() => [Eleve])
-  async eleves(): Promise<Eleve[]> {
-    return this.eleveService.getAllEleves();
+  @Query(() => ElevesResult)
+  async eleves(
+    @Args('paginationInput') paginationInput: PaginationInput,
+  ): Promise<ElevesResult> {
+    const paginateEleves = await this.eleveService.paginate(
+      this.eleveService.getAllEleves(),
+      paginationInput,
+    );
+
+    return {
+      eleves: paginateEleves.items,
+      paginationMeta: paginateEleves.meta,
+    };
   }
 }

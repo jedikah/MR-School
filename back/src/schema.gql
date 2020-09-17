@@ -54,6 +54,11 @@ input EleveInput {
   sexe: String!
 }
 
+type ElevesResult {
+  eleves: [Eleve!]!
+  paginationMeta: PaginationMeta!
+}
+
 type Fonction {
   designation: String!
   id: ID!
@@ -82,6 +87,19 @@ type Niveau {
   id: ID!
 }
 
+input PaginationInput {
+  limit: Float!
+  page: Float!
+}
+
+type PaginationMeta {
+  currentPage: Float!
+  itemCount: Float!
+  itemsPerPage: Float!
+  totalItems: Float!
+  totalPages: Float!
+}
+
 type Parent {
   adresse: String!
   contact: String!
@@ -100,7 +118,7 @@ input ParentInput {
 }
 
 type Query {
-  eleves: [Eleve!]!
+  eleves(paginationInput: PaginationInput!): ElevesResult!
   fonctionByDesignation(input: String!): Fonction!
   helloMrSchool: String!
   WhoAmI: Utilisateur!
