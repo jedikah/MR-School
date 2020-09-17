@@ -62,6 +62,10 @@ export type EleveInput = {
   sexe: Scalars['String'];
 };
 
+export type ElevesFilterInput = {
+  matricule: Scalars['String'];
+};
+
 export type ElevesResult = {
   __typename?: 'ElevesResult';
   eleves: Array<Eleve>;
@@ -172,6 +176,7 @@ export type Query = {
 
 
 export type QueryElevesArgs = {
+  elevesFilterInput: ElevesFilterInput;
   paginationInput: PaginationInput;
 };
 
