@@ -8,6 +8,13 @@ type AnneeScolaire {
   id: ID!
 }
 
+type Classe {
+  designation: String!
+  id: Float!
+  niveau: Niveau!
+  sections: [Section!]!
+}
+
 input CreateEleveInput {
   eleve: EleveInput!
   parent: ParentInput!
