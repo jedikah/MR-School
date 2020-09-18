@@ -19,6 +19,14 @@ export type AnneeScolaire = {
   id: Scalars['ID'];
 };
 
+export type Classe = {
+  __typename?: 'Classe';
+  designation: Scalars['String'];
+  id: Scalars['Float'];
+  niveau: Niveau;
+  sections: Array<Section>;
+};
+
 export type CreateEleveInput = {
   eleve: EleveInput;
   parent: ParentInput;
