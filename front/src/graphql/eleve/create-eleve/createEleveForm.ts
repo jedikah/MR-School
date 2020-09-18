@@ -1,11 +1,12 @@
-import * as React from "react";
-import { useImmer } from "use-immer";
+import { Drafts } from '@material-ui/icons';
+import * as React from 'react';
+import { useImmer } from 'use-immer';
 import {
   CreateEleveInput,
   EleveInput,
   ParentInput,
-  CreateUtilisateurInput_Eleve,
-} from "../../types";
+  CreateUtilisateurInput_Eleve
+} from '../../types';
 
 export type CreateEleveInputKey = keyof CreateEleveInput;
 export type EleveInputKey = keyof EleveInput;
@@ -22,6 +23,11 @@ export type UseCreateEleveForm = {
   ) => void;
   _setCreatEleveFormError: (value: boolean) => void;
   handleDateChange: (date: Date | null) => void;
+  cleanInputCreatEleve: (
+    key1: CreateEleveInputKey,
+    key2: EleveInputKey | ParentInputKey | UtilisateurInputKey,
+    value: string
+  ) => void;
   createEleveFormError: boolean;
   sexe: string;
   selectedDate: Date | null;
@@ -30,34 +36,69 @@ export type UseCreateEleveForm = {
 export const useCreateEleveForm = (): UseCreateEleveForm => {
   const [createEleveFormError, setCreateEleveFormError] = React.useState(false);
 
-  const [sexe, setSexe] = React.useState("G");
+  const [sexe, setSexe] = React.useState('g');
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date()
   );
 
   const [creatEleveInput, setCreateEleveInput] = useImmer<CreateEleveInput>({
     eleve: {
-      matricule: "",
-      naissance: "",
-      sexe: "",
+      matricule: '',
+      naissance: '',
+      sexe: ''
     },
     parent: {
-      adresse: "",
-      contact: "",
-      mere: "",
-      pere: "",
-      tuteur: "",
+      adresse: '',
+      contact: '',
+      mere: '',
+      pere: '',
+      tuteur: ''
     },
     utilisateur: {
-      nom: "",
-      prenom: "",
-      adresse: "",
-      contact: "",
-      photo: "",
-    },
+      nom: '',
+      prenom: '',
+      adresse: '',
+      contact: '',
+      photo: ''
+    }
   });
   const _setCreatEleveFormError = (value: boolean) => {
     setCreateEleveFormError(value);
+  };
+
+  const cleanInputCreatEleve = (
+    key1: CreateEleveInputKey,
+    key2: EleveInputKey | ParentInputKey | UtilisateurInputKey,
+    value: string
+  ) => {
+    setCreateEleveInput((draft) => {
+      if (
+        key1 === 'eleve' &&
+        (key2 === 'naissance' || key2 === 'sexe' || key2 === 'matricule')
+      ) {
+        draft[key1][key2] = '';
+      }
+      if (
+        key1 === 'parent' &&
+        (key2 === 'adresse' ||
+          key2 === 'contact' ||
+          key2 === 'mere' ||
+          key2 === 'pere' ||
+          key2 === 'tuteur')
+      ) {
+        draft[key1][key2] = '';
+      }
+      if (
+        key1 === 'utilisateur' &&
+        (key2 === 'adresse' ||
+          key2 === 'nom' ||
+          key2 === 'contact' ||
+          key2 === 'photo' ||
+          key2 === 'prenom')
+      ) {
+        draft[key1][key2] = '';
+      }
+    });
   };
 
   const handleChangeCreatEleveForm = (
@@ -67,28 +108,28 @@ export const useCreateEleveForm = (): UseCreateEleveForm => {
   ) => {
     setCreateEleveInput((draft) => {
       if (
-        key1 === "eleve" &&
-        (key2 === "naissance" || key2 === "sexe" || key2 === "matricule")
+        key1 === 'eleve' &&
+        (key2 === 'naissance' || key2 === 'sexe' || key2 === 'matricule')
       ) {
         draft[key1][key2] = value;
       }
       if (
-        key1 === "parent" &&
-        (key2 === "adresse" ||
-          key2 === "contact" ||
-          key2 === "mere" ||
-          key2 === "pere" ||
-          key2 === "tuteur")
+        key1 === 'parent' &&
+        (key2 === 'adresse' ||
+          key2 === 'contact' ||
+          key2 === 'mere' ||
+          key2 === 'pere' ||
+          key2 === 'tuteur')
       ) {
         draft[key1][key2] = value;
       }
       if (
-        key1 === "utilisateur" &&
-        (key2 === "adresse" ||
-          key2 === "nom" ||
-          key2 === "contact" ||
-          key2 === "photo" ||
-          key2 === "prenom")
+        key1 === 'utilisateur' &&
+        (key2 === 'adresse' ||
+          key2 === 'nom' ||
+          key2 === 'contact' ||
+          key2 === 'photo' ||
+          key2 === 'prenom')
       ) {
         draft[key1][key2] = value;
       }
@@ -110,7 +151,8 @@ export const useCreateEleveForm = (): UseCreateEleveForm => {
     handleChangeCreatEleveForm,
     handleSexeChange,
     createEleveFormError,
+    cleanInputCreatEleve,
     handleDateChange,
-    _setCreatEleveFormError,
+    _setCreatEleveFormError
   };
 };
