@@ -7,18 +7,18 @@ export interface CreatEleveData {
 }
 
 export const CREATE_ELEVE = gql`
-  mutation CreateEleve($input: EleveInput!) {
+  mutation CreateEleve($input: CreateEleveInput!) {
     createEleve(input: $input) {
       ...EleveFrag
-      utilisateur {
-        ...UtilisateurFrag
-      }
       parent {
         ...ParentFrag
       }
+      utilisateur {
+        ...UtilisateurFrag
+      }
     }
   }
-  ${PARENT_FRAG}
   ${ELEVE_FRAG}
+  ${PARENT_FRAG}
   ${UTILISATEUR_FRAG}
 `;

@@ -22,7 +22,7 @@ export type AnneeScolaire = {
 export type CreateEleveInput = {
   eleve: EleveInput;
   parent: ParentInput;
-  utilisateur: UtilisateurInput;
+  utilisateur: CreateUtilisateurInput_Eleve;
 };
 
 export type CreateParentInput = {
@@ -36,6 +36,14 @@ export type CreateParentInput = {
 export type CreateResponsableInput = {
   fonction: FonctionInput;
   utilisateur: UtilisateurInput;
+};
+
+export type CreateUtilisateurInput_Eleve = {
+  adresse: Scalars['String'];
+  contact: Scalars['String'];
+  nom: Scalars['String'];
+  photo?: Maybe<Scalars['String']>;
+  prenom: Scalars['String'];
 };
 
 

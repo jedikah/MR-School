@@ -1,12 +1,16 @@
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { MutationCreateEleveArgs } from "../../types";
-import { CreatEleveData, CREATE_ELEVE } from "./creat-eleve";
+import { CreatEleveData, CREATE_ELEVE } from "./creat-eleve.gql";
 import { UseCreateEleveForm, useCreateEleveForm } from "./createEleveForm";
 
 export type UseCreatEleve = UseCreateEleveForm & {
   submitEleve: () => void;
   eleveLoading: boolean;
+};
+
+export const handleOnCompletedCreatEleve = (data: CreatEleveData) => {
+  return data.createEleve.utilisateur.motDePasse;
 };
 
 export const useCreatEleve = () => {
@@ -16,6 +20,9 @@ export const useCreatEleve = () => {
     CreatEleveData,
     MutationCreateEleveArgs
   >(CREATE_ELEVE, {
+    onCompleted: (data) => {
+      handleOnCompletedCreatEleve(data);
+    },
     onError: (error) => {
       enqueueSnackbar(error.message, {
         variant: "error",
@@ -29,22 +36,23 @@ export const useCreatEleve = () => {
 
   const submitEleve = () => {
     if (
-      form.creatEleveInput.eleve.matricule !== "" ||
-      form.creatEleveInput.eleve.naissance !== "" ||
-      form.creatEleveInput.eleve.sexe !== "" ||
-      form.creatEleveInput.parent.adresse !== "" ||
-      form.creatEleveInput.parent.contact !== "" ||
-      form.creatEleveInput.parent.mere !== "" ||
-      form.creatEleveInput.parent.pere !== "" ||
-      form.creatEleveInput.parent.tuteur !== "" ||
-      form.creatEleveInput.utilisateur.adresse !== "" ||
-      form.creatEleveInput.utilisateur.prenom !== "" ||
-      form.creatEleveInput.utilisateur.photo !== "" ||
-      form.creatEleveInput.utilisateur.nom !== "" ||
-      form.creatEleveInput.utilisateur.motDePasse !== "" ||
+      form.creatEleveInput.eleve.naissance !== "" &&
+      form.creatEleveInput.eleve.matricule !== "" &&
+      form.creatEleveInput.utilisateur.nom !== "" &&
+      form.creatEleveInput.utilisateur.prenom !== "" &&
+      form.creatEleveInput.parent.contact !== "" &&
+      form.creatEleveInput.parent.adresse !== "" &&
+      form.creatEleveInput.parent.pere !== "" &&
+      form.creatEleveInput.parent.mere !== "" &&
+      form.creatEleveInput.utilisateur.adresse !== "" &&
       form.creatEleveInput.utilisateur.contact !== ""
     ) {
-      console.log(form.creatEleveInput.eleve.sexe);
+      console.log(
+        "de service creat eleve sex: ",
+        form.creatEleveInput.eleve.sexe,
+        "de service creat eleve naissance: ",
+        form.creatEleveInput.eleve.naissance
+      );
       createEleve({
         variables: {
           input: form.creatEleveInput,
@@ -57,6 +65,7 @@ export const useCreatEleve = () => {
   return {
     ...form,
     submitEleve,
+    handleOnCompletedCreatEleve,
     eleveLoading,
   };
 };

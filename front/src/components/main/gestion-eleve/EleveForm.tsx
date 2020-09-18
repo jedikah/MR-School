@@ -63,23 +63,16 @@ const useStyles = makeStyles((theme) => ({
 
 export const EleveForm: React.FC<UseCreatEleve> = ({
   submitEleve,
+  sexe,
+  selectedDate,
+  handleDateChange,
+  handleSexeChange,
   creatEleveInput,
   eleveLoading,
   handleChangeCreatEleveForm,
   createEleveFormError,
 }) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState("garçon");
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
-  };
-
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-    new Date()
-  );
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
-  };
 
   const isEleveFormError = (key: EleveInputKey) => {
     return createEleveFormError && creatEleveInput.eleve[key] === "";
@@ -124,8 +117,8 @@ export const EleveForm: React.FC<UseCreatEleve> = ({
               row
               aria-label="gender"
               name="gender1"
-              value={value}
-              onChange={handleChange}
+              value={sexe}
+              onChange={handleSexeChange}
             >
               <FormControlLabel
                 value="garçon"
@@ -224,10 +217,11 @@ export const EleveForm: React.FC<UseCreatEleve> = ({
               error={isEleveFormError("naissance")}
               size="small"
               fullWidth
+              autoOk
               inputVariant="outlined"
-              disableToolbar
+              maxDate={Date.now()}
               variant="inline"
-              format="MM/dd/yyyy"
+              format="dd/MM/yyyy"
               margin="normal"
               label="Anniversaire"
               value={selectedDate}
@@ -283,7 +277,6 @@ export const EleveForm: React.FC<UseCreatEleve> = ({
 
           <Box display="flex" className={classes.marginBottom}>
             <TextField
-              error={isParentFormError("tuteur")}
               onChange={(e) =>
                 handleChangeCreatEleveForm("parent", "tuteur", e.target.value)
               }
@@ -331,13 +324,15 @@ export const EleveForm: React.FC<UseCreatEleve> = ({
             className={classes.submitBtn}
             onClick={(e) => {
               e.preventDefault();
-              if (selectedDate && value) {
-                handleChangeCreatEleveForm(
-                  "eleve",
-                  "naissance",
-                  selectedDate?.toLocaleDateString()
-                );
-                handleChangeCreatEleveForm("eleve", "sexe", value);
+              if (selectedDate) {
+                const dateNais =
+                  selectedDate.getFullYear() +
+                  "-" +
+                  (selectedDate.getMonth() + 1) +
+                  "-" +
+                  selectedDate.getDate();
+                handleChangeCreatEleveForm("eleve", "naissance", dateNais);
+                handleChangeCreatEleveForm("eleve", "sexe", sexe);
               }
               submitEleve();
             }}

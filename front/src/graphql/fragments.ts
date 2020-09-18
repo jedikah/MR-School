@@ -4,26 +4,28 @@ export const ELEVE_FRAG = gql`
   fragment EleveFrag on Eleve {
     matricule
     naissance
-    parent
     sexe
   }
 `;
 export const UTILISATEUR_FRAG = gql`
   fragment UtilisateurFrag on Utilisateur {
+    id
     nom
-    prenom
     contact
-    adresse
-    photo
     motDePasse
+    photo
+    prenom
+    adresse
   }
 `;
 export const PARENT_FRAG = gql`
   fragment ParentFrag on Parent {
-    pere
-    mere
     tuteur
-    contact
     adresse
+    contact
+    id
+    mere
+    pere
+    tuteur
   }
 `;
