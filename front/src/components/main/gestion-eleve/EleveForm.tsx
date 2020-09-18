@@ -120,16 +120,8 @@ export const EleveForm: React.FC<UseCreatEleve> = ({
               value={sexe}
               onChange={handleSexeChange}
             >
-              <FormControlLabel
-                value="garçon"
-                control={<Radio />}
-                label="Garçon"
-              />
-              <FormControlLabel
-                value="fille"
-                control={<Radio />}
-                label="Fille"
-              />
+              <FormControlLabel value="G" control={<Radio />} label="Garçon" />
+              <FormControlLabel value="F" control={<Radio />} label="Fille" />
             </RadioGroup>
           </Box>
           <Box display="flex" className={classes.marginBottom}>

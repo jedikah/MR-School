@@ -19,7 +19,7 @@ export const ELEVES = gql`
     eleves(
       paginationInput: $paginationInput
       elevesFilterInput: $elevesFilterInput
-    ) {
+    ) @connection(key: "eleves") {
       eleves {
         ...EleveFrag
         utilisateur {

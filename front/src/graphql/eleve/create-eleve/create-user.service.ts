@@ -1,6 +1,8 @@
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { MutationCreateEleveArgs } from "../../types";
+import produce from "immer";
+
+import { MutationCreateEleveArgs, ElevesResult } from "../../types";
 import { CreatEleveData, CREATE_ELEVE } from "./creat-eleve.gql";
 import { UseCreateEleveForm, useCreateEleveForm } from "./createEleveForm";
 
@@ -36,6 +38,19 @@ export const useCreatEleve = () => {
           horizontal: "right",
         },
       });
+    },
+    update: (cache, { data }) => {
+      if (data) {
+        cache.modify({
+          fields: {
+            eleves(existingEleves: ElevesResult): ElevesResult {
+              return produce(existingEleves, (draft) => {
+                draft.eleves.unshift(data.createEleve);
+              });
+            },
+          },
+        });
+      }
     },
   });
 

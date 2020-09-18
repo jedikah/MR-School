@@ -27,10 +27,41 @@ export type Classe = {
   sections: Array<Section>;
 };
 
+export type Classification = {
+  __typename?: 'Classification';
+  anneeScolaire: AnneeScolaire;
+  eleve: Eleve;
+  niveau: Niveau;
+  numAppel: Scalars['Float'];
+  section: Section;
+};
+
+export type CreateAnneeScolaireInput = {
+  debut: Scalars['DateTime'];
+  fin: Scalars['DateTime'];
+};
+
+export type CreateClasseInput = {
+  designation?: Maybe<Scalars['String']>;
+  idNiveau: Scalars['Float'];
+};
+
+export type CreateClassificationInput = {
+  idAnneeScolaire: Scalars['Float'];
+  idEleve: Scalars['Float'];
+  idNiveau: Scalars['Float'];
+  idSection: Scalars['Float'];
+  numAppel: Scalars['Float'];
+};
+
 export type CreateEleveInput = {
   eleve: EleveInput;
   parent: ParentInput;
   utilisateur: CreateUtilisateurInput_Eleve;
+};
+
+export type CreateNiveauInput = {
+  designation?: Maybe<Scalars['String']>;
 };
 
 export type CreateParentInput = {
@@ -44,6 +75,10 @@ export type CreateParentInput = {
 export type CreateResponsableInput = {
   fonction: FonctionInput;
   utilisateur: UtilisateurInput;
+};
+
+export type CreateSectionInput = {
+  designation?: Maybe<Scalars['String']>;
 };
 
 export type CreateUtilisateurInput_Eleve = {
@@ -97,12 +132,34 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAnneeScolaire: AnneeScolaire;
+  createClasse: Classe;
+  createClassification: Classification;
   createEleve: Eleve;
   createFonction: Fonction;
+  createNiveau: Niveau;
   createParent: Parent;
   createResponsable: Responsable;
+  createSection: Section;
   login: TokenDto;
+  updateAnneeScolaire: AnneeScolaire;
   updateEleve: Eleve;
+  updateSection: Section;
+};
+
+
+export type MutationCreateAnneeScolaireArgs = {
+  createAnneeScolaireInput: CreateAnneeScolaireInput;
+};
+
+
+export type MutationCreateClasseArgs = {
+  createClasseInput: CreateClasseInput;
+};
+
+
+export type MutationCreateClassificationArgs = {
+  createClassificationInput: CreateClassificationInput;
 };
 
 
@@ -116,6 +173,11 @@ export type MutationCreateFonctionArgs = {
 };
 
 
+export type MutationCreateNiveauArgs = {
+  createNiveauInput: CreateNiveauInput;
+};
+
+
 export type MutationCreateParentArgs = {
   input: CreateParentInput;
 };
@@ -126,8 +188,18 @@ export type MutationCreateResponsableArgs = {
 };
 
 
+export type MutationCreateSectionArgs = {
+  createSectionInput: CreateSectionInput;
+};
+
+
 export type MutationLoginArgs = {
   input: LoginInput;
+};
+
+
+export type MutationUpdateAnneeScolaireArgs = {
+  updateAnneeScolaireInput: UpdateAnneeScolaireInput;
 };
 
 
@@ -136,8 +208,14 @@ export type MutationUpdateEleveArgs = {
   matricule: Scalars['String'];
 };
 
+
+export type MutationUpdateSectionArgs = {
+  updateSectionInput: UpdateSectionInput;
+};
+
 export type Niveau = {
   __typename?: 'Niveau';
+  classes: Array<Classe>;
   designation: Scalars['String'];
   id: Scalars['ID'];
 };
@@ -178,6 +256,7 @@ export type Query = {
   __typename?: 'Query';
   eleves: ElevesResult;
   fonctionByDesignation: Fonction;
+  getAllNiveaux: Array<Niveau>;
   helloMrSchool: Scalars['String'];
   WhoAmI: Utilisateur;
 };
@@ -210,10 +289,21 @@ export type TokenDto = {
   token?: Maybe<Scalars['String']>;
 };
 
+export type UpdateAnneeScolaireInput = {
+  debut: Scalars['DateTime'];
+  fin: Scalars['DateTime'];
+  id: Scalars['Float'];
+};
+
 export type UpdateEleveInput = {
   eleve: EleveInput;
   parent: ParentInput;
   utilisateur: UtilisateurInput;
+};
+
+export type UpdateSectionInput = {
+  designation?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
 };
 
 export type Utilisateur = {
