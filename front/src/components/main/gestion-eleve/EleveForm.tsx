@@ -16,10 +16,12 @@ import {
 } from '@material-ui/core';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import EditIcon from '@material-ui/icons/Edit';
+import clsx from 'clsx';
 
 import studentIcon from '../../../assets/student.png';
 import parentIcon from '../../../assets/001-family.png';
-import infoIcon from '../../../assets/001-information.png';
+// import infoIcon from '../../../assets/001-information.png';
+// import { closestIndexTo } from 'date-fns';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -225,9 +227,9 @@ const EleveForm: React.FC = () => {
           <Button
             disableFocusRipple={true}
             variant="contained"
-            color="primary"
             size="small"
-            className={classes.submitBtn}
+            color="primary"
+            className={clsx(classes.submitBtn)}
             onClick={() => {
               //
             }}

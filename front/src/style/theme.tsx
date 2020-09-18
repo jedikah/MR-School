@@ -1,5 +1,5 @@
 import React from 'react';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
 const theme = createMuiTheme({
   palette: {
@@ -9,6 +9,9 @@ const theme = createMuiTheme({
     secondary: {
       main: '#780204',
       light: '#885353'
+    },
+    neutral: {
+      main: 'green'
     }
   }
 });
