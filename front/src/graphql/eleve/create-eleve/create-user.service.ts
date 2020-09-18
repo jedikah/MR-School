@@ -9,10 +9,6 @@ export type UseCreatEleve = UseCreateEleveForm & {
   eleveLoading: boolean;
 };
 
-export const handleOnCompletedCreatEleve = (data: CreatEleveData) => {
-  return data.createEleve.utilisateur.motDePasse;
-};
-
 export const useCreatEleve = () => {
   const { enqueueSnackbar } = useSnackbar();
   const form = useCreateEleveForm();
@@ -21,7 +17,16 @@ export const useCreatEleve = () => {
     MutationCreateEleveArgs
   >(CREATE_ELEVE, {
     onCompleted: (data) => {
-      handleOnCompletedCreatEleve(data);
+      enqueueSnackbar(
+        `votre mot de passe est ${data.createEleve.utilisateur.motDePasse}`,
+        {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        }
+      );
     },
     onError: (error) => {
       enqueueSnackbar(error.message, {
@@ -47,12 +52,6 @@ export const useCreatEleve = () => {
       form.creatEleveInput.utilisateur.adresse !== "" &&
       form.creatEleveInput.utilisateur.contact !== ""
     ) {
-      console.log(
-        "de service creat eleve sex: ",
-        form.creatEleveInput.eleve.sexe,
-        "de service creat eleve naissance: ",
-        form.creatEleveInput.eleve.naissance
-      );
       createEleve({
         variables: {
           input: form.creatEleveInput,
@@ -65,7 +64,6 @@ export const useCreatEleve = () => {
   return {
     ...form,
     submitEleve,
-    handleOnCompletedCreatEleve,
     eleveLoading,
   };
 };

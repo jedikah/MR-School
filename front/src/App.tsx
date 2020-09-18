@@ -5,7 +5,6 @@ import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "fontsource-roboto";
 import "hover.css/css/hover-min.css";
-
 import { ContextProvider } from "./contexts";
 import { apolloClient } from "./graphql/apollo";
 import RootNavigation from "./navigations/RootNavigation";

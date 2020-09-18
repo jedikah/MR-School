@@ -31,7 +31,6 @@ export const useCreateEleveForm = (): UseCreateEleveForm => {
   const [createEleveFormError, setCreateEleveFormError] = React.useState(false);
 
   const [sexe, setSexe] = React.useState("garçon");
-
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date()
   );
