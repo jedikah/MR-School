@@ -3,7 +3,7 @@ import {NiveauService} from "../niveau.service";
 import {Niveau} from "../niveau.entity";
 
 @Resolver()
-export class ListClassByNiveauResolver {
+export class ListNiveauResolver {
     constructor(private niveauService: NiveauService) {}
 
     @Query(() => [Niveau])

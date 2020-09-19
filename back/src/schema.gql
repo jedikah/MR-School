@@ -15,10 +15,15 @@ type Classe {
   sections: [Section!]!
 }
 
+type ClasseSection {
+  classe: Classe!
+  section: Section!
+}
+
 type Classification {
   anneeScolaire: AnneeScolaire!
+  classe: Classe!
   eleve: Eleve!
-  niveau: Niveau!
   numAppel: Float!
   section: Section!
 }
@@ -33,10 +38,15 @@ input CreateClasseInput {
   idNiveau: Float!
 }
 
+input CreateClasseSectionInput {
+  idClasse: Float!
+  idSection: Float!
+}
+
 input CreateClassificationInput {
   idAnneeScolaire: Float!
+  idClasse: Float!
   idEleve: Float!
-  idNiveau: Float!
   idSection: Float!
   numAppel: Float!
 }
@@ -125,6 +135,7 @@ type Mutation {
   createEleve(input: CreateEleveInput!): Eleve!
   createFonction(input: FonctionInput!): Fonction!
   createNiveau(createNiveauInput: CreateNiveauInput!): Niveau!
+  createOrUpdateSectionsOfClasse(createClasseSectionInput: CreateClasseSectionInput!): ClasseSection!
   createParent(input: CreateParentInput!): Parent!
   createResponsable(input: CreateResponsableInput!): Responsable!
   createSection(createSectionInput: CreateSectionInput!): Section!
@@ -173,6 +184,7 @@ input ParentInput {
 type Query {
   eleves(elevesFilterInput: ElevesFilterInput!, paginationInput: PaginationInput!): ElevesResult!
   fonctionByDesignation(input: String!): Fonction!
+  getAllClasses: [Classe!]!
   getAllNiveaux: [Niveau!]!
   helloMrSchool: String!
   WhoAmI: Utilisateur!

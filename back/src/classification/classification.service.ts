@@ -3,6 +3,8 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {Classification} from "./classification.entity";
 import {Repository} from "typeorm";
 import {GetIfClassificationExists} from "./types/classification.interface";
+import { Eleve } from '../eleve/eleve.entity';
+import { AnneeScolaire } from '../annee-scolaire/annee-scolaire.entity';
 
 @Injectable()
 export class ClassificationService {
@@ -11,17 +13,15 @@ export class ClassificationService {
         private classificationRepository: Repository<Classification>
     ) {}
 
-    async createClassification(classification: Classification): Promise<Classification> {
+    async createOrUpdateClassification(classification: Classification): Promise<Classification> {
         return await this.classificationRepository.save(classification)
     }
 
-    async findOneClassification(search: GetIfClassificationExists): Promise<Classification> {
-        /**Un élève ne se trouve qu'à une classeEntity pendant une année scolaire*/
-        /**Dans ce cas, son identifiant ne se répète pas pour une année scolaire*/
+    async findOneClassification(eleve: Eleve, anneeScolaire: AnneeScolaire): Promise<Classification> {
         return await this.classificationRepository.findOne({
             where: {
-                idEleve: search.idEleve,
-                idAnneeScolaire: search.idAnneeScolaire
+                eleve: eleve,
+                anneeScolaire: anneeScolaire
             }
         })
 

@@ -10,13 +10,13 @@ export class CreateSectionResolver {
 
     @Mutation(() => Section)
     async createSection(@Args('createSectionInput')sectionInput: CreateSectionInput) {
+
+      if(await this.sectionService.findOneSectionByDesignation(sectionInput.designation))
+        throw new UnauthorizedException('La section entrée existe déjà...');
+
         const section = new Section();
         section.designation = sectionInput.designation;
-       const saved = await this.sectionService.createOrUpdateSection(section);
+       return await this.sectionService.createOrUpdateSection(section);
 
-       if(!saved)
-           throw new UnauthorizedException('La section entrée existe déjà...');
-
-       return saved;
     }
 }

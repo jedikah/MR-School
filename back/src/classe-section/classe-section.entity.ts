@@ -1,6 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Entity, JoinColumn, ManyToOne, RelationId } from 'typeorm';
-import { Niveau } from '../niveau/niveau.entity';
 import { Section } from '../section/section.entity';
 import {Classe} from "../classe/classe.entity";
 
@@ -8,7 +7,7 @@ import {Classe} from "../classe/classe.entity";
 @Entity({ name: 'classe_section' })
 export class ClasseSection {
 
-  @ManyToOne(() => Niveau, { primary: true })
+  @ManyToOne(() => Classe, { primary: true })
   @Field()
   @JoinColumn({name: 'id_classe'})
   classe: Classe;

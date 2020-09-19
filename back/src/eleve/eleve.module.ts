@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { EleveService } from './eleve.service';
@@ -10,6 +10,7 @@ import { Parent } from '../parent/parent.entity';
 import { ParentService } from '../parent/parent.service';
 import { EleveFieldResolvers } from './field-resolvers';
 
+@Global()
 @Module({
   imports: [TypeOrmModule.forFeature([Eleve, Utilisateur, Parent])],
   providers: [
@@ -19,5 +20,6 @@ import { EleveFieldResolvers } from './field-resolvers';
     UtilisateurService,
     ParentService,
   ],
+  exports: [EleveService]
 })
 export class EleveModule {}

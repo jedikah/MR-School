@@ -3,7 +3,7 @@ import { NiveauService } from './niveau.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Niveau} from "./niveau.entity";
 import {NiveauResolvers} from "./resolvers";
-import { NiveauResolverFieldsResolver } from './resolver-fields/niveau-resolver-fields.resolver';
+import { NiveauResolverFieldsResolver } from './resolvers-fields/niveau-resolver-fields.resolver';
 
 @Global()
 @Module({

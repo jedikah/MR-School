@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ListClassByNiveauResolver } from './list-class-by-niveau.resolver';
+import { ListNiveauResolver } from './list-niveau.resolver';
 
 describe('NiveauResolver', () => {
-  let resolver: ListClassByNiveauResolver;
+  let resolver: ListNiveauResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ListClassByNiveauResolver],
+      providers: [ListNiveauResolver],
     }).compile();
 
-    resolver = module.get<ListClassByNiveauResolver>(ListClassByNiveauResolver);
+    resolver = module.get<ListNiveauResolver>(ListNiveauResolver);
   });
 
   it('should be defined', () => {

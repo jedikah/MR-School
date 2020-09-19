@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ClasseSectionResolver } from './classe-section.resolver';
+import { ClasseSectionResolver } from './create-classe-section.resolver';
 
 describe('SectionNiveauResolver', () => {
   let resolver: ClasseSectionResolver;

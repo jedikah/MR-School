@@ -7,7 +7,7 @@ export class CreateClassificationInput {
     idEleve: number
 
     @Field()
-    idNiveau: number
+    idClasse: number
 
     @Field()
     idSection: number

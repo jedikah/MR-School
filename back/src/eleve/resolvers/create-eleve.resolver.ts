@@ -5,13 +5,14 @@ import { Utilisateur } from '../../utilisateur/utilisateur.entity';
 import { CryptService } from '../../utils/crypt.service';
 import { EleveService } from '../../eleve/eleve.service';
 import { CreateEleveInput } from '../eleve.type';
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { Eleve } from '../eleve.entity';
 import { UtilisateurInput } from '../../utilisateur/utilisateur.type';
 import { Parent } from '../../parent/parent.entity';
 import { ParentService } from '../../parent/parent.service';
 import { GeneratePassword } from '../../utils/generate_password';
 import { ParentInput } from '../../parent/parent.type';
+import { GqlAuthGuard } from '../../auth/jwt-auth.guard';
 
 @Resolver()
 export class CreateEleveResolver {
@@ -24,6 +25,7 @@ export class CreateEleveResolver {
   ) {}
 
   @Mutation(() => Eleve)
+  @UseGuards(GqlAuthGuard)
   async createEleve(@Args('input') input: CreateEleveInput): Promise<Eleve> {
     const mdp: string = this.generatePassword.makePassword();
     let mdpHash: string;

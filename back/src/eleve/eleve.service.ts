@@ -48,4 +48,11 @@ export class EleveService {
         matricule: `%${matricule}%`,
       });
   }
+
+  searchEleveByIdUtilisateur(id: number): Promise<Eleve> {
+    return this.eleveRepository
+      .createQueryBuilder('eleve')
+      .where('eleve.id_utilisateur = :id', { id })
+      .getOne();
+  }
 }

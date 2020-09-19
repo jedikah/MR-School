@@ -1,9 +1,9 @@
-import { Entity, Column, OneToOne, JoinColumn, RelationId, OneToMany, ManyToOne } from 'typeorm';
+import { Entity, Column, JoinColumn, RelationId, ManyToOne } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Eleve } from '../eleve/eleve.entity';
 import { AnneeScolaire } from '../annee-scolaire/annee-scolaire.entity';
-import { Niveau } from '../niveau/niveau.entity';
 import { Section } from '../section/section.entity';
+import { Classe } from '../classe/classe.entity';
 
 @ObjectType()
 @Entity({ name: 'classification' })
@@ -16,12 +16,12 @@ export class Classification {
   @RelationId((classification: Classification) => classification.eleve)
   idEleve: number;
 
-  @ManyToOne(() => Niveau, { primary: true})
+  @ManyToOne(() => Classe, { primary: true})
   @Field()
-  @JoinColumn({ name: 'id_niveau' })
-  niveau: Niveau
-  @RelationId((classification: Classification) => classification.niveau)
-  idNiveau: number;
+  @JoinColumn({ name: 'id_classe' })
+  classe: Classe
+  @RelationId((classification: Classification) => classification.classe)
+  idClasse: number;
 
   @ManyToOne(() => Section, { primary: true})
   @Field()

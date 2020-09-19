@@ -16,4 +16,11 @@ export class SectionService {
     async findOneSection(idSection: number): Promise<Section> {
         return await this.sectionRepository.findOne(idSection);
     }
+    async findOneSectionByDesignation(designation: string): Promise<Section> {
+        return await this.sectionRepository.findOne({
+            where: {
+                designation: designation
+            }
+        })
+    }
 }

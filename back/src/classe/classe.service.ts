@@ -21,11 +21,23 @@ export class ClasseService {
             }
         })
     }
+    async findOneClasseById(id: number): Promise<Classe> {
+        return await this.classeServiceRepository.findOne(id)
+    }
     /** Pour récupérer, les classes d'un niveau*/
     async findClassesByNiveau(niveau: Niveau): Promise<Classe[]> {
         return await this.classeServiceRepository.find({
             where: {
                 niveau: niveau
+            }
+        })
+    }
+
+    /**Pour récupérer toutes les classes*/
+    async getAllClasses(): Promise<Classe[]> {
+        return await this.classeServiceRepository.find({
+            order: {
+                id: "ASC"
             }
         })
     }

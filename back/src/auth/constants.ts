@@ -1,4 +1,4 @@
 export const jwtConstants = {
   secret: 'secretKey',
-  signOptions: { expiresIn: '1d' },
+  signOptions: { expiresIn: '120d' },
 };
