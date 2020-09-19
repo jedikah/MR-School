@@ -17,6 +17,7 @@ export const useCreatEleve = () => {
     MutationCreateEleveArgs
   >(CREATE_ELEVE, {
     onCompleted: (data) => {
+      form.cleanInputCreatEleve();
       enqueueSnackbar(
         `votre mot de passe est ${data.createEleve.utilisateur.motDePasse}`,
         {
@@ -29,6 +30,7 @@ export const useCreatEleve = () => {
       );
     },
     onError: (error) => {
+      form.cleanInputCreatEleve();
       enqueueSnackbar(error.message, {
         variant: "error",
         anchorOrigin: {
@@ -41,16 +43,18 @@ export const useCreatEleve = () => {
 
   const submitEleve = () => {
     if (
+      form.creatEleveInput.eleve.sexe !== "" &&
       form.creatEleveInput.eleve.naissance !== "" &&
       form.creatEleveInput.eleve.matricule !== "" &&
       form.creatEleveInput.utilisateur.nom !== "" &&
       form.creatEleveInput.utilisateur.prenom !== "" &&
+      form.creatEleveInput.utilisateur.contact !== "" &&
+      form.creatEleveInput.utilisateur.adresse !== "" &&
       form.creatEleveInput.parent.contact !== "" &&
       form.creatEleveInput.parent.adresse !== "" &&
       form.creatEleveInput.parent.pere !== "" &&
       form.creatEleveInput.parent.mere !== "" &&
-      form.creatEleveInput.utilisateur.adresse !== "" &&
-      form.creatEleveInput.utilisateur.contact !== ""
+      form.creatEleveInput.parent.tuteur !== ""
     ) {
       createEleve({
         variables: {
