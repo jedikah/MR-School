@@ -23,9 +23,9 @@ import { UseCreatEleve } from "../../../graphql/eleve/create-eleve/create-user.s
 import {
   EleveInputKey,
   ParentInputKey,
-  UtilisateurInputKey,
 } from "../../../graphql/eleve/create-eleve/createEleveForm";
 import { dateToString, stringToDate } from "../../../utils/dateUtils";
+import UtilisateurFields, { UtilisateurFieldsProps } from "./UtilisateurFields";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -79,16 +79,20 @@ export const EleveForm: React.FC<UseCreatEleve> = ({
     return createEleveFormError && creatEleveInput.parent[key] === "";
   };
 
-  const isUtilisateurFormError = (key: UtilisateurInputKey) => {
-    return createEleveFormError && creatEleveInput.utilisateur[key] === "";
-  };
-
   const naissance = () => {
     const actualDate = new Date();
     if (dateToString(actualDate) === creatEleveInput.eleve.naissance) {
       return new Date();
     }
     return stringToDate(creatEleveInput.eleve.naissance);
+  };
+
+  const UTILISATEUR_FIELDS_PROPS: UtilisateurFieldsProps = {
+    utilisateurFields: creatEleveInput.utilisateur,
+    error: createEleveFormError,
+    onChange: (key, value) => {
+      handleChangeCreatEleveForm("utilisateur", key, value);
+    },
   };
 
   return (
@@ -147,71 +151,7 @@ export const EleveForm: React.FC<UseCreatEleve> = ({
             />
           </Box>
 
-          <Box display="flex" className={classes.marginBottom}>
-            <TextField
-              error={isUtilisateurFormError("nom")}
-              onChange={(e) =>
-                handleChangeCreatEleveForm("utilisateur", "nom", e.target.value)
-              }
-              value={creatEleveInput.utilisateur.nom}
-              size="small"
-              variant="outlined"
-              placeholder="nom *"
-              fullWidth
-            />
-          </Box>
-
-          <Box display="flex" className={classes.marginBottom}>
-            <TextField
-              error={isUtilisateurFormError("prenom")}
-              onChange={(e) =>
-                handleChangeCreatEleveForm(
-                  "utilisateur",
-                  "prenom",
-                  e.target.value
-                )
-              }
-              value={creatEleveInput.utilisateur.prenom}
-              size="small"
-              variant="outlined"
-              placeholder="prenom *"
-              fullWidth
-            />
-          </Box>
-
-          <Box display="flex">
-            <TextField
-              error={isUtilisateurFormError("contact")}
-              onChange={(e) =>
-                handleChangeCreatEleveForm(
-                  "utilisateur",
-                  "contact",
-                  e.target.value
-                )
-              }
-              value={creatEleveInput.utilisateur.contact}
-              size="small"
-              variant="outlined"
-              placeholder="contacte *"
-              fullWidth
-              style={{ marginRight: 5 }}
-            />
-            <TextField
-              error={isUtilisateurFormError("adresse")}
-              size="small"
-              onChange={(e) =>
-                handleChangeCreatEleveForm(
-                  "utilisateur",
-                  "adresse",
-                  e.target.value
-                )
-              }
-              value={creatEleveInput.utilisateur.adresse}
-              variant="outlined"
-              placeholder="adresse *"
-              fullWidth
-            />
-          </Box>
+          <UtilisateurFields {...UTILISATEUR_FIELDS_PROPS} />
 
           <Box>
             <KeyboardDatePicker
