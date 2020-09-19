@@ -19,7 +19,12 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import studentIcon from '../../../assets/student.png';
 import parentIcon from '../../../assets/001-family.png';
-import infoIcon from '../../../assets/001-information.png';
+import { UseCreatEleve } from '../../../graphql/eleve/create-eleve/create-user.service';
+import {
+  EleveInputKey,
+  ParentInputKey,
+  UtilisateurInputKey
+} from '../../../graphql/eleve/create-eleve/createEleveForm';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -56,8 +61,28 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const EleveForm: React.FC = () => {
+export const EleveForm: React.FC<UseCreatEleve> = ({
+  submitEleve,
+  sexe,
+  selectedDate,
+  handleDateChange,
+  handleSexeChange,
+  creatEleveInput,
+  eleveLoading,
+  handleChangeCreatEleveForm,
+  createEleveFormError
+}) => {
   const classes = useStyles();
+
+  const isEleveFormError = (key: EleveInputKey) => {
+    return createEleveFormError && creatEleveInput.eleve[key] === '';
+  };
+  const isParentFormError = (key: ParentInputKey) => {
+    return createEleveFormError && creatEleveInput.parent[key] === '';
+  };
+  const isUtilisateurFormError = (key: UtilisateurInputKey) => {
+    return createEleveFormError && creatEleveInput.utilisateur[key] === '';
+  };
 
   return (
     <form className={classes.container}>
@@ -88,21 +113,24 @@ const EleveForm: React.FC = () => {
           </Box>
 
           <Box display="flex">
-            <RadioGroup row aria-label="gender" name="gender1" value={'homme'}>
-              <FormControlLabel
-                value="garçon"
-                control={<Radio />}
-                label="Garçon"
-              />
-              <FormControlLabel
-                value="fille"
-                control={<Radio />}
-                label="Fille"
-              />
+            <RadioGroup
+              row
+              aria-label="gender"
+              name="gender1"
+              value={sexe}
+              onChange={handleSexeChange}
+            >
+              <FormControlLabel value="g" control={<Radio />} label="Garçon" />
+              <FormControlLabel value="f" control={<Radio />} label="Fille" />
             </RadioGroup>
           </Box>
           <Box display="flex" className={classes.marginBottom}>
             <TextField
+              error={isEleveFormError('matricule')}
+              onChange={(e) =>
+                handleChangeCreatEleveForm('eleve', 'matricule', e.target.value)
+              }
+              value={creatEleveInput.eleve.matricule}
               size="small"
               variant="outlined"
               placeholder="matricul *"
@@ -112,6 +140,11 @@ const EleveForm: React.FC = () => {
 
           <Box display="flex" className={classes.marginBottom}>
             <TextField
+              error={isUtilisateurFormError('nom')}
+              onChange={(e) =>
+                handleChangeCreatEleveForm('utilisateur', 'nom', e.target.value)
+              }
+              value={creatEleveInput.utilisateur.nom}
               size="small"
               variant="outlined"
               placeholder="nom *"
@@ -121,6 +154,15 @@ const EleveForm: React.FC = () => {
 
           <Box display="flex" className={classes.marginBottom}>
             <TextField
+              error={isUtilisateurFormError('prenom')}
+              onChange={(e) =>
+                handleChangeCreatEleveForm(
+                  'utilisateur',
+                  'prenom',
+                  e.target.value
+                )
+              }
+              value={creatEleveInput.utilisateur.prenom}
               size="small"
               variant="outlined"
               placeholder="prenom *"
@@ -130,6 +172,15 @@ const EleveForm: React.FC = () => {
 
           <Box display="flex">
             <TextField
+              error={isUtilisateurFormError('contact')}
+              onChange={(e) =>
+                handleChangeCreatEleveForm(
+                  'utilisateur',
+                  'contact',
+                  e.target.value
+                )
+              }
+              value={creatEleveInput.utilisateur.contact}
               size="small"
               variant="outlined"
               placeholder="contacte *"
@@ -137,7 +188,16 @@ const EleveForm: React.FC = () => {
               style={{ marginRight: 5 }}
             />
             <TextField
+              error={isUtilisateurFormError('adresse')}
               size="small"
+              onChange={(e) =>
+                handleChangeCreatEleveForm(
+                  'utilisateur',
+                  'adresse',
+                  e.target.value
+                )
+              }
+              value={creatEleveInput.utilisateur.adresse}
               variant="outlined"
               placeholder="adresse *"
               fullWidth
@@ -146,16 +206,18 @@ const EleveForm: React.FC = () => {
 
           <Box>
             <KeyboardDatePicker
+              error={isEleveFormError('naissance')}
               size="small"
               fullWidth
+              autoOk
               inputVariant="outlined"
-              disableToolbar
+              maxDate={Date.now()}
               variant="inline"
-              format="MM/dd/yyyy"
+              format="dd/MM/yyyy"
               margin="normal"
               label="Anniversaire"
-              value={new Date()}
-              onChange={() => {}}
+              value={selectedDate}
+              onChange={handleDateChange}
               KeyboardButtonProps={{
                 'aria-label': 'change date'
               }}
@@ -179,6 +241,11 @@ const EleveForm: React.FC = () => {
 
           <Box display="flex" className={classes.marginBottom}>
             <TextField
+              error={isParentFormError('pere')}
+              onChange={(e) =>
+                handleChangeCreatEleveForm('parent', 'pere', e.target.value)
+              }
+              value={creatEleveInput.parent.pere}
               size="small"
               variant="outlined"
               placeholder="pere *"
@@ -188,6 +255,11 @@ const EleveForm: React.FC = () => {
 
           <Box display="flex" className={classes.marginBottom}>
             <TextField
+              error={isParentFormError('mere')}
+              onChange={(e) =>
+                handleChangeCreatEleveForm('parent', 'mere', e.target.value)
+              }
+              value={creatEleveInput.parent.mere}
               size="small"
               variant="outlined"
               placeholder="mere *"
@@ -197,6 +269,10 @@ const EleveForm: React.FC = () => {
 
           <Box display="flex" className={classes.marginBottom}>
             <TextField
+              onChange={(e) =>
+                handleChangeCreatEleveForm('parent', 'tuteur', e.target.value)
+              }
+              value={creatEleveInput.parent.tuteur}
               size="small"
               variant="outlined"
               placeholder="tuteur *"
@@ -206,6 +282,11 @@ const EleveForm: React.FC = () => {
 
           <Box display="flex" className={classes.marginBottom}>
             <TextField
+              error={isParentFormError('adresse')}
+              onChange={(e) =>
+                handleChangeCreatEleveForm('parent', 'adresse', e.target.value)
+              }
+              value={creatEleveInput.parent.adresse}
               size="small"
               variant="outlined"
               placeholder="adresse *"
@@ -213,6 +294,11 @@ const EleveForm: React.FC = () => {
               style={{ marginRight: 5 }}
             />
             <TextField
+              onChange={(e) =>
+                handleChangeCreatEleveForm('parent', 'contact', e.target.value)
+              }
+              error={isParentFormError('contact')}
+              value={creatEleveInput.parent.contact}
               size="small"
               variant="outlined"
               placeholder="contacte *"
@@ -228,12 +314,23 @@ const EleveForm: React.FC = () => {
             color="primary"
             size="small"
             className={classes.submitBtn}
-            onClick={() => {
-              //
+            onClick={(e) => {
+              e.preventDefault();
+              if (selectedDate) {
+                const dateNais =
+                  selectedDate.getFullYear() +
+                  '-' +
+                  (selectedDate.getMonth() + 1) +
+                  '-' +
+                  selectedDate.getDate();
+                handleChangeCreatEleveForm('eleve', 'naissance', dateNais);
+                handleChangeCreatEleveForm('eleve', 'sexe', sexe);
+              }
+              submitEleve();
             }}
           >
             Enregistrer
-            {false && (
+            {eleveLoading && (
               <CircularProgress
                 size={20}
                 className={classes.circularProgress}
@@ -245,5 +342,3 @@ const EleveForm: React.FC = () => {
     </form>
   );
 };
-
-export default EleveForm;
