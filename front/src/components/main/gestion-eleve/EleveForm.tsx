@@ -87,12 +87,17 @@ export const EleveForm: React.FC<UseCreatEleve> = ({
     return stringToDate(creatEleveInput.eleve.naissance);
   };
 
+  const utilisateurFieldsPropsOnChange: (
+    key: "adresse" | "contact" | "nom" | "prenom",
+    value: string
+  ) => void = React.useCallback((key, value) => {
+    handleChangeCreatEleveForm("utilisateur", key, value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const UTILISATEUR_FIELDS_PROPS: UtilisateurFieldsProps = {
     utilisateurFields: creatEleveInput.utilisateur,
     error: createEleveFormError,
-    onChange: (key, value) => {
-      handleChangeCreatEleveForm("utilisateur", key, value);
-    },
+    onChange: utilisateurFieldsPropsOnChange,
   };
 
   return (
