@@ -1,3 +1,4 @@
 import { CreateMatiereResolver } from './createMatiere';
+import { MatieresResolver } from './matieres';
 
-export const MatiereResolvers = [CreateMatiereResolver];
+export const MatiereResolvers = [CreateMatiereResolver, MatieresResolver];

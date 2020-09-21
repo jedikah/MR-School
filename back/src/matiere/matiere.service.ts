@@ -10,6 +10,10 @@ export class MatiereService {
     private matiereRepository: Repository<Matiere>,
   ) {}
 
+  getAllMatieres(): Promise<Matiere[]> {
+    return this.matiereRepository.find();
+  }
+
   getMatiereByDesignation(designation: string): Promise<Matiere> {
     return this.matiereRepository.findOne({ where: { designation } });
   }
