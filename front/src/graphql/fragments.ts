@@ -39,3 +39,10 @@ export const PARENT_FRAG = gql`
     tuteur
   }
 `;
+
+export const MATIERE_FRAG = gql`
+  fragment MatiereFrag on Matiere {
+    id
+    designation
+  }
+`;
