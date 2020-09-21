@@ -295,6 +295,7 @@ export type Query = {
   getAllClasses: Array<Classe>;
   getAllNiveaux: Array<Niveau>;
   helloMrSchool: Scalars['String'];
+  matieres: Array<Matiere>;
   WhoAmI: Utilisateur;
 };
 

@@ -1,15 +1,18 @@
 import { useMutation } from "@apollo/client";
+import produce from "immer";
 
 import {
   useCreateMatiereState,
   useCreateMatiereDispatch,
 } from "./createMatiere.consumer";
 import { CreateMatiereData, CREATE_MATIERE } from "./createMatiere.gql";
-import { MutationCreateMatiereArgs } from "../../types";
+import { MutationCreateMatiereArgs, Matiere } from "../../types";
 import {
   CreateMatiereState,
   CreateMatiereDispatch,
 } from "./createMatiere.context";
+import { MatieresData } from "../matieres/matieres.gql";
+import { MATIERE_FRAG } from "../../fragments";
 
 export interface UseCreateMatiere {
   createMatiereState: CreateMatiereState;
@@ -27,8 +30,17 @@ export const useCreateMatiere = (): UseCreateMatiere => {
     MutationCreateMatiereArgs
   >(CREATE_MATIERE, {
     variables: createMatiereState.variables,
-    onCompleted: (data) => {
-      console.log(data);
+    update: (cache, { data }) => {
+      const matieresKey: keyof MatieresData = "matieres";
+      if (data) {
+        cache.modify({
+          fields: {
+            [matieresKey](existingMatieres: Matiere[]) {
+              return [data.createMatiere, ...existingMatieres];
+            },
+          },
+        });
+      }
     },
   });
 
