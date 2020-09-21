@@ -4,7 +4,7 @@ const configsDev: ConnectionOptions = {
   type: 'mysql',
   name: 'default',
   host: 'localhost',
-  port: 3308,
+  port: 3306,
   username: 'root',
   password: '',
   database: 'mr_school',
