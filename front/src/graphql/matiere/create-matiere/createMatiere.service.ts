@@ -1,5 +1,4 @@
 import { useMutation } from "@apollo/client";
-import produce from "immer";
 
 import {
   useCreateMatiereState,
@@ -12,7 +11,6 @@ import {
   CreateMatiereDispatch,
 } from "./createMatiere.context";
 import { MatieresData } from "../matieres/matieres.gql";
-import { MATIERE_FRAG } from "../../fragments";
 
 export interface UseCreateMatiere {
   createMatiereState: CreateMatiereState;
