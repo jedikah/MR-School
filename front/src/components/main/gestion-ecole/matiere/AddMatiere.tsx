@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
   btnCtn: {
     paddingTop: theme.spacing(1),
   },
+
+  submitBtn: {
+    borderRadius: "50px 50px 50px 50px",
+  },
 }));
 
 const AddMatiere: React.FC = () => {
@@ -36,7 +40,11 @@ const AddMatiere: React.FC = () => {
           justifyContent="flex-end"
           className={classes.btnCtn}
         >
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.submitBtn}
+          >
             Enregistrer
           </Button>
         </Box>

@@ -3,6 +3,7 @@ import { Grid, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import AddMatiere from "./AddMatiere";
+import ListMatiere from "./ListMatiere";
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -20,6 +21,7 @@ const Matiere: React.FC = () => {
       </Grid>
       <Grid item xs={4} className={classes.section}>
         <AddMatiere />
+        <ListMatiere />
       </Grid>
     </Grid>
   );
