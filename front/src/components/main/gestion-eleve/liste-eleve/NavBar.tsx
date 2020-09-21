@@ -9,9 +9,9 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import SearchIcon from "@material-ui/icons/Search";
 import { Avatar, Box } from "@material-ui/core";
-import classroom from "../../assets/classroom.png";
-import calendar from "../../assets/calendar.png";
-import SearchElevesCtn from "./gestion-eleve/liste-eleve/SearchEleves.ctn";
+import classroom from "../../../../assets/classroom.png";
+import calendar from "../../../../assets/calendar.png";
+import SearchElevesCtn from "./SearchEleves.ctn";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
