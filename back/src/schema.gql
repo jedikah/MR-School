@@ -57,6 +57,12 @@ input CreateEleveInput {
   utilisateur: CreateUtilisateurInput_Eleve!
 }
 
+type CreateMatiereError {
+  designationAlreadyExist: String!
+}
+
+union CreateMatiereResult = CreateMatiereError | Matiere
+
 input CreateNiveauInput {
   designation: String
 }
@@ -128,12 +134,18 @@ input LoginInput {
   motDePasse: String!
 }
 
+type Matiere {
+  designation: String!
+  id: ID!
+}
+
 type Mutation {
   createAnneeScolaire(createAnneeScolaireInput: CreateAnneeScolaireInput!): AnneeScolaire!
   createClasse(createClasseInput: CreateClasseInput!): Classe!
   createClassification(createClassificationInput: CreateClassificationInput!): Classification!
   createEleve(input: CreateEleveInput!): Eleve!
   createFonction(input: FonctionInput!): Fonction!
+  createMatiere(designation: String!): CreateMatiereResult!
   createNiveau(createNiveauInput: CreateNiveauInput!): Niveau!
   createOrUpdateSectionsOfClasse(createClasseSectionInput: CreateClasseSectionInput!): ClasseSection!
   createParent(input: CreateParentInput!): Parent!
