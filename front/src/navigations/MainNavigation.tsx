@@ -9,6 +9,10 @@ const MainNavigation: React.FC = () => {
         path={`${match.url}/gestion-eleve`}
         component={require("./GestionEleveNavigation").default}
       />
+      <Route
+        path={`${match.url}/gestion-ecole`}
+        component={require("./GestionEcoleNavigation").default}
+      />
     </Switch>
   );
 };
