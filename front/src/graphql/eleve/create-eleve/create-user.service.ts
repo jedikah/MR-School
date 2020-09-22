@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/client";
+import { MutationUpdaterFn, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { MutationCreateEleveArgs } from "../../types";
-import { ELEVES } from "../eleves/eleves.gql";
+import { ELEVES, ElevesData } from "../eleves/eleves.gql";
 import { CreatEleveData, CREATE_ELEVE } from "./creat-eleve.gql";
 import { UseCreateEleveForm, useCreateEleveForm } from "./createEleveForm";
 
@@ -10,25 +10,19 @@ export type UseCreatEleve = UseCreateEleveForm & {
   eleveLoading: boolean;
 };
 
-const updateCache = (cache: any, data: any) => {
-  const existingEleves = cache.readQuery({
+const updateCache: MutationUpdaterFn<CreatEleveData> = (cache, { data }) => {
+  const existingEleves = cache.readQuery<ElevesData>({
     query: ELEVES,
-    variables: {
-      paginationInput: {
-        page: 1,
-        limit: 100,
-      },
-      elevesFilterInput: {
-        matricule: "",
-      },
-    },
   });
-
-  const newEleve = data.createEleve;
-  cache.writeQuery({
-    query: ELEVES,
-    data: { data: [newEleve, ...existingEleves.eleves.eleves] },
-  });
+  const newEleve = data;
+  if (existingEleves && newEleve) {
+    cache.writeQuery({
+      query: ELEVES,
+      data: {
+        eleves: [newEleve, ...existingEleves.eleves.eleves],
+      },
+    });
+  }
 };
 
 export const useCreatEleve = () => {

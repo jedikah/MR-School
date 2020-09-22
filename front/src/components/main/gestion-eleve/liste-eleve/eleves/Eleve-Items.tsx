@@ -18,7 +18,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 import user from "../../../../../assets/user.png";
-import { Data } from "./DataCreator";
+import { Data } from "./EleveInterface";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

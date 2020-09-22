@@ -13,7 +13,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Toolbar, Typography } from "@material-ui/core";
-import { Data } from "./DataCreator";
+import { Data } from "./EleveInterface";
 import { UseEleves } from "../../../../../graphql/eleve/eleves/eleves.service";
 import { TableRowSkeleton } from "../../../../public-component/TableSkeleton";
 import EleveItems from "./Eleve-Items";
