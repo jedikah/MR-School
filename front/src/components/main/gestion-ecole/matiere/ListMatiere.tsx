@@ -15,6 +15,8 @@ import {
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
 import ConfirmationDialog from "../../../public-component/ConfirmationDialog";
 import SearchMatiere from "./SearchMatiere";
@@ -40,6 +42,12 @@ const useStyles = makeStyles((theme) => ({
   dialog: {
     width: "80%",
     maxHeight: 435,
+  },
+
+  sortBtn: {
+    position: "relative",
+    left: 5,
+    bottom: 9,
   },
 }));
 
@@ -97,9 +105,14 @@ const ListMatiere: React.FC = () => {
           justifyContent="space-between"
           alignItems="flex-start"
         >
-          <Typography gutterBottom variant="h5" component="h2">
-            Liste matiere
-          </Typography>
+          <Box display="flex">
+            <Typography gutterBottom variant="h5" component="h2">
+              Liste matiere
+            </Typography>
+            <IconButton className={classes.sortBtn}>
+              <ArrowUpwardIcon />
+            </IconButton>
+          </Box>
           <SearchMatiere
             input={matiereState.searchMatieres}
             onChange={(value) =>
