@@ -50,45 +50,51 @@ const MatiereForm: React.FC<MatiereFormProps> = ({
 }) => {
   const classes = useStyles();
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit();
+  };
+
   return (
-    <Card elevation={4} className={classes.card}>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
-          {title}
-        </Typography>
+    <form onSubmit={handleSubmit}>
+      <Card elevation={4} className={classes.card}>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {title}
+          </Typography>
 
-        <TextField
-          fullWidth
-          variant="outlined"
-          placeholder="designation"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          error={error && value === ""}
-        />
+          <TextField
+            fullWidth
+            variant="outlined"
+            placeholder="designation"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            error={error && value === ""}
+          />
 
-        <Box
-          display="flex"
-          justifyContent="flex-end"
-          className={classes.btnCtn}
-        >
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.submitBtn}
-            onClick={onSubmit}
+          <Box
+            display="flex"
+            justifyContent="flex-end"
+            className={classes.btnCtn}
           >
-            {submitBtnLabel}
-            {loading && (
-              <CircularProgress
-                size={20}
-                className={classes.circularProgress}
-              />
-            )}
-          </Button>
-        </Box>
-      </CardContent>
-    </Card>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submitBtn}
+            >
+              {submitBtnLabel}
+              {loading && (
+                <CircularProgress
+                  size={20}
+                  className={classes.circularProgress}
+                />
+              )}
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </form>
   );
 };
 

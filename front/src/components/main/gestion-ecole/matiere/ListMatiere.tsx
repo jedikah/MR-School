@@ -4,7 +4,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
 import {
   Card,
   Typography,
@@ -26,6 +25,9 @@ import { useRemoveMatiere } from "../../../../graphql/matiere/remove-matiere/rem
 const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: theme.spacing(1),
+    height: "70vh",
+    maxHeight: "70vh",
+    overflow: "auto",
   },
 
   empytIcon: {
@@ -96,6 +98,7 @@ const ListMatiere: React.FC = () => {
           <List component="nav" aria-label="main mailbox folders">
             {matieresData.matieres.map((matiere) => (
               <ListItem
+                divider
                 key={matiere.id}
                 button
                 selected={
@@ -137,7 +140,6 @@ const ListMatiere: React.FC = () => {
             />
           </Box>
         )}
-        <Divider />
       </CardContent>
 
       <ConfirmationDialog
