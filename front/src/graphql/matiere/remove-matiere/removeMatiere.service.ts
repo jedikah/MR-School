@@ -25,32 +25,42 @@ export const useRemoveMatiere = () => {
     MutationRemoveMatiereArgs
   >(REMOVE_MATIERE, {
     onCompleted: (data) => {
-      enqueueSnackbar("La matiere a bien ete supprimer", {
-        variant: "success",
-        anchorOrigin: {
-          vertical: "top",
-          horizontal: "center",
-        },
-      });
-
-      const matieres = apollo.cache.readQuery<MatieresData>({
-        query: MATIERES,
-      });
-      if (matieres) {
-        apollo.cache.writeQuery<MatieresData>({
+      if (data.removeMatiere) {
+        let designationMatiereRemoved = "";
+        const matieres = apollo.cache.readQuery<MatieresData>({
           query: MATIERES,
-          data: produce(matieres, (draft) => {
-            draft.matieres.splice(
-              draft.matieres.findIndex(
-                (m) => parseInt(m.id) === matiereState.removeMatiereVariables.id
-              ),
-              1
-            );
-          }),
         });
-      }
 
-      matiereDispatch({ type: "SET_TO_DELETE_MATIERE", idMatiere: 0 });
+        if (matieres) {
+          apollo.cache.writeQuery<MatieresData>({
+            query: MATIERES,
+            data: produce(matieres, (draft) => {
+              draft.matieres.splice(
+                draft.matieres.findIndex((m) => {
+                  const isMatch =
+                    parseInt(m.id) === matiereState.removeMatiereVariables.id;
+                  if (isMatch) designationMatiereRemoved = m.designation;
+                  return isMatch;
+                }),
+                1
+              );
+            }),
+          });
+        }
+
+        enqueueSnackbar(
+          `La matiere ${designationMatiereRemoved} a bien ete supprimer`,
+          {
+            variant: "success",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "center",
+            },
+          }
+        );
+
+        matiereDispatch({ type: "SET_TO_DELETE_MATIERE", idMatiere: 0 });
+      }
     },
   });
 
