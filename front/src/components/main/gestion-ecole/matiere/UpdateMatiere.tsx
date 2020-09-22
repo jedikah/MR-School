@@ -13,6 +13,7 @@ const UpdateMatiere: React.FC = () => {
 
   const matiereFormProps: MatiereFormProps = {
     title: "Modifier la matiere",
+    error: matiereState.updateMatiereFormError,
     submitBtnLabel: "Modifier",
     loading: loadingUpdateMatiere,
     onSubmit: () => {

@@ -32,6 +32,12 @@ export const useUpdateMatiere = () => {
           },
         }
       );
+
+      matiereDispatch({
+        type: "SET_FORM_ERROR",
+        key: "updateMatiereFormError",
+        value: false,
+      });
     },
 
     onError: (error) => {
@@ -53,6 +59,12 @@ export const useUpdateMatiere = () => {
     ) {
       updateMatiere({
         variables,
+      });
+    } else {
+      matiereDispatch({
+        type: "SET_FORM_ERROR",
+        key: "updateMatiereFormError",
+        value: true,
       });
     }
   };

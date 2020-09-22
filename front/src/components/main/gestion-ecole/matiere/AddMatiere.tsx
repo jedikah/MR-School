@@ -12,6 +12,7 @@ const AddMatiere: React.FC = () => {
   } = useCreateMatiere();
 
   const matiereFormProps: MatiereFormProps = {
+    error: matiereState.createMatiereFormError,
     title: "Ajouter une matiere",
     submitBtnLabel: "Ajouter",
     loading: loadingCreateMatiere,

@@ -30,11 +30,18 @@ interface SetToUpdateMatiereAction {
   updateMatiereInput: UpdateMatiereInput;
 }
 
+interface SetFormErrorAction {
+  type: "SET_FORM_ERROR";
+  key: "createMatiereFormError" | "updateMatiereFormError";
+  value: boolean;
+}
+
 type MatiereActions =
   | HandleChangeCreateMatiereVariablesAction
   | HandleChangeUpdateMatiereVariablesAction
   | SetToDeleteMatiereAction
-  | SetToUpdateMatiereAction;
+  | SetToUpdateMatiereAction
+  | SetFormErrorAction;
 export type MatiereDispatch = (action: MatiereActions) => void;
 
 // Context
@@ -43,6 +50,8 @@ export interface MatiereState {
   removeMatiereVariables: MutationRemoveMatiereArgs;
   createMatiereVariables: MutationCreateMatiereArgs;
   updateMatiereVariables: MutationUpdateMatiereArgs;
+  createMatiereFormError: boolean;
+  updateMatiereFormError: boolean;
 }
 
 const initialState: MatiereState = {
@@ -58,6 +67,8 @@ const initialState: MatiereState = {
       designation: "",
     },
   },
+  createMatiereFormError: false,
+  updateMatiereFormError: false,
 };
 
 const matiereReducer = produce(
@@ -89,6 +100,12 @@ const matiereReducer = produce(
           draft.updateMatiereVariables.updateMatiereInput =
             action.updateMatiereInput;
         }
+        draft.createMatiereFormError = false;
+        draft.updateMatiereFormError = false;
+        break;
+
+      case "SET_FORM_ERROR":
+        draft[action.key] = action.value;
         break;
     }
   }

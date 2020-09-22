@@ -55,6 +55,12 @@ export const useCreateMatiere = (): UseCreateMatiere => {
           type: "HANDLE_CHANGE_CREATE_MATIERE_VARIABLES",
           value: "",
         });
+
+        matiereDispatch({
+          type: "SET_FORM_ERROR",
+          key: "createMatiereFormError",
+          value: false,
+        });
       }
 
       if (data.createMatiere.__typename === "CreateMatiereError") {
@@ -72,6 +78,12 @@ export const useCreateMatiere = (): UseCreateMatiere => {
   const submitCreateMatiere = (): void => {
     if (matiereState.createMatiereVariables.designation !== "") {
       createMatiere({ variables: matiereState.createMatiereVariables });
+    } else {
+      matiereDispatch({
+        type: "SET_FORM_ERROR",
+        key: "createMatiereFormError",
+        value: true,
+      });
     }
   };
 

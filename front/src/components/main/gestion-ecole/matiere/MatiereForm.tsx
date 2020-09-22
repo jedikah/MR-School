@@ -34,6 +34,7 @@ export interface MatiereFormProps {
   loading: boolean;
   title: string;
   submitBtnLabel: string;
+  error: boolean;
   onChange: (value: string) => void;
   onSubmit: () => void;
 }
@@ -45,6 +46,7 @@ const MatiereForm: React.FC<MatiereFormProps> = ({
   loading,
   title,
   submitBtnLabel,
+  error,
 }) => {
   const classes = useStyles();
 
@@ -61,6 +63,7 @@ const MatiereForm: React.FC<MatiereFormProps> = ({
           placeholder="designation"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          error={error && value === ""}
         />
 
         <Box
