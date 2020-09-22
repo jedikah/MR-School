@@ -1,11 +1,12 @@
 import { useSnackbar } from "notistack";
-import { useMutation } from "@apollo/client";
+import { useMutation, useApolloClient } from "@apollo/client";
 
 import { useMatiereDispatch, useMatiereState } from "../matiere.consumer";
 import { CreateMatiereData, CREATE_MATIERE } from "./createMatiere.gql";
-import { MutationCreateMatiereArgs, Matiere } from "../../types";
+import { MutationCreateMatiereArgs } from "../../types";
 import { MatiereDispatch, MatiereState } from "../matiere.context";
-import { MatieresData } from "../matieres/matieres.gql";
+import { MatieresData, MATIERES } from "../matieres/matieres.gql";
+import produce from "immer";
 
 export interface UseCreateMatiere {
   matiereState: MatiereState;
@@ -15,6 +16,7 @@ export interface UseCreateMatiere {
 }
 
 export const useCreateMatiere = (): UseCreateMatiere => {
+  const apollo = useApolloClient();
   const matiereState = useMatiereState();
   const matiereDispatch = useMatiereDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -25,6 +27,19 @@ export const useCreateMatiere = (): UseCreateMatiere => {
   >(CREATE_MATIERE, {
     onCompleted: (data) => {
       if (data.createMatiere.__typename === "Matiere") {
+        const prevMatieres = apollo.cache.readQuery<MatieresData>({
+          query: MATIERES,
+        });
+        if (prevMatieres) {
+          apollo.cache.writeQuery<MatieresData>({
+            query: MATIERES,
+            data: produce(prevMatieres, (draft) => {
+              data.createMatiere.__typename === "Matiere" &&
+                draft.matieres.unshift(data.createMatiere);
+            }),
+          });
+        }
+
         enqueueSnackbar(
           `La matiere ${data.createMatiere.designation} a bien ete creer`,
           {
@@ -35,6 +50,7 @@ export const useCreateMatiere = (): UseCreateMatiere => {
             },
           }
         );
+
         matiereDispatch({ type: "HANDLE_CHANGE", value: "" });
       }
 
@@ -44,19 +60,6 @@ export const useCreateMatiere = (): UseCreateMatiere => {
           anchorOrigin: {
             vertical: "top",
             horizontal: "center",
-          },
-        });
-      }
-    },
-
-    update: (cache, { data }) => {
-      const matieresKey: keyof MatieresData = "matieres";
-      if (data && data.createMatiere.__typename === "Matiere") {
-        cache.modify({
-          fields: {
-            [matieresKey](existingMatieres: Matiere[]) {
-              return [data.createMatiere, ...existingMatieres];
-            },
           },
         });
       }

@@ -1,11 +1,11 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useApolloClient } from "@apollo/client";
 import { RemoveMatiereData, REMOVE_MATIERE } from "./removeMatiere.gql";
 import { MutationRemoveMatiereArgs } from "../../types";
 import { MatieresData, MATIERES } from "../matieres/matieres.gql";
 import { useMatiereState, useMatiereDispatch } from "../matiere.consumer";
 import { MatiereState, MatiereDispatch } from "../matiere.context";
-import produce from "immer";
 import { useSnackbar } from "notistack";
+import produce from "immer";
 
 export interface UseRemoveMatiere {
   matiereState: MatiereState;
@@ -15,6 +15,7 @@ export interface UseRemoveMatiere {
 }
 
 export const useRemoveMatiere = () => {
+  const apollo = useApolloClient();
   const matiereState = useMatiereState();
   const matiereDispatch = useMatiereDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -31,29 +32,25 @@ export const useRemoveMatiere = () => {
           horizontal: "center",
         },
       });
-      matiereDispatch({ type: "SET_TO_DELETE_MATIERE", idMatiere: 0 });
-    },
 
-    update: (cache, { data }) => {
-      if (data && data.removeMatiere) {
-        const matieres = cache.readQuery<MatieresData>({
+      const matieres = apollo.cache.readQuery<MatieresData>({
+        query: MATIERES,
+      });
+      if (matieres) {
+        apollo.cache.writeQuery<MatieresData>({
           query: MATIERES,
+          data: produce(matieres, (draft) => {
+            draft.matieres.splice(
+              draft.matieres.findIndex(
+                (m) => parseInt(m.id) === matiereState.removeMatiereVariables.id
+              ),
+              1
+            );
+          }),
         });
-        if (matieres) {
-          cache.writeQuery<MatieresData>({
-            query: MATIERES,
-            data: produce(matieres, (draft) => {
-              draft.matieres.splice(
-                draft.matieres.findIndex(
-                  (m) =>
-                    parseInt(m.id) === matiereState.removeMatiereVariables.id
-                ),
-                1
-              );
-            }),
-          });
-        }
       }
+
+      matiereDispatch({ type: "SET_TO_DELETE_MATIERE", idMatiere: 0 });
     },
   });
 
