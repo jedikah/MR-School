@@ -59,7 +59,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
   })
 )(TableCell);
 
-const Eleves: React.FC<UseEleves> = ({ elevesData, changePaginationInput }) => {
+const Eleves: React.FC<UseEleves> = ({ elevesData, elevesLoading }) => {
   const classes = useStyles();
 
   return (
@@ -118,7 +118,7 @@ const Eleves: React.FC<UseEleves> = ({ elevesData, changePaginationInput }) => {
                 };
                 return <EleveItems key={row.utilisateur.id} row={eleve} />;
               })) ||
-              (!elevesData && (
+              (elevesLoading && (
                 <TableRowSkeleton
                   column={6}
                   width={120}

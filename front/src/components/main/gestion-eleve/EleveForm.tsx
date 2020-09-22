@@ -25,7 +25,7 @@ import {
   ParentInputKey,
 } from "../../../graphql/eleve/create-eleve/createEleveForm";
 import { dateToString, stringToDate } from "../../../utils/dateUtils";
-import UtilisateurFields, { UtilisateurFieldsProps } from "./UtilisateurFields";
+import UtilisateurFields, { UtilisateurFieldsProps } from "../UtilisateurFields";
 
 const useStyles = makeStyles((theme) => ({
   container: {

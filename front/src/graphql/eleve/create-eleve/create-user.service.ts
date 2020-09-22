@@ -1,12 +1,34 @@
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { MutationCreateEleveArgs } from "../../types";
+import { ELEVES } from "../eleves/eleves.gql";
 import { CreatEleveData, CREATE_ELEVE } from "./creat-eleve.gql";
 import { UseCreateEleveForm, useCreateEleveForm } from "./createEleveForm";
 
 export type UseCreatEleve = UseCreateEleveForm & {
   submitEleve: () => void;
   eleveLoading: boolean;
+};
+
+const updateCache = (cache: any, data: any) => {
+  const existingEleves = cache.readQuery({
+    query: ELEVES,
+    variables: {
+      paginationInput: {
+        page: 1,
+        limit: 100,
+      },
+      elevesFilterInput: {
+        matricule: "",
+      },
+    },
+  });
+
+  const newEleve = data.createEleve;
+  cache.writeQuery({
+    query: ELEVES,
+    data: { data: [newEleve, ...existingEleves.eleves.eleves] },
+  });
 };
 
 export const useCreatEleve = () => {
@@ -29,7 +51,9 @@ export const useCreatEleve = () => {
         }
       );
     },
+    update: updateCache,
     onError: (error) => {
+      console.log(error);
       form.cleanInputCreatEleve();
       enqueueSnackbar(error.message, {
         variant: "error",

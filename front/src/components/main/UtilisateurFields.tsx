@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { UtilisateurInput } from "../../../graphql/types";
+import { UtilisateurInput } from "../../graphql/types";
 import { Box, TextField } from "@material-ui/core";
 
 type UtilisateurFields = Omit<UtilisateurInput, "photo" | "motDePasse">;
