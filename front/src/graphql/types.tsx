@@ -168,8 +168,10 @@ export type Mutation = {
   createResponsable: Responsable;
   createSection: Section;
   login: TokenDto;
+  removeMatiere: Scalars['Boolean'];
   updateAnneeScolaire: AnneeScolaire;
   updateEleve: Eleve;
+  updateMatiere: UpdateMatiereResult;
   updateSection: Section;
 };
 
@@ -234,6 +236,11 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationRemoveMatiereArgs = {
+  id: Scalars['Float'];
+};
+
+
 export type MutationUpdateAnneeScolaireArgs = {
   updateAnneeScolaireInput: UpdateAnneeScolaireInput;
 };
@@ -242,6 +249,11 @@ export type MutationUpdateAnneeScolaireArgs = {
 export type MutationUpdateEleveArgs = {
   input: UpdateEleveInput;
   matricule: Scalars['String'];
+};
+
+
+export type MutationUpdateMatiereArgs = {
+  updateMatiereInput: UpdateMatiereInput;
 };
 
 
@@ -338,6 +350,18 @@ export type UpdateEleveInput = {
   parent: ParentInput;
   utilisateur: UtilisateurInput;
 };
+
+export type UpdateMatiereError = {
+  __typename?: 'UpdateMatiereError';
+  matiereAlreadyExist: Scalars['String'];
+};
+
+export type UpdateMatiereInput = {
+  designation: Scalars['String'];
+  id: Scalars['Float'];
+};
+
+export type UpdateMatiereResult = Matiere | UpdateMatiereError;
 
 export type UpdateSectionInput = {
   designation?: Maybe<Scalars['String']>;

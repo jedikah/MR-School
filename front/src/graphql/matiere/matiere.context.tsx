@@ -1,7 +1,7 @@
 import * as React from "react";
 import produce, { Draft } from "immer";
 
-import { MutationCreateMatiereArgs } from "../types";
+import { MutationCreateMatiereArgs, MutationRemoveMatiereArgs } from "../types";
 
 // Actions
 
@@ -15,13 +15,22 @@ interface HandleChangeAction {
   value: string;
 }
 
-type MatiereActions = SelectMatiereAction | HandleChangeAction;
+interface SetToDeleteMatiereAction {
+  type: "SET_TO_DELETE_MATIERE";
+  idMatiere: number;
+}
+
+type MatiereActions =
+  | SelectMatiereAction
+  | HandleChangeAction
+  | SetToDeleteMatiereAction;
 export type MatiereDispatch = (action: MatiereActions) => void;
 
 // Context
 
 export interface MatiereState {
   selectedMatiere: string;
+  removeMatiereVariables: MutationRemoveMatiereArgs;
   createMatiereVariables: MutationCreateMatiereArgs;
 }
 
@@ -29,6 +38,9 @@ const initialState: MatiereState = {
   selectedMatiere: "",
   createMatiereVariables: {
     designation: "",
+  },
+  removeMatiereVariables: {
+    id: 0,
   },
 };
 
@@ -43,6 +55,10 @@ const matiereReducer = produce(
         if (draft.selectedMatiere === action.idMatiere)
           draft.selectedMatiere = "";
         else draft.selectedMatiere = action.idMatiere;
+        break;
+
+      case "SET_TO_DELETE_MATIERE":
+        draft.removeMatiereVariables.id = action.idMatiere;
         break;
     }
   }
