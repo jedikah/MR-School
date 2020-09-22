@@ -152,6 +152,7 @@ type Mutation {
   createResponsable(input: CreateResponsableInput!): Responsable!
   createSection(createSectionInput: CreateSectionInput!): Section!
   login(input: LoginInput!): TokenDto!
+  removeMatiere(id: Float!): Boolean!
   updateAnneeScolaire(updateAnneeScolaireInput: UpdateAnneeScolaireInput!): AnneeScolaire!
   updateEleve(input: UpdateEleveInput!, matricule: String!): Eleve!
   updateMatiere(updateMatiereInput: UpdateMatiereInput!): UpdateMatiereResult!

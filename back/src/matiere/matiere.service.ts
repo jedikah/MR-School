@@ -25,4 +25,8 @@ export class MatiereService {
   createOrSaveMatiere(matiere: Matiere): Promise<Matiere> {
     return this.matiereRepository.save(matiere);
   }
+
+  removeMatiere(matiere: Matiere): Promise<Matiere> {
+    return this.matiereRepository.remove(matiere);
+  }
 }
