@@ -11,7 +11,7 @@ interface SelectMatiereAction {
 }
 
 interface HandleChangeAction {
-  type: "HANDLE_CHANGE";
+  type: "HANDLE_CHANGE_CREATE_MATIERE_VARIABLES";
   value: string;
 }
 
@@ -47,7 +47,7 @@ const initialState: MatiereState = {
 const matiereReducer = produce(
   (draft: Draft<MatiereState>, action: MatiereActions) => {
     switch (action.type) {
-      case "HANDLE_CHANGE":
+      case "HANDLE_CHANGE_CREATE_MATIERE_VARIABLES":
         draft.createMatiereVariables.designation = action.value;
         break;
 

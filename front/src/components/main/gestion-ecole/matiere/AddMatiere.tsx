@@ -18,7 +18,10 @@ const AddMatiere: React.FC = () => {
     onSubmit: submitCreateMatiere,
     value: matiereState.createMatiereVariables.designation,
     onChange: (value) => {
-      matiereDispatch({ type: "HANDLE_CHANGE", value });
+      matiereDispatch({
+        type: "HANDLE_CHANGE_CREATE_MATIERE_VARIABLES",
+        value,
+      });
     },
   };
 

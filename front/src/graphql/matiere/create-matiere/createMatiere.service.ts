@@ -51,7 +51,10 @@ export const useCreateMatiere = (): UseCreateMatiere => {
           }
         );
 
-        matiereDispatch({ type: "HANDLE_CHANGE", value: "" });
+        matiereDispatch({
+          type: "HANDLE_CHANGE_CREATE_MATIERE_VARIABLES",
+          value: "",
+        });
       }
 
       if (data.createMatiere.__typename === "CreateMatiereError") {
