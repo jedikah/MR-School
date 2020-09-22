@@ -1,24 +1,24 @@
 import { useQuery } from "@apollo/client";
 
 import { MatieresData, MATIERES } from "./matieres.gql";
-import { useMatieresState, useMatieresDispatch } from "./matieres.consumer";
-import { MatieresState, MatieresDispatch } from "./matieres.context";
+import { useMatiereDispatch, useMatiereState } from "../matiere.consumer";
+import { MatiereDispatch, MatiereState } from "../matiere.context";
 
 export interface UseMatieres {
   matieresData: MatieresData | undefined;
   loadingMatiere: boolean;
-  matieresState: MatieresState;
-  matieresDispatch: MatieresDispatch;
+  matiereState: MatiereState;
+  matiereDispatch: MatiereDispatch;
 }
 
 export const useMatieres = (): UseMatieres => {
-  const matieresState = useMatieresState();
-  const matieresDispatch = useMatieresDispatch();
+  const matiereState = useMatiereState();
+  const matiereDispatch = useMatiereDispatch();
   const { data, loading: loadingMatiere } = useQuery<MatieresData>(MATIERES);
   return {
     matieresData: data,
     loadingMatiere,
-    matieresState,
-    matieresDispatch,
+    matiereState,
+    matiereDispatch,
   };
 };

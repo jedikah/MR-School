@@ -5,8 +5,8 @@ import { useCreateMatiere } from "../../../../graphql/matiere/create-matiere/cre
 
 const AddMatiere: React.FC = () => {
   const {
-    createMatiereState,
-    createMatiereDispatch,
+    matiereDispatch,
+    matiereState,
     submitCreateMatiere,
     loadingCreateMatiere,
   } = useCreateMatiere();
@@ -16,9 +16,9 @@ const AddMatiere: React.FC = () => {
     submitBtnLabel: "Enregistrer",
     loading: loadingCreateMatiere,
     onSubmit: submitCreateMatiere,
-    value: createMatiereState.variables.designation,
+    value: matiereState.createMatiereVariables.designation,
     onChange: (value) => {
-      createMatiereDispatch({ type: "HANDLE_CHANGE", value });
+      matiereDispatch({ type: "HANDLE_CHANGE", value });
     },
   };
 

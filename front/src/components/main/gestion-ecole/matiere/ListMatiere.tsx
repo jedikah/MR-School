@@ -27,15 +27,15 @@ const ListMatiere: React.FC = () => {
   const {
     loadingMatiere,
     matieresData,
-    matieresState,
-    matieresDispatch,
+    matiereState,
+    matiereDispatch,
   } = useMatieres();
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: string
   ) => {
-    matieresDispatch({ type: "SELECT_MATIERE", idMatiere: index });
+    matiereDispatch({ type: "SELECT_MATIERE", idMatiere: index });
   };
 
   return (
@@ -59,7 +59,7 @@ const ListMatiere: React.FC = () => {
               <ListItem
                 key={matiere.id}
                 button
-                selected={matieresState.selectedMatiere === matiere.id}
+                selected={matiereState.selectedMatiere === matiere.id}
                 onClick={(event) => handleListItemClick(event, matiere.id)}
               >
                 <ListItemIcon>

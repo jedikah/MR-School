@@ -15,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Matiere: React.FC = () => {
   const classes = useStyles();
-  const { matieresState } = useMatieres();
+  const { matiereState } = useMatieres();
 
-  const updateMode = () => matieresState.selectedMatiere !== "";
+  const updateMode = () => matiereState.selectedMatiere !== "";
 
   return (
     <Grid container>
