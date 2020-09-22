@@ -182,6 +182,7 @@ input ParentInput {
 }
 
 type Query {
+  eleve(matriculeInput: String!): Eleve!
   eleves(elevesFilterInput: ElevesFilterInput!, paginationInput: PaginationInput!): ElevesResult!
   fonctionByDesignation(input: String!): Fonction!
   getAllClasses: [Classe!]!

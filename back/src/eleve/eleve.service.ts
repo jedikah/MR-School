@@ -55,4 +55,10 @@ export class EleveService {
       .where('eleve.id_utilisateur = :id', { id })
       .getOne();
   }
+  oEleveByIdUtilisateur(id: string): Promise<Eleve> {
+    return this.eleveRepository
+      .createQueryBuilder('eleve')
+      .where('eleve.matricule = :matricule', { matricule: `${id}` })
+      .getOne();
+  }
 }

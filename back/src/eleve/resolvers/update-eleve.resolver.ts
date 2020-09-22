@@ -25,11 +25,9 @@ export class UpdateleveResolver {
     @Args('input') updateEleveInput: UpdateEleveInput,
   ): Promise<Eleve> {
     const eleve = await this.eleveService.eleveByMatricule(matricule);
+    console.log(eleve);
     if (!eleve) {
-      throw new HttpException(
-        `Cette élève n'existe pas`,
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw new HttpException(`Cette élève n'existe pas`, HttpStatus.NOT_FOUND);
     }
 
     let utilisateur = await this.utilisateurService.utilisateurById(
