@@ -31,11 +31,21 @@ export const useCreateMatiere = (): UseCreateMatiere => {
             variant: "success",
             anchorOrigin: {
               vertical: "top",
-              horizontal: "right",
+              horizontal: "center",
             },
           }
         );
         matiereDispatch({ type: "HANDLE_CHANGE", value: "" });
+      }
+
+      if (data.createMatiere.__typename === "CreateMatiereError") {
+        enqueueSnackbar(data.createMatiere.designationAlreadyExist, {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "center",
+          },
+        });
       }
     },
 

@@ -28,7 +28,7 @@ export const useRemoveMatiere = () => {
         variant: "success",
         anchorOrigin: {
           vertical: "top",
-          horizontal: "right",
+          horizontal: "center",
         },
       });
       matiereDispatch({ type: "SET_TO_DELETE_MATIERE", idMatiere: 0 });
