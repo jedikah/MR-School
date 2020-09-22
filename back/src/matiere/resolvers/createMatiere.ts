@@ -16,7 +16,7 @@ export class CreateMatiereResolver {
     );
     if (isMatiereExist) {
       const error = new CreateMatiereError();
-      error.designationAlreadyExist = 'La matiere existe deja';
+      error.designationAlreadyExist = `La matiere ${designation} existe deja`;
       return error;
     }
 
