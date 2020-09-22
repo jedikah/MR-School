@@ -15,11 +15,9 @@ import {
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import DeleteIcon from "@material-ui/icons/Delete";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
 import ConfirmationDialog from "../../../public-component/ConfirmationDialog";
-import SearchMatiere from "./SearchMatiere";
+import HeadListMatiere from "./HeadListMatiere";
 import emptyFolderIcon from "../../../../assets/001-empty-folder.png";
 import { useMatieres } from "../../../../graphql/matiere/matieres/matieres.service";
 import { Matiere, UpdateMatiereInput } from "../../../../graphql/types";
@@ -100,26 +98,10 @@ const ListMatiere: React.FC = () => {
   return (
     <Card elevation={4} className={classes.container}>
       <CardContent>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="flex-start"
-        >
-          <Box display="flex">
-            <Typography gutterBottom variant="h5" component="h2">
-              Liste matiere
-            </Typography>
-            <IconButton className={classes.sortBtn}>
-              <ArrowUpwardIcon />
-            </IconButton>
-          </Box>
-          <SearchMatiere
-            input={matiereState.searchMatieres}
-            onChange={(value) =>
-              matiereDispatch({ type: "HANDLE_CHANGE_SEARCH_MATIERES", value })
-            }
-          />
-        </Box>
+        <HeadListMatiere
+          matiereState={matiereState}
+          matiereDispatch={matiereDispatch}
+        />
 
         {loadingMatiere && (
           <Box>
