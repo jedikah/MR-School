@@ -20,6 +20,11 @@ interface HandleChangeUpdateMatiereVariablesAction {
   value: string;
 }
 
+interface HandleChangeSearchMatieresAction {
+  type: "HANDLE_CHANGE_SEARCH_MATIERES";
+  value: string;
+}
+
 interface SetToDeleteMatiereAction {
   type: "SET_TO_DELETE_MATIERE";
   idMatiere: number;
@@ -41,7 +46,8 @@ type MatiereActions =
   | HandleChangeUpdateMatiereVariablesAction
   | SetToDeleteMatiereAction
   | SetToUpdateMatiereAction
-  | SetFormErrorAction;
+  | SetFormErrorAction
+  | HandleChangeSearchMatieresAction;
 export type MatiereDispatch = (action: MatiereActions) => void;
 
 // Context
@@ -52,6 +58,7 @@ export interface MatiereState {
   updateMatiereVariables: MutationUpdateMatiereArgs;
   createMatiereFormError: boolean;
   updateMatiereFormError: boolean;
+  searchMatieres: string;
 }
 
 const initialState: MatiereState = {
@@ -69,6 +76,7 @@ const initialState: MatiereState = {
   },
   createMatiereFormError: false,
   updateMatiereFormError: false,
+  searchMatieres: "",
 };
 
 const matiereReducer = produce(
@@ -106,6 +114,10 @@ const matiereReducer = produce(
 
       case "SET_FORM_ERROR":
         draft[action.key] = action.value;
+        break;
+
+      case "HANDLE_CHANGE_SEARCH_MATIERES":
+        draft.searchMatieres = action.value;
         break;
     }
   }

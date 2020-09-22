@@ -16,9 +16,10 @@ import {
 import Skeleton from "@material-ui/lab/Skeleton";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import ConfirmationDialog from "../../../public-component/ConfirmationDialog";
+import SearchMatiere from "./SearchMatiere";
 import emptyFolderIcon from "../../../../assets/001-empty-folder.png";
 import { useMatieres } from "../../../../graphql/matiere/matieres/matieres.service";
-import ConfirmationDialog from "../../../public-component/ConfirmationDialog";
 import { Matiere, UpdateMatiereInput } from "../../../../graphql/types";
 import { useRemoveMatiere } from "../../../../graphql/matiere/remove-matiere/removeMatiere.service";
 
@@ -31,8 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   empytIcon: {
-    width: 50,
-    height: 50,
+    width: 75,
+    height: 75,
+    marginTop: 25,
   },
 
   dialog: {
@@ -76,15 +78,35 @@ const ListMatiere: React.FC = () => {
     });
   };
 
+  const matieres = matieresData
+    ? matiereState.searchMatieres
+      ? matieresData.matieres.filter((m) =>
+          m.designation.includes(matiereState.searchMatieres)
+        )
+      : matieresData.matieres
+    : [];
+
   const confirmSuppressionDialogOpen =
     matiereState.removeMatiereVariables.id !== 0;
 
   return (
     <Card elevation={4} className={classes.container}>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
-          Liste matiere
-        </Typography>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="flex-start"
+        >
+          <Typography gutterBottom variant="h5" component="h2">
+            Liste matiere
+          </Typography>
+          <SearchMatiere
+            input={matiereState.searchMatieres}
+            onChange={(value) =>
+              matiereDispatch({ type: "HANDLE_CHANGE_SEARCH_MATIERES", value })
+            }
+          />
+        </Box>
 
         {loadingMatiere && (
           <Box>
@@ -94,9 +116,9 @@ const ListMatiere: React.FC = () => {
           </Box>
         )}
 
-        {!loadingMatiere && matieresData && matieresData.matieres.length > 0 && (
+        {!loadingMatiere && matieres.length > 0 && (
           <List component="nav" aria-label="main mailbox folders">
-            {matieresData.matieres.map((matiere) => (
+            {matieres.map((matiere) => (
               <ListItem
                 divider
                 key={matiere.id}
@@ -131,7 +153,7 @@ const ListMatiere: React.FC = () => {
           </List>
         )}
 
-        {matieresData && matieresData.matieres.length === 0 && (
+        {matieres.length === 0 && (
           <Box display="flex" justifyContent="center">
             <img
               className={classes.empytIcon}
