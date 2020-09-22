@@ -5,7 +5,7 @@ import MatiereForm, { MatiereFormProps } from "./MatiereForm";
 const UpdateMatiere: React.FC = () => {
   const matiereFormProps: MatiereFormProps = {
     title: "Modifier la matiere",
-    submitBtnLabel: "Enregistrer",
+    submitBtnLabel: "Modifier",
     loading: false,
     onSubmit: () => {
       //

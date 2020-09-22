@@ -5,8 +5,17 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import { Card, Typography, CardContent, Avatar, Box } from "@material-ui/core";
+import {
+  Card,
+  Typography,
+  CardContent,
+  Avatar,
+  Box,
+  ListItemSecondaryAction,
+  IconButton,
+} from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import emptyFolderIcon from "../../../../assets/001-empty-folder.png";
 import { useMatieres } from "../../../../graphql/matiere/matieres/matieres.service";
@@ -66,6 +75,12 @@ const ListMatiere: React.FC = () => {
                   <Avatar>{matiere.designation[0].toUpperCase()}</Avatar>
                 </ListItemIcon>
                 <ListItemText primary={matiere.designation} />
+
+                <ListItemSecondaryAction>
+                  <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
               </ListItem>
             ))}
           </List>
