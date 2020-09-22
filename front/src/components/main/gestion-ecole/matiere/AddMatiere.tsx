@@ -12,6 +12,8 @@ const AddMatiere: React.FC = () => {
   } = useCreateMatiere();
 
   const matiereFormProps: MatiereFormProps = {
+    title: "Ajouter une matiere",
+    submitBtnLabel: "Enregistrer",
     loading: loadingCreateMatiere,
     onSubmit: submitCreateMatiere,
     value: createMatiereState.variables.designation,

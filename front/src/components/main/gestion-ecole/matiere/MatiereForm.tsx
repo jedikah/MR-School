@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
 export interface MatiereFormProps {
   value: string;
   loading: boolean;
+  title: string;
+  submitBtnLabel: string;
   onChange: (value: string) => void;
   onSubmit: () => void;
 }
@@ -41,6 +43,8 @@ const MatiereForm: React.FC<MatiereFormProps> = ({
   onChange,
   onSubmit,
   loading,
+  title,
+  submitBtnLabel,
 }) => {
   const classes = useStyles();
 
@@ -48,7 +52,7 @@ const MatiereForm: React.FC<MatiereFormProps> = ({
     <Card elevation={4} className={classes.card}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
-          Ajouter une matiere
+          {title}
         </Typography>
 
         <TextField
@@ -71,7 +75,7 @@ const MatiereForm: React.FC<MatiereFormProps> = ({
             className={classes.submitBtn}
             onClick={onSubmit}
           >
-            Enregistrer
+            {submitBtnLabel}
             {loading && (
               <CircularProgress
                 size={20}
