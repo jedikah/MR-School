@@ -30,7 +30,6 @@ const ListMatiere: React.FC = () => {
     matieresState,
     matieresDispatch,
   } = useMatieres();
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
