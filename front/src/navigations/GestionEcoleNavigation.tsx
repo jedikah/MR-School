@@ -6,9 +6,10 @@ const GestionEcoleNavigation: React.FC = () => {
   return (
     <Switch>
       <Route
-        path={`${match.url}/matiere`}
+        path={`${match.url}/gestion-ecole`}
         component={
-          require("../components/main/gestion-ecole/matiere/Matiere").default
+          require("../components/main/gestion-eleve/frais-de-scolarite/FraisDeScolarite")
+            .default
         }
       />
     </Switch>

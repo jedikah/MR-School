@@ -1,9 +1,9 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
-import ElevesCtn from "./Eleves.ctn";
+import ElevesCtn from "./eleves/Eleves.ctn";
 import CreatEleveCtn from "../EleveForm.ctn";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
