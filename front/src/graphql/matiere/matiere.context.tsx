@@ -41,13 +41,18 @@ interface SetFormErrorAction {
   value: boolean;
 }
 
+interface ToogleSortMatieresAction {
+  type: "TOOGLE_SORT_MATIERES";
+}
+
 type MatiereActions =
   | HandleChangeCreateMatiereVariablesAction
   | HandleChangeUpdateMatiereVariablesAction
   | SetToDeleteMatiereAction
   | SetToUpdateMatiereAction
   | SetFormErrorAction
-  | HandleChangeSearchMatieresAction;
+  | HandleChangeSearchMatieresAction
+  | ToogleSortMatieresAction;
 export type MatiereDispatch = (action: MatiereActions) => void;
 
 // Context
@@ -59,6 +64,7 @@ export interface MatiereState {
   createMatiereFormError: boolean;
   updateMatiereFormError: boolean;
   searchMatieres: string;
+  sortMatieres: boolean;
 }
 
 const initialState: MatiereState = {
@@ -77,6 +83,7 @@ const initialState: MatiereState = {
   createMatiereFormError: false,
   updateMatiereFormError: false,
   searchMatieres: "",
+  sortMatieres: false,
 };
 
 const matiereReducer = produce(
@@ -118,6 +125,10 @@ const matiereReducer = produce(
 
       case "HANDLE_CHANGE_SEARCH_MATIERES":
         draft.searchMatieres = action.value;
+        break;
+
+      case "TOOGLE_SORT_MATIERES":
+        draft.sortMatieres = !draft.sortMatieres;
         break;
     }
   }

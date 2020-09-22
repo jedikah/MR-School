@@ -6,7 +6,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import {
   Card,
-  Typography,
   CardContent,
   Avatar,
   Box,
@@ -22,6 +21,7 @@ import emptyFolderIcon from "../../../../assets/001-empty-folder.png";
 import { useMatieres } from "../../../../graphql/matiere/matieres/matieres.service";
 import { Matiere, UpdateMatiereInput } from "../../../../graphql/types";
 import { useRemoveMatiere } from "../../../../graphql/matiere/remove-matiere/removeMatiere.service";
+import { filterOrderMatieres } from "./filterOrderMatieres";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -84,16 +84,13 @@ const ListMatiere: React.FC = () => {
     });
   };
 
-  const matieres = matieresData
-    ? matiereState.searchMatieres
-      ? matieresData.matieres.filter((m) =>
-          m.designation.includes(matiereState.searchMatieres)
-        )
-      : matieresData.matieres
-    : [];
-
   const confirmSuppressionDialogOpen =
     matiereState.removeMatiereVariables.id !== 0;
+
+  const matieres = filterOrderMatieres(
+    matieresData ? matieresData.matieres : [],
+    matiereState.searchMatieres
+  );
 
   return (
     <Card elevation={4} className={classes.container}>

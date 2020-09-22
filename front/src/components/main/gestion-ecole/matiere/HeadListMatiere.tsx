@@ -35,7 +35,10 @@ const HeadListMatiere: React.FC<HeadListMatiere> = ({
         <Typography gutterBottom variant="h5" component="h2">
           Liste matiere
         </Typography>
-        <IconButton className={classes.sortBtn}>
+        <IconButton
+          className={classes.sortBtn}
+          onClick={() => matiereDispatch({ type: "TOOGLE_SORT_MATIERES" })}
+        >
           <ArrowUpwardIcon />
         </IconButton>
       </Box>
