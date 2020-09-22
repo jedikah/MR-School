@@ -62,7 +62,7 @@ const ListMatiere: React.FC = () => {
           matieresData.matieres.find(
             (matiere) =>
               parseInt(matiere.id) === matiereState.removeMatiereVariables.id
-          )?.designation
+          )?.designation || "..."
         }`
       : "";
   };
