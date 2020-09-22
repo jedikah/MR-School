@@ -1,10 +1,7 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { HttpException, HttpStatus } from '@nestjs/common';
 
-import {
-  UpdateMatiereResult,
-  UpdateMatiereInput,
-  UpdateMatiereError,
-} from '../matiere.type';
+import { UpdateMatiereInput } from '../matiere.type';
 import { MatiereService } from '../matiere.service';
 import { Matiere } from '../matiere.entity';
 
@@ -12,17 +9,18 @@ import { Matiere } from '../matiere.entity';
 export class UpdateMatiereResolver {
   constructor(private matiereService: MatiereService) {}
 
-  @Mutation(() => UpdateMatiereResult)
+  @Mutation(() => Matiere)
   async updateMatiere(
     @Args('updateMatiereInput') updateMatiereInput: UpdateMatiereInput,
-  ): Promise<typeof UpdateMatiereResult> {
+  ): Promise<Matiere> {
     const isMatiereExist = await this.matiereService.getMatiereByDesignation(
       updateMatiereInput.designation,
     );
     if (isMatiereExist && isMatiereExist.id !== updateMatiereInput.id) {
-      const error = new UpdateMatiereError();
-      error.matiereAlreadyExist = `La matiere ${updateMatiereInput.designation} existe deja`;
-      return error;
+      throw new HttpException(
+        `La matiere ${isMatiereExist.designation} existe deja`,
+        HttpStatus.CONFLICT,
+      );
     }
 
     const newMatiere = await this.matiereService.getMatiereById(

@@ -155,7 +155,7 @@ type Mutation {
   removeMatiere(id: Float!): Boolean!
   updateAnneeScolaire(updateAnneeScolaireInput: UpdateAnneeScolaireInput!): AnneeScolaire!
   updateEleve(input: UpdateEleveInput!, matricule: String!): Eleve!
-  updateMatiere(updateMatiereInput: UpdateMatiereInput!): UpdateMatiereResult!
+  updateMatiere(updateMatiereInput: UpdateMatiereInput!): Matiere!
   updateSection(updateSectionInput: UpdateSectionInput!): Section!
 }
 
@@ -231,16 +231,10 @@ input UpdateEleveInput {
   utilisateur: UtilisateurInput!
 }
 
-type UpdateMatiereError {
-  matiereAlreadyExist: String!
-}
-
 input UpdateMatiereInput {
   designation: String!
   id: Float!
 }
-
-union UpdateMatiereResult = Matiere | UpdateMatiereError
 
 input UpdateSectionInput {
   designation: String

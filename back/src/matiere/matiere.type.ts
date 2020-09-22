@@ -24,22 +24,6 @@ export const CreateMatiereResult = createUnionType({
 
 // update matiere
 
-@ObjectType()
-export class UpdateMatiereError {
-  @Field()
-  matiereAlreadyExist: string;
-}
-
-export const UpdateMatiereResult = createUnionType({
-  name: 'UpdateMatiereResult',
-  types: () => [Matiere, UpdateMatiereError],
-  resolveType: (value: Matiere | UpdateMatiereError) => {
-    if (value instanceof Matiere) return 'Matiere';
-    if (value instanceof UpdateMatiereError) return 'UpdateMatiereError';
-    return null;
-  },
-});
-
 @InputType()
 export class UpdateMatiereInput implements Partial<Matiere> {
   @Field()
