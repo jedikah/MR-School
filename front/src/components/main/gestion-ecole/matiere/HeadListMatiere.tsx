@@ -39,8 +39,11 @@ const HeadListMatiere: React.FC<HeadListMatiere> = ({
           className={classes.sortBtn}
           onClick={() => matiereDispatch({ type: "TOOGLE_SORT_MATIERES" })}
         >
-          <ArrowUpwardIcon />
-          <ArrowDownwardIcon />
+          {matiereState.sortMatieres ? (
+            <ArrowDownwardIcon />
+          ) : (
+            <ArrowUpwardIcon />
+          )}
         </IconButton>
       </Box>
       <SearchMatiere

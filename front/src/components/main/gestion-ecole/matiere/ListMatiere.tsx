@@ -89,7 +89,8 @@ const ListMatiere: React.FC = () => {
 
   const matieres = filterOrderMatieres(
     matieresData ? matieresData.matieres : [],
-    matiereState.searchMatieres
+    matiereState.searchMatieres,
+    matiereState.sortMatieres
   );
 
   return (
