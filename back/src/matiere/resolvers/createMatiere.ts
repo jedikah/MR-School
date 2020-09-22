@@ -22,6 +22,6 @@ export class CreateMatiereResolver {
 
     const newMatiere = new Matiere();
     newMatiere.designation = designation;
-    return this.matiereService.createMatiere(newMatiere);
+    return this.matiereService.createOrSaveMatiere(newMatiere);
   }
 }

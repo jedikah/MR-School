@@ -10,6 +10,10 @@ export class MatiereService {
     private matiereRepository: Repository<Matiere>,
   ) {}
 
+  getMatiereById(id: number): Promise<Matiere> {
+    return this.matiereRepository.findOne(id);
+  }
+
   getAllMatieres(): Promise<Matiere[]> {
     return this.matiereRepository.find();
   }
@@ -18,7 +22,7 @@ export class MatiereService {
     return this.matiereRepository.findOne({ where: { designation } });
   }
 
-  createMatiere(matiere: Matiere): Promise<Matiere> {
+  createOrSaveMatiere(matiere: Matiere): Promise<Matiere> {
     return this.matiereRepository.save(matiere);
   }
 }

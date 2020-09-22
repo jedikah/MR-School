@@ -154,6 +154,7 @@ type Mutation {
   login(input: LoginInput!): TokenDto!
   updateAnneeScolaire(updateAnneeScolaireInput: UpdateAnneeScolaireInput!): AnneeScolaire!
   updateEleve(input: UpdateEleveInput!, matricule: String!): Eleve!
+  updateMatiere(updateMatiereInput: UpdateMatiereInput!): UpdateMatiereResult!
   updateSection(updateSectionInput: UpdateSectionInput!): Section!
 }
 
@@ -228,6 +229,17 @@ input UpdateEleveInput {
   parent: ParentInput!
   utilisateur: UtilisateurInput!
 }
+
+type UpdateMatiereError {
+  matiereAlreadyExist: String!
+}
+
+input UpdateMatiereInput {
+  designation: String!
+  id: Float!
+}
+
+union UpdateMatiereResult = Matiere | UpdateMatiereError
 
 input UpdateSectionInput {
   designation: String
