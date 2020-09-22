@@ -5,6 +5,7 @@ import { MatieresData, MATIERES } from "../matieres/matieres.gql";
 import { useMatiereState, useMatiereDispatch } from "../matiere.consumer";
 import { MatiereState, MatiereDispatch } from "../matiere.context";
 import produce from "immer";
+import { useSnackbar } from "notistack";
 
 export interface UseRemoveMatiere {
   matiereState: MatiereState;
@@ -16,12 +17,20 @@ export interface UseRemoveMatiere {
 export const useRemoveMatiere = () => {
   const matiereState = useMatiereState();
   const matiereDispatch = useMatiereDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [removeMatiere, { loading: loadingRemoveMatiere }] = useMutation<
     RemoveMatiereData,
     MutationRemoveMatiereArgs
   >(REMOVE_MATIERE, {
-    onCompleted: () => {
+    onCompleted: (data) => {
+      enqueueSnackbar("La matiere a bien ete supprimer", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right",
+        },
+      });
       matiereDispatch({ type: "SET_TO_DELETE_MATIERE", idMatiere: 0 });
     },
 
@@ -49,7 +58,6 @@ export const useRemoveMatiere = () => {
   });
 
   const submitRemoveMatiere = () => {
-    console.log("ok");
     if (matiereState.removeMatiereVariables.id !== 0) {
       removeMatiere({ variables: matiereState.removeMatiereVariables });
     }

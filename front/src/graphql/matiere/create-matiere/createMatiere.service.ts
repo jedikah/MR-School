@@ -1,3 +1,4 @@
+import { useSnackbar } from "notistack";
 import { useMutation } from "@apollo/client";
 
 import { useMatiereDispatch, useMatiereState } from "../matiere.consumer";
@@ -16,11 +17,28 @@ export interface UseCreateMatiere {
 export const useCreateMatiere = (): UseCreateMatiere => {
   const matiereState = useMatiereState();
   const matiereDispatch = useMatiereDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [createMatiere, { loading: loadingCreateMatiere }] = useMutation<
     CreateMatiereData,
     MutationCreateMatiereArgs
   >(CREATE_MATIERE, {
+    onCompleted: (data) => {
+      if (data.createMatiere.__typename === "Matiere") {
+        enqueueSnackbar(
+          `La matiere ${data.createMatiere.designation} a bien ete creer`,
+          {
+            variant: "success",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          }
+        );
+        matiereDispatch({ type: "HANDLE_CHANGE", value: "" });
+      }
+    },
+
     update: (cache, { data }) => {
       const matieresKey: keyof MatieresData = "matieres";
       if (data && data.createMatiere.__typename === "Matiere") {
