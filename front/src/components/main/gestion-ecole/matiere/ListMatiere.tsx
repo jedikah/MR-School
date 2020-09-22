@@ -24,14 +24,19 @@ const useStyles = makeStyles((theme) => ({
 
 const ListMatiere: React.FC = () => {
   const classes = useStyles();
-  const { loadingMatiere, matieresData } = useMatieres();
+  const {
+    loadingMatiere,
+    matieresData,
+    matieresState,
+    matieresDispatch,
+  } = useMatieres();
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
+    index: string
   ) => {
-    setSelectedIndex(index);
+    matieresDispatch({ type: "SELECT_MATIERE", idMatiere: index });
   };
 
   return (
@@ -55,8 +60,8 @@ const ListMatiere: React.FC = () => {
               <ListItem
                 key={matiere.id}
                 button
-                selected={selectedIndex === 0}
-                onClick={(event) => handleListItemClick(event, 0)}
+                selected={matieresState.selectedMatiere === matiere.id}
+                onClick={(event) => handleListItemClick(event, matiere.id)}
               >
                 <ListItemIcon>
                   <Avatar>{matiere.designation[0].toUpperCase()}</Avatar>
