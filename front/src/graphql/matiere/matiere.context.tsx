@@ -1,17 +1,22 @@
 import * as React from "react";
 import produce, { Draft } from "immer";
 
-import { MutationCreateMatiereArgs, MutationRemoveMatiereArgs } from "../types";
+import {
+  MutationCreateMatiereArgs,
+  MutationRemoveMatiereArgs,
+  MutationUpdateMatiereArgs,
+  UpdateMatiereInput,
+} from "../types";
 
 // Actions
 
-interface SelectMatiereAction {
-  type: "SELECT_MATIERE";
-  idMatiere: string;
+interface HandleChangeCreateMatiereVariablesAction {
+  type: "HANDLE_CHANGE_CREATE_MATIERE_VARIABLES";
+  value: string;
 }
 
-interface HandleChangeAction {
-  type: "HANDLE_CHANGE_CREATE_MATIERE_VARIABLES";
+interface HandleChangeUpdateMatiereVariablesAction {
+  type: "HANDLE_CHANGE_UPDATE_MATIERE_VARIABLES";
   value: string;
 }
 
@@ -20,27 +25,38 @@ interface SetToDeleteMatiereAction {
   idMatiere: number;
 }
 
+interface SetToUpdateMatiereAction {
+  type: "SET_TO_UPDATE_MATIERE";
+  updateMatiereInput: UpdateMatiereInput;
+}
+
 type MatiereActions =
-  | SelectMatiereAction
-  | HandleChangeAction
-  | SetToDeleteMatiereAction;
+  | HandleChangeCreateMatiereVariablesAction
+  | HandleChangeUpdateMatiereVariablesAction
+  | SetToDeleteMatiereAction
+  | SetToUpdateMatiereAction;
 export type MatiereDispatch = (action: MatiereActions) => void;
 
 // Context
 
 export interface MatiereState {
-  selectedMatiere: string;
   removeMatiereVariables: MutationRemoveMatiereArgs;
   createMatiereVariables: MutationCreateMatiereArgs;
+  updateMatiereVariables: MutationUpdateMatiereArgs;
 }
 
 const initialState: MatiereState = {
-  selectedMatiere: "",
   createMatiereVariables: {
     designation: "",
   },
   removeMatiereVariables: {
     id: 0,
+  },
+  updateMatiereVariables: {
+    updateMatiereInput: {
+      id: 0,
+      designation: "",
+    },
   },
 };
 
@@ -51,14 +67,28 @@ const matiereReducer = produce(
         draft.createMatiereVariables.designation = action.value;
         break;
 
-      case "SELECT_MATIERE":
-        if (draft.selectedMatiere === action.idMatiere)
-          draft.selectedMatiere = "";
-        else draft.selectedMatiere = action.idMatiere;
+      case "HANDLE_CHANGE_UPDATE_MATIERE_VARIABLES":
+        draft.updateMatiereVariables.updateMatiereInput.designation =
+          action.value;
         break;
 
       case "SET_TO_DELETE_MATIERE":
         draft.removeMatiereVariables.id = action.idMatiere;
+        break;
+
+      case "SET_TO_UPDATE_MATIERE":
+        if (
+          draft.updateMatiereVariables.updateMatiereInput.id ===
+          action.updateMatiereInput.id
+        ) {
+          draft.updateMatiereVariables.updateMatiereInput = {
+            id: 0,
+            designation: "",
+          };
+        } else {
+          draft.updateMatiereVariables.updateMatiereInput =
+            action.updateMatiereInput;
+        }
         break;
     }
   }

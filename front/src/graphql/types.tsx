@@ -171,7 +171,7 @@ export type Mutation = {
   removeMatiere: Scalars['Boolean'];
   updateAnneeScolaire: AnneeScolaire;
   updateEleve: Eleve;
-  updateMatiere: UpdateMatiereResult;
+  updateMatiere: Matiere;
   updateSection: Section;
 };
 
@@ -351,17 +351,10 @@ export type UpdateEleveInput = {
   utilisateur: UtilisateurInput;
 };
 
-export type UpdateMatiereError = {
-  __typename?: 'UpdateMatiereError';
-  matiereAlreadyExist: Scalars['String'];
-};
-
 export type UpdateMatiereInput = {
   designation: Scalars['String'];
   id: Scalars['Float'];
 };
-
-export type UpdateMatiereResult = Matiere | UpdateMatiereError;
 
 export type UpdateSectionInput = {
   designation?: Maybe<Scalars['String']>;

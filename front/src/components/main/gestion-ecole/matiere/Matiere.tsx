@@ -17,7 +17,8 @@ const Matiere: React.FC = () => {
   const classes = useStyles();
   const { matiereState } = useMatieres();
 
-  const updateMode = () => matiereState.selectedMatiere !== "";
+  const updateMode = () =>
+    matiereState.updateMatiereVariables.updateMatiereInput.id !== 0;
 
   return (
     <Grid container>

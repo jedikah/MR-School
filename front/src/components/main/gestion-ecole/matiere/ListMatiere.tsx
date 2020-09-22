@@ -20,7 +20,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import emptyFolderIcon from "../../../../assets/001-empty-folder.png";
 import { useMatieres } from "../../../../graphql/matiere/matieres/matieres.service";
 import ConfirmationDialog from "../../../public-component/ConfirmationDialog";
-import { Matiere } from "../../../../graphql/types";
+import { Matiere, UpdateMatiereInput } from "../../../../graphql/types";
 import { useRemoveMatiere } from "../../../../graphql/matiere/remove-matiere/removeMatiere.service";
 
 const useStyles = makeStyles((theme) => ({
@@ -51,9 +51,9 @@ const ListMatiere: React.FC = () => {
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: string
+    updateMatiereInput: UpdateMatiereInput
   ) => {
-    matiereDispatch({ type: "SELECT_MATIERE", idMatiere: index });
+    matiereDispatch({ type: "SET_TO_UPDATE_MATIERE", updateMatiereInput });
   };
 
   const confirmMessage = () => {
@@ -98,8 +98,16 @@ const ListMatiere: React.FC = () => {
               <ListItem
                 key={matiere.id}
                 button
-                selected={matiereState.selectedMatiere === matiere.id}
-                onClick={(event) => handleListItemClick(event, matiere.id)}
+                selected={
+                  matiereState.updateMatiereVariables.updateMatiereInput.id ===
+                  parseInt(matiere.id)
+                }
+                onClick={(event) =>
+                  handleListItemClick(event, {
+                    id: parseInt(matiere.id),
+                    designation: matiere.designation,
+                  })
+                }
               >
                 <ListItemIcon>
                   <Avatar>{matiere.designation[0].toUpperCase()}</Avatar>

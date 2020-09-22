@@ -1736,8 +1736,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "UNION",
-                "name": "UpdateMatiereResult",
+                "kind": "OBJECT",
+                "name": "Matiere",
                 "ofType": null
               }
             },
@@ -2591,33 +2591,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "OBJECT",
-        "name": "UpdateMatiereError",
-        "description": null,
-        "fields": [
-          {
-            "name": "matiereAlreadyExist",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "INPUT_OBJECT",
         "name": "UpdateMatiereInput",
         "description": null,
@@ -2655,27 +2628,6 @@
         "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
-      },
-      {
-        "kind": "UNION",
-        "name": "UpdateMatiereResult",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": [
-          {
-            "kind": "OBJECT",
-            "name": "Matiere",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "UpdateMatiereError",
-            "ofType": null
-          }
-        ]
       },
       {
         "kind": "INPUT_OBJECT",
