@@ -24,6 +24,7 @@ import { AnneeScolaireModule } from './annee-scolaire/annee-scolaire.module';
 import { ClassificationModule } from './classification/classification.module';
 import { ClasseModule } from './classe/classe.module';
 import { MatiereModule } from './matiere/matiere.module';
+import { CoefficientModule } from './coefficient/coefficient.module';
 
 @Module({
   imports: [
@@ -47,7 +48,7 @@ import { MatiereModule } from './matiere/matiere.module';
           ...graphqlConfigs,
           autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
           sortSchema: true,
-          context: ({req}) => ({req})
+          context: ({ req }) => ({ req }),
         };
       },
     }),
@@ -67,6 +68,7 @@ import { MatiereModule } from './matiere/matiere.module';
     ClassificationModule,
     ClasseModule,
     MatiereModule,
+    CoefficientModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
