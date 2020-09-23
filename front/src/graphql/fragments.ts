@@ -41,3 +41,10 @@ export const MATIERE_FRAG = gql`
     designation
   }
 `;
+
+export const FONCTION_FRAG = gql`
+  fragment FonctionFrag on Fonction {
+    id
+    designation
+  }
+`;
