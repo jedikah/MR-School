@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AddMatiere from "./AddMatiere";
 import UpdateMatiere from "./UpdateMatiere";
 import ListMatiere from "./ListMatiere";
+import TableMatiere from "./table-matiere/TableMatiere";
 import { useMatieres } from "../../../../graphql/matiere/matieres/matieres.service";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +24,7 @@ const Matiere: React.FC = () => {
   return (
     <Grid container>
       <Grid item xs={8} className={classes.section}>
-        <Card elevation={4}></Card>
+        <TableMatiere />
       </Grid>
       <Grid item xs={4} className={classes.section}>
         {updateMode() ? <UpdateMatiere /> : <AddMatiere />}
