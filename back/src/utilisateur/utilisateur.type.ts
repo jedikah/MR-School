@@ -37,3 +37,6 @@ export class CreateUtilisateurInput_Eleve extends OmitType(UtilisateurInput, [
   @Field()
   contact: string;
 }
+
+@InputType()
+export class CreateUtilisateurInput_Responsable extends CreateUtilisateurInput_Eleve {}

@@ -1,6 +1,9 @@
 import { PartialType, InputType, Field, OmitType } from '@nestjs/graphql';
 import { Responsable } from './responsable.entity';
-import { UtilisateurInput } from '../utilisateur/utilisateur.type';
+import {
+  CreateUtilisateurInput_Responsable,
+  UtilisateurInput,
+} from '../utilisateur/utilisateur.type';
 import { FonctionInput } from '../fonction/fonction.type';
 
 @InputType()
@@ -16,4 +19,10 @@ export class ResponsableInput extends PartialType(
 }
 
 @InputType()
-export class CreateResponsableInput extends ResponsableInput {}
+export class CreateResponsableInput {
+  @Field(() => CreateUtilisateurInput_Responsable)
+  utilisateur: CreateUtilisateurInput_Responsable;
+
+  @Field(() => FonctionInput)
+  fonction: FonctionInput;
+}

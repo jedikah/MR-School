@@ -71,7 +71,7 @@ input CreateParentInput {
 
 input CreateResponsableInput {
   fonction: FonctionInput!
-  utilisateur: UtilisateurInput!
+  utilisateur: CreateUtilisateurInput_Responsable!
 }
 
 input CreateSectionInput {
@@ -79,6 +79,14 @@ input CreateSectionInput {
 }
 
 input CreateUtilisateurInput_Eleve {
+  adresse: String!
+  contact: String!
+  nom: String!
+  photo: String
+  prenom: String!
+}
+
+input CreateUtilisateurInput_Responsable {
   adresse: String!
   contact: String!
   nom: String!

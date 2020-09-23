@@ -1,7 +1,7 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 
 import { UtilisateurService } from '../../utilisateur/utilisateur.service';
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { ResponsableService } from '../../responsable/responsable.service';
 import { Responsable } from '../../responsable/responsable.entity';
 import { Utilisateur } from '../../utilisateur/utilisateur.entity';
@@ -13,6 +13,8 @@ import { CreateResponsableInput } from '../responsable.type';
 import { Fonction } from '../../fonction/fonction.entity';
 import { FonctionInput } from '../../fonction/fonction.type';
 import { UtilisateurInput } from '../../utilisateur/utilisateur.type';
+import { GqlAuthGuard } from '../../auth/jwt-auth.guard';
+import { GeneratePassword } from '../../utils/generate_password';
 
 @Resolver()
 export class CreateResponsableResolver {
@@ -22,15 +24,17 @@ export class CreateResponsableResolver {
     private cryptService: CryptService,
     private fonctionService: FonctionService,
     private avoirService: AvoirService,
+    private generatePassword: GeneratePassword,
   ) {}
 
   @Mutation(() => Responsable)
+  @UseGuards(GqlAuthGuard)
   async createResponsable(
     @Args('input') input: CreateResponsableInput,
   ): Promise<Responsable> {
+    const mdp: string = this.generatePassword.makePassword();
     let mdpHash: string = null;
-    const utilisateur = new Utilisateur();
-    const responsable = new Responsable();
+    const newResponsable = new Responsable();
     const newAvoir = new Avoir();
 
     if (input.fonction.designation === 'SU') {
@@ -55,9 +59,10 @@ export class CreateResponsableResolver {
     );
 
     if (!isResponsableExist) {
-      mdpHash = await this.cryptService.hash(input.utilisateur.motDePasse);
+      mdpHash = await this.cryptService.hash(mdp);
 
       //creer utilisateur
+      const utilisateur = new Utilisateur();
       Object.assign<Utilisateur, UtilisateurInput>(utilisateur, {
         ...input.utilisateur,
         motDePasse: mdpHash,
@@ -67,8 +72,8 @@ export class CreateResponsableResolver {
       );
 
       // creer responsable
-      responsable.utilisateur = createdUtilisateur;
-      await this.responsableService.createResponsable(responsable);
+      newResponsable.utilisateur = createdUtilisateur;
+      await this.responsableService.createResponsable(newResponsable);
 
       // obtenir fonction
       fonction = await this.fonctionService.fonctionByDesignation(
@@ -78,15 +83,17 @@ export class CreateResponsableResolver {
       // associer responsable à une fonction
       Object.assign<Avoir, Avoir>(newAvoir, {
         fonction: fonction,
-        responsable,
+        responsable: newResponsable,
       });
       await this.avoirService.createAvoir(newAvoir);
+
+      newResponsable.utilisateur.motDePasse = mdp;
     } else
       throw new HttpException(
         `Ce contact est déja utilisé par un responsable.`,
         HttpStatus.UNAUTHORIZED,
       );
 
-    return responsable;
+    return newResponsable;
   }
 }
