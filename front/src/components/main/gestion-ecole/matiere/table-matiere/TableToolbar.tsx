@@ -1,9 +1,17 @@
 import * as React from "react";
 import clsx from "clsx";
-import { Toolbar, Typography, Tooltip, IconButton, makeStyles, Theme, createStyles, lighten } from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-
+import {
+  Toolbar,
+  Typography,
+  Tooltip,
+  IconButton,
+  makeStyles,
+  Theme,
+  createStyles,
+  lighten,
+} from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import FilterListIcon from "@material-ui/icons/FilterList";
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,11 +37,12 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 
 interface TableToolbarProps {
   numSelected: number;
+  designationMatiere: string;
 }
 
 const TableToolbar = (props: TableToolbarProps) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, designationMatiere } = props;
 
   return (
     <Toolbar
@@ -48,7 +57,8 @@ const TableToolbar = (props: TableToolbarProps) => {
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          {designationMatiere}: {numSelected} classe{numSelected > 0 ? "s" : ""}{" "}
+          selectionnee
         </Typography>
       ) : (
         <Typography
@@ -57,7 +67,7 @@ const TableToolbar = (props: TableToolbarProps) => {
           id="tableTitle"
           component="div"
         >
-          Matiere
+          {designationMatiere || "Classes"}
         </Typography>
       )}
       {numSelected > 0 ? (

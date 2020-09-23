@@ -11,6 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 
 import TableToolbar from "./TableToolbar";
+import { useMatieres } from "../../../../../graphql/matiere/matieres/matieres.service";
 
 interface Data {
   calories: number;
@@ -195,6 +196,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function EnhancedTable() {
   const classes = useStyles();
+  const { matiereState } = useMatieres();
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Data>("calories");
   const [selected, setSelected] = React.useState<string[]>([]);
@@ -244,7 +246,12 @@ export default function EnhancedTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper} elevation={4}>
-        <TableToolbar numSelected={selected.length} />
+        <TableToolbar
+          numSelected={selected.length}
+          designationMatiere={
+            matiereState.updateMatiereVariables.updateMatiereInput.designation
+          }
+        />
         <TableContainer style={{ maxHeight: "82vh" }}>
           <Table
             className={classes.table}
