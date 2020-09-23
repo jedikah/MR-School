@@ -123,6 +123,10 @@ input FonctionInput {
   designation: String!
 }
 
+input InputMatriculeEleve {
+  matricule: String!
+}
+
 input LoginInput {
   contact: String!
   motDePasse: String!
@@ -182,7 +186,7 @@ input ParentInput {
 }
 
 type Query {
-  eleve(matriculeInput: String!): Eleve!
+  eleve(matriculeInput: InputMatriculeEleve!): Eleve!
   eleves(elevesFilterInput: ElevesFilterInput!, paginationInput: PaginationInput!): ElevesResult!
   fonctionByDesignation(input: String!): Fonction!
   getAllClasses: [Classe!]!

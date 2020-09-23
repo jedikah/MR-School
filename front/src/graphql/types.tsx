@@ -136,6 +136,10 @@ export type FonctionInput = {
   designation: Scalars['String'];
 };
 
+export type InputMatriculeEleve = {
+  matricule: Scalars['String'];
+};
+
 export type LoginInput = {
   contact: Scalars['String'];
   motDePasse: Scalars['String'];
@@ -271,12 +275,18 @@ export type ParentInput = {
 
 export type Query = {
   __typename?: 'Query';
+  eleve: Eleve;
   eleves: ElevesResult;
   fonctionByDesignation: Fonction;
   getAllClasses: Array<Classe>;
   getAllNiveaux: Array<Niveau>;
   helloMrSchool: Scalars['String'];
   WhoAmI: Utilisateur;
+};
+
+
+export type QueryEleveArgs = {
+  matriculeInput: InputMatriculeEleve;
 };
 
 

@@ -17,6 +17,7 @@ import { Data } from "./EleveInterface";
 import { UseEleves } from "../../../../../graphql/eleve/eleves/eleves.service";
 import { TableRowSkeleton } from "../../../../public-component/TableSkeleton";
 import EleveItems from "./Eleve-Items";
+import { useOneEleve } from "../../../../../graphql/eleve/eleve/eleveFormContext";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -61,6 +62,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
 
 const Eleves: React.FC<UseEleves> = ({ elevesData, elevesLoading }) => {
   const classes = useStyles();
+  const oneEleve = useOneEleve();
 
   return (
     <Paper className={classes.root}>

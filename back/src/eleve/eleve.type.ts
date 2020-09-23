@@ -64,12 +64,6 @@ export class ElevesResult {
   paginationMeta: PaginationMeta;
 }
 
-@ObjectType()
-export class EleveResult {
-  @Field(() => Eleve)
-  eleve: Eleve;
-}
-
 @InputType()
 export class ElevesFilterInput {
   @Field()
