@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const PAGINATION_META_FRAG = gql`
   fragment PaginationMetaFrag on PaginationMeta {
@@ -20,11 +20,6 @@ export const ELEVE_FRAG = gql`
 
 export const UTILISATEUR_FRAG = gql`
   fragment UtilisateurFrag on Utilisateur {
-    id
-    adresse
-    contact
-    nom
-    photo
     prenom
   }
 `;
@@ -37,5 +32,12 @@ export const PARENT_FRAG = gql`
     mere
     pere
     tuteur
+  }
+`;
+
+export const FONCTION_FRAG = gql`
+  fragment FonctionFrag on Fonction {
+    id
+    designation
   }
 `;

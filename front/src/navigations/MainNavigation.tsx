@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
+import * as React from 'react';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 const MainNavigation: React.FC = () => {
   const match = useRouteMatch();
@@ -7,11 +7,15 @@ const MainNavigation: React.FC = () => {
     <Switch>
       <Route
         path={`${match.url}/gestion-eleve`}
-        component={require("./GestionEleveNavigation").default}
+        component={require('./GestionEleveNavigation').default}
       />
       <Route
         path={`${match.url}/gestion-ecole`}
-        component={require("./GestionEcoleNavigation").default}
+        component={require('./GestionEcoleNavigation').default}
+      />
+      <Route
+        path={`${match.url}/gestion-responsable`}
+        component={require('./GestionResponsableNavigation').default}
       />
     </Switch>
   );
