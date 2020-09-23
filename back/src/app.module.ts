@@ -25,6 +25,7 @@ import { ClassificationModule } from './classification/classification.module';
 import { ClasseModule } from './classe/classe.module';
 import { MatiereModule } from './matiere/matiere.module';
 import { CoefficientModule } from './coefficient/coefficient.module';
+import { EnseignerModule } from './enseigner/enseigner.module';
 
 @Module({
   imports: [
@@ -69,6 +70,7 @@ import { CoefficientModule } from './coefficient/coefficient.module';
     ClasseModule,
     MatiereModule,
     CoefficientModule,
+    EnseignerModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
