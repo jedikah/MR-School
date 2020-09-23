@@ -71,6 +71,13 @@ export type CreateEleveInput = {
   utilisateur: CreateUtilisateurInput_Eleve;
 };
 
+export type CreateMatiereError = {
+  __typename?: 'CreateMatiereError';
+  designationAlreadyExist: Scalars['String'];
+};
+
+export type CreateMatiereResult = CreateMatiereError | Matiere;
+
 export type CreateNiveauInput = {
   designation?: Maybe<Scalars['String']>;
 };
@@ -149,6 +156,12 @@ export type LoginInput = {
   motDePasse: Scalars['String'];
 };
 
+export type Matiere = {
+  __typename?: 'Matiere';
+  designation: Scalars['String'];
+  id: Scalars['ID'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createAnneeScolaire: AnneeScolaire;
@@ -156,14 +169,17 @@ export type Mutation = {
   createClassification: Classification;
   createEleve: Eleve;
   createFonction: Fonction;
+  createMatiere: CreateMatiereResult;
   createNiveau: Niveau;
   createOrUpdateSectionsOfClasse: ClasseSection;
   createParent: Parent;
   createResponsable: Responsable;
   createSection: Section;
   login: TokenDto;
+  removeMatiere: Scalars['Boolean'];
   updateAnneeScolaire: AnneeScolaire;
   updateEleve: Eleve;
+  updateMatiere: Matiere;
   updateSection: Section;
 };
 
@@ -190,6 +206,11 @@ export type MutationCreateEleveArgs = {
 
 export type MutationCreateFonctionArgs = {
   input: FonctionInput;
+};
+
+
+export type MutationCreateMatiereArgs = {
+  designation: Scalars['String'];
 };
 
 
@@ -223,6 +244,11 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationRemoveMatiereArgs = {
+  id: Scalars['Float'];
+};
+
+
 export type MutationUpdateAnneeScolaireArgs = {
   updateAnneeScolaireInput: UpdateAnneeScolaireInput;
 };
@@ -231,6 +257,11 @@ export type MutationUpdateAnneeScolaireArgs = {
 export type MutationUpdateEleveArgs = {
   input: UpdateEleveInput;
   matricule: Scalars['String'];
+};
+
+
+export type MutationUpdateMatiereArgs = {
+  updateMatiereInput: UpdateMatiereInput;
 };
 
 
@@ -284,6 +315,7 @@ export type Query = {
   getAllClasses: Array<Classe>;
   getAllNiveaux: Array<Niveau>;
   helloMrSchool: Scalars['String'];
+  matieres: Array<Matiere>;
   WhoAmI: Utilisateur;
 };
 
@@ -325,6 +357,11 @@ export type UpdateEleveInput = {
   eleve: EleveInput;
   parent: ParentInput;
   utilisateur: UtilisateurInput;
+};
+
+export type UpdateMatiereInput = {
+  designation: Scalars['String'];
+  id: Scalars['Float'];
 };
 
 export type UpdateSectionInput = {

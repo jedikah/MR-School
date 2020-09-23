@@ -23,6 +23,7 @@ import { ClasseSectionModule } from './classe-section/classe-section.module';
 import { AnneeScolaireModule } from './annee-scolaire/annee-scolaire.module';
 import { ClassificationModule } from './classification/classification.module';
 import { ClasseModule } from './classe/classe.module';
+import { MatiereModule } from './matiere/matiere.module';
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { ClasseModule } from './classe/classe.module';
     AnneeScolaireModule,
     ClassificationModule,
     ClasseModule,
+    MatiereModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],

@@ -57,6 +57,12 @@ input CreateEleveInput {
   utilisateur: CreateUtilisateurInput_Eleve!
 }
 
+type CreateMatiereError {
+  designationAlreadyExist: String!
+}
+
+union CreateMatiereResult = CreateMatiereError | Matiere
+
 input CreateNiveauInput {
   designation: String
 }
@@ -136,20 +142,28 @@ input LoginInput {
   motDePasse: String!
 }
 
+type Matiere {
+  designation: String!
+  id: ID!
+}
+
 type Mutation {
   createAnneeScolaire(createAnneeScolaireInput: CreateAnneeScolaireInput!): AnneeScolaire!
   createClasse(createClasseInput: CreateClasseInput!): Classe!
   createClassification(createClassificationInput: CreateClassificationInput!): Classification!
   createEleve(input: CreateEleveInput!): Eleve!
   createFonction(input: FonctionInput!): Fonction!
+  createMatiere(designation: String!): CreateMatiereResult!
   createNiveau(createNiveauInput: CreateNiveauInput!): Niveau!
   createOrUpdateSectionsOfClasse(createClasseSectionInput: CreateClasseSectionInput!): ClasseSection!
   createParent(input: CreateParentInput!): Parent!
   createResponsable(input: CreateResponsableInput!): Responsable!
   createSection(createSectionInput: CreateSectionInput!): Section!
   login(input: LoginInput!): TokenDto!
+  removeMatiere(id: Float!): Boolean!
   updateAnneeScolaire(updateAnneeScolaireInput: UpdateAnneeScolaireInput!): AnneeScolaire!
   updateEleve(input: UpdateEleveInput!, matricule: String!): Eleve!
+  updateMatiere(updateMatiereInput: UpdateMatiereInput!): Matiere!
   updateSection(updateSectionInput: UpdateSectionInput!): Section!
 }
 
@@ -195,6 +209,7 @@ type Query {
   getAllClasses: [Classe!]!
   getAllNiveaux: [Niveau!]!
   helloMrSchool: String!
+  matieres: [Matiere!]!
   WhoAmI: Utilisateur!
 }
 
@@ -222,6 +237,11 @@ input UpdateEleveInput {
   eleve: EleveInput!
   parent: ParentInput!
   utilisateur: UtilisateurInput!
+}
+
+input UpdateMatiereInput {
+  designation: String!
+  id: Float!
 }
 
 input UpdateSectionInput {

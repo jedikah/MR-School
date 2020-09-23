@@ -35,8 +35,8 @@ export const PARENT_FRAG = gql`
   }
 `;
 
-export const FONCTION_FRAG = gql`
-  fragment FonctionFrag on Fonction {
+export const MATIERE_FRAG = gql`
+  fragment MatiereFrag on Matiere {
     id
     designation
   }
