@@ -28,6 +28,13 @@ type Classification {
   section: Section!
 }
 
+type CoefficientTable {
+  checked: Boolean!
+  classe: Classe!
+  coefficient: Float
+  id: ID!
+}
+
 input CreateAnneeScolaireInput {
   debut: DateTime!
   fin: DateTime!
@@ -135,6 +142,7 @@ input LoginInput {
 }
 
 type Matiere {
+  coefficientTable: [CoefficientTable!]!
   designation: String!
   id: ID!
 }

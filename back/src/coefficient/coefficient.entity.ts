@@ -16,6 +16,6 @@ export class Coefficient {
   @RelationId((coefficient: Coefficient) => coefficient.matiere)
   matiereId: number;
 
-  @Column()
-  valeur: number;
+  @Column({ nullable: true })
+  valeur?: number;
 }
