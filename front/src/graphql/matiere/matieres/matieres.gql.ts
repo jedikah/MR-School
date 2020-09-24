@@ -11,6 +11,14 @@ export const MATIERES = gql`
   query {
     matieres {
       ...MatiereFrag
+      coefficientTable {
+        classe {
+          id
+          designation
+        }
+        coefficient
+        checked
+      }
     }
   }
   ${MATIERE_FRAG}

@@ -22,7 +22,6 @@ export class MatiereCoefficientFieldResolver {
 
     const coefficientTable: CoefficientTable[] = classes.map(classe => {
       const entry = new CoefficientTable();
-      entry.id = classe.id;
       entry.classe = classe;
 
       const coefficient = coefficients.find(c => c.classeId === classe.id);

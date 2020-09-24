@@ -32,7 +32,6 @@ type CoefficientTable {
   checked: Boolean!
   classe: Classe!
   coefficient: Float
-  id: ID!
 }
 
 input CreateAnneeScolaireInput {

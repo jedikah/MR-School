@@ -42,6 +42,13 @@ export type Classification = {
   section: Section;
 };
 
+export type CoefficientTable = {
+  __typename?: 'CoefficientTable';
+  checked: Scalars['Boolean'];
+  classe: Classe;
+  coefficient?: Maybe<Scalars['Float']>;
+};
+
 export type CreateAnneeScolaireInput = {
   debut: Scalars['DateTime'];
   fin: Scalars['DateTime'];
@@ -150,6 +157,7 @@ export type LoginInput = {
 
 export type Matiere = {
   __typename?: 'Matiere';
+  coefficientTable: Array<CoefficientTable>;
   designation: Scalars['String'];
   id: Scalars['ID'];
 };

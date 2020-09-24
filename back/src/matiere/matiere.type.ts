@@ -1,19 +1,10 @@
-import {
-  createUnionType,
-  ObjectType,
-  Field,
-  InputType,
-  ID,
-} from '@nestjs/graphql';
+import { createUnionType, ObjectType, Field, InputType } from '@nestjs/graphql';
 
 import { Matiere } from './matiere.entity';
 import { Classe } from '../classe/classe.entity';
 
 @ObjectType()
 export class CoefficientTable {
-  @Field(() => ID)
-  id: number;
-
   @Field(() => Classe)
   classe: Classe;
 

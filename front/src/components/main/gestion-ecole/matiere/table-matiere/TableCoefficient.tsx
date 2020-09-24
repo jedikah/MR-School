@@ -8,21 +8,7 @@ import {
   TableHead,
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-
-interface Data {
-  classe: string;
-  coefficient: number;
-}
-
-function createData(classe: string, coefficient: number): Data {
-  return { classe, coefficient };
-}
-
-const rows = [
-  createData("seconde", 2),
-  createData("premiere", 3),
-  createData("terminal", 4),
-];
+import { CoefficientTable } from "../../../../../graphql/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,7 +27,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const TableCoefficient: React.FC = () => {
+export interface TableCoefficientProps {
+  data: CoefficientTable[];
+}
+
+const TableCoefficient: React.FC<TableCoefficientProps> = ({ data }) => {
   const classes = useStyles();
   return (
     <Table
@@ -67,8 +57,8 @@ const TableCoefficient: React.FC = () => {
       </TableHead>
 
       <TableBody>
-        {rows.map((row, index) => {
-          const isItemSelected = false;
+        {data.map((row, index) => {
+          const isItemSelected = row.checked;
           const labelId = `enhanced-table-checkbox-${index}`;
 
           return (
@@ -78,7 +68,7 @@ const TableCoefficient: React.FC = () => {
               role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
-              key={row.classe}
+              key={row.classe.id}
               selected={isItemSelected}
             >
               <TableCell padding="checkbox">
@@ -89,7 +79,7 @@ const TableCoefficient: React.FC = () => {
               </TableCell>
 
               <TableCell scope="row" align="left">
-                {row.classe}
+                {row.classe.designation}
               </TableCell>
 
               <TableCell scope="row" align="center">

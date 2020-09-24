@@ -31,10 +31,26 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function EnhancedTable() {
+export default function TableMatiere() {
   const classes = useStyles();
-  const { matiereState, matiereDispatch } = useMatieres();
+  const { matiereState, matiereDispatch, matieresData } = useMatieres();
   const [selected] = React.useState<string[]>(["1"]);
+
+  const coefficientTableData = () => {
+    if (
+      matieresData &&
+      matieresData.matieres &&
+      matiereState.updateMatiereVariables.updateMatiereInput.id
+    ) {
+      const matiere = matieresData.matieres.find(
+        (m) =>
+          parseInt(m.id) ===
+          matiereState.updateMatiereVariables.updateMatiereInput.id
+      );
+      return matiere ? matiere.coefficientTable : [];
+    }
+    return [];
+  };
 
   return (
     <div className={classes.root}>
@@ -51,7 +67,7 @@ export default function EnhancedTable() {
         />
         <TableContainer className={classes.tableContainer}>
           {matiereState.tableMatiere === "coefficient" ? (
-            <TableCoefficient />
+            <TableCoefficient data={coefficientTableData()} />
           ) : (
             <TableEnseigner />
           )}
