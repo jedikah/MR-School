@@ -17,11 +17,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import ConfirmationDialog from "../../../public-component/ConfirmationDialog";
 import HeadListMatiere from "./HeadListMatiere";
-import emptyFolderIcon from "../../../../assets/001-empty-folder.png";
 import { useMatieres } from "../../../../graphql/matiere/matieres/matieres.service";
 import { Matiere, UpdateMatiereInput } from "../../../../graphql/types";
 import { useRemoveMatiere } from "../../../../graphql/matiere/remove-matiere/removeMatiere.service";
 import { filterOrderMatieres } from "./filterOrderMatieres";
+import ListEmpty from "./ListEmpty";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -38,12 +38,6 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     bottom: 0,
     overflow: "auto",
-  },
-
-  empytIcon: {
-    width: 75,
-    height: 75,
-    marginTop: 25,
   },
 
   dialog: {
@@ -155,15 +149,7 @@ const ListMatiere: React.FC = () => {
           </List>
         )}
 
-        {matieres.length === 0 && (
-          <Box display="flex" justifyContent="center">
-            <img
-              className={classes.empytIcon}
-              src={emptyFolderIcon}
-              alt="empty icon"
-            />
-          </Box>
-        )}
+        {matieres.length === 0 && <ListEmpty />}
       </CardContent>
 
       <ConfirmationDialog
