@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import MatiereForm, { MatiereFormProps } from "./MatiereForm";
-import { useUpdateMatiere } from "../../../../graphql/matiere/update-matiere/updateMatiere.service";
+import { useUpdateMatiere } from "../../../../../graphql/matiere/update-matiere/updateMatiere.service";
 
 const UpdateMatiere: React.FC = () => {
   const {

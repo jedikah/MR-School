@@ -2,10 +2,9 @@ import * as React from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import AddMatiere from "./AddMatiere";
-import UpdateMatiere from "./UpdateMatiere";
-import ListMatiere from "./ListMatiere";
+import FormMatiere from "./form-matiere/FormMatiere";
 import TableMatiere from "./table-matiere/TableMatiere";
+import ListMatiere from "./ListMatiere";
 import { useMatieres } from "../../../../graphql/matiere/matieres/matieres.service";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +33,7 @@ const Matiere: React.FC = () => {
         <TableMatiere />
       </Grid>
       <Grid item xs={4} className={classes.section}>
-        {updateMode() ? <UpdateMatiere /> : <AddMatiere />}
+        <FormMatiere mode={updateMode()} />
         <ListMatiere />
       </Grid>
     </Grid>

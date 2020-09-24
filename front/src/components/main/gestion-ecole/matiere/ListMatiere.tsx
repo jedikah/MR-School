@@ -16,11 +16,11 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import ConfirmationDialog from "../../../public-component/ConfirmationDialog";
-import HeadListMatiere from "./HeadListMatiere";
+import HeadListMatiere from "./form-matiere/HeadListMatiere";
 import { useMatieres } from "../../../../graphql/matiere/matieres/matieres.service";
 import { Matiere, UpdateMatiereInput } from "../../../../graphql/types";
 import { useRemoveMatiere } from "../../../../graphql/matiere/remove-matiere/removeMatiere.service";
-import { filterOrderMatieres } from "./filterOrderMatieres";
+import { filterOrderMatieres } from "./form-matiere/filterOrderMatieres";
 import ListEmpty from "./ListEmpty";
 
 const useStyles = makeStyles((theme) => ({

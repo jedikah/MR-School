@@ -8,7 +8,7 @@ import SearchMatiere from "./SearchMatiere";
 import {
   MatiereState,
   MatiereDispatch,
-} from "../../../../graphql/matiere/matiere.context";
+} from "../../../../../graphql/matiere/matiere.context";
 
 const useStyles = makeStyles((theme) => ({
   sortBtn: {

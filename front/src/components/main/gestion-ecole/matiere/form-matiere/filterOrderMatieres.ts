@@ -1,4 +1,4 @@
-import { Matiere } from "../../../../graphql/types";
+import { Matiere } from "../../../../../graphql/types";
 import produce from "immer";
 
 export function filterOrderMatieres(

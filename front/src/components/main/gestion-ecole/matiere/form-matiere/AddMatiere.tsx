@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import MatiereForm, { MatiereFormProps } from "./MatiereForm";
-import { useCreateMatiere } from "../../../../graphql/matiere/create-matiere/createMatiere.service";
+import { useCreateMatiere } from "../../../../../graphql/matiere/create-matiere/createMatiere.service";
 
 const AddMatiere: React.FC = () => {
   const {
