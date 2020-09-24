@@ -26,8 +26,17 @@ import { filterOrderMatieres } from "./filterOrderMatieres";
 const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: theme.spacing(1),
-    height: "70vh",
-    maxHeight: "70vh",
+    overflow: "scrool",
+    flexGrow: 1,
+    position: "relative",
+  },
+
+  innerContent: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     overflow: "auto",
   },
 
@@ -95,7 +104,7 @@ const ListMatiere: React.FC = () => {
 
   return (
     <Card elevation={4} className={classes.container}>
-      <CardContent>
+      <CardContent className={classes.innerContent}>
         <HeadListMatiere
           matiereState={matiereState}
           matiereDispatch={matiereDispatch}
