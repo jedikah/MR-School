@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 import { Utilisateur } from './utilisateur.entity';
 
@@ -13,6 +13,12 @@ export class UtilisateurService {
 
   utilisateurByContact(contact: string): Promise<Utilisateur> {
     return this.utilisateurRepository.findOne({ where: [{ contact }] });
+  }
+
+  utilisateursByContact(contact: string): Promise<Utilisateur[]> {
+    return this.utilisateurRepository.find({
+      contact: Like('%' + contact + '%'),
+    });
   }
 
   utilisateurById(id: number): Promise<Utilisateur> {

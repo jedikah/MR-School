@@ -21,4 +21,8 @@ export class FonctionService {
   fonctionById(id: number): Promise<Fonction> {
     return this.fonctionRepository.findOne({ where: [{ id }] });
   }
+
+  fonctions(): Promise<Fonction[]> {
+    return this.fonctionRepository.find();
+  }
 }

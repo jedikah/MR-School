@@ -15,6 +15,6 @@ export class AvoirService {
   }
 
   getResponsableFonctions(responsable: Responsable): Promise<Avoir[]> {
-    return this.avoirRepository.find({ where: [{ responsable }] });
+    return this.avoirRepository.find({ where: { responsable } });
   }
 }

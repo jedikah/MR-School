@@ -210,12 +210,17 @@ type Query {
   getAllNiveaux: [Niveau!]!
   helloMrSchool: String!
   matieres: [Matiere!]!
+  responsables(responsablesFilterInput: ResponsablesFilterInput): [Responsable!]!
   WhoAmI: Utilisateur!
 }
 
 type Responsable {
   fonctions: [Fonction!]!
   utilisateur: Utilisateur!
+}
+
+input ResponsablesFilterInput {
+  contact: String
 }
 
 type Section {

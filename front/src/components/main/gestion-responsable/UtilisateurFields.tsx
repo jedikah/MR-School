@@ -1,14 +1,8 @@
 import * as React from 'react';
 
-import {
-  CreateResponsableInput,
-  UtilisateurInput
-} from '../../../graphql/types';
+import { CreateResponsableInput } from '../../../graphql/types';
 import { Box, TextField } from '@material-ui/core';
 import { HandleChangeCreateResponsable } from '../../../graphql/responsable/responsable.action';
-
-type UtilisateurFields = Omit<UtilisateurInput, 'photo' | 'motDePasse'>;
-type UtilisateurFieldsKeys = keyof UtilisateurFields;
 
 export interface UtilisateurFieldsProps {
   value: CreateResponsableInput;

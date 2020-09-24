@@ -10,6 +10,7 @@ import {
   ResponsablesFilterInput,
 } from '../responsable.type';
 import { PaginationInput } from '../../types';
+import { Utilisateur } from '../../utilisateur/utilisateur.entity';
 
 @Resolver()
 export class ResponsablesResolver {
@@ -20,27 +21,22 @@ export class ResponsablesResolver {
     private avoirService: AvoirService,
   ) {}
 
-  @Query(() => ResponsableResult)
+  @Query(() => [Responsable])
   async responsables(
-    @Args('paginationInput') paginationInput: PaginationInput,
-    @Args('responsableFilterInput')
-    responsableFilterInput: ResponsablesFilterInput,
-  ): Promise<ResponsableResult> {
-    let request: Promise<Responsable[]>;
+    @Args('responsablesFilterInput', { nullable: true })
+    responsablesFilterInput: ResponsablesFilterInput,
+  ): Promise<Responsable[]> {
+    let responsables: Responsable[];
 
-    if (responsableFilterInput.contact)
-      request = this.responsableService.searchResponsableByContact(
-        responsableFilterInput.contact,
+    if (responsablesFilterInput && responsablesFilterInput.contact) {
+      return await this.responsableService.searchResponsableByContact(
+        responsablesFilterInput.contact,
       );
-    else request = this.responsableService.getAllResponsables();
+    } else {
+      responsables = await this.responsableService.getAllResponsables();
+      console.log(responsables);
+    }
 
-    const paginateResponsables = await this.responsableService.paginate(
-      request,
-      paginationInput,
-    );
-    return {
-      responsables: paginateResponsables.items,
-      paginationMeta: paginateResponsables.meta,
-    };
+    return responsables;
   }
 }
