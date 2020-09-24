@@ -45,6 +45,12 @@ interface ToogleSortMatieresAction {
   type: "TOOGLE_SORT_MATIERES";
 }
 
+export type TableMatiereMode = "enseigner" | "coefficient";
+interface ToogleTableMatiereAction {
+  type: "TOOGLE_TABLE_MATIERE";
+  value: TableMatiereMode;
+}
+
 type MatiereActions =
   | HandleChangeCreateMatiereVariablesAction
   | HandleChangeUpdateMatiereVariablesAction
@@ -52,11 +58,11 @@ type MatiereActions =
   | SetToUpdateMatiereAction
   | SetFormErrorAction
   | HandleChangeSearchMatieresAction
-  | ToogleSortMatieresAction;
+  | ToogleSortMatieresAction
+  | ToogleTableMatiereAction;
 export type MatiereDispatch = (action: MatiereActions) => void;
 
 // Context
-
 export interface MatiereState {
   removeMatiereVariables: MutationRemoveMatiereArgs;
   createMatiereVariables: MutationCreateMatiereArgs;
@@ -65,6 +71,7 @@ export interface MatiereState {
   updateMatiereFormError: boolean;
   searchMatieres: string;
   sortMatieres: boolean;
+  tableMatiere: TableMatiereMode;
 }
 
 const initialState: MatiereState = {
@@ -84,6 +91,7 @@ const initialState: MatiereState = {
   updateMatiereFormError: false,
   searchMatieres: "",
   sortMatieres: false,
+  tableMatiere: "enseigner",
 };
 
 const matiereReducer = produce(
@@ -129,6 +137,10 @@ const matiereReducer = produce(
 
       case "TOOGLE_SORT_MATIERES":
         draft.sortMatieres = !draft.sortMatieres;
+        break;
+
+      case "TOOGLE_TABLE_MATIERE":
+        draft.tableMatiere = action.value;
         break;
     }
   }
