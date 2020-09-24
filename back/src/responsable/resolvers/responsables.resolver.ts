@@ -34,7 +34,6 @@ export class ResponsablesResolver {
       );
     } else {
       responsables = await this.responsableService.getAllResponsables();
-      console.log(responsables);
     }
 
     return responsables;
