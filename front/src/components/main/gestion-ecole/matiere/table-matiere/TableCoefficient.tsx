@@ -6,6 +6,7 @@ import {
   TableCell,
   Checkbox,
   TableHead,
+  Box,
 } from "@material-ui/core";
 import {
   makeStyles,
@@ -16,6 +17,7 @@ import {
 import { grey } from "@material-ui/core/colors";
 
 import CoefficientValue from "./CoefficientValue";
+import EditIcon from "@material-ui/icons/Edit";
 import { CoefficientTable } from "../../../../../graphql/types";
 import { CoefficientDispatch } from "../../../../../graphql/coefficient/coefficient.context";
 
@@ -131,7 +133,10 @@ const TableCoefficient: React.FC<TableCoefficientProps> = ({
           </TableCell>
 
           <TableCell scope="row" align="center" className={classes.columText}>
-            Coefficient
+            <span>
+              <EditIcon />
+              Coefficient
+            </span>
           </TableCell>
 
           <TableCell scope="row" align="center" className={classes.columText}>

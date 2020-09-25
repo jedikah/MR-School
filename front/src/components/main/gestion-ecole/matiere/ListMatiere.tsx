@@ -140,6 +140,10 @@ const ListMatiere: React.FC = () => {
 
                 <ListItemSecondaryAction>
                   <IconButton
+                    disabled={
+                      matiereState.updateMatiereVariables.updateMatiereInput
+                        .id === parseInt(matiere.id)
+                    }
                     edge="end"
                     aria-label="delete"
                     onClick={() => selectMatiereToDelete(matiere)}
