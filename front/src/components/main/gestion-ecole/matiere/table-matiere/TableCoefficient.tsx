@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core/styles";
 import { grey } from "@material-ui/core/colors";
 
+import CoefficientValue from "./CoefficientValue";
 import { CoefficientTable } from "../../../../../graphql/types";
 import { CoefficientDispatch } from "../../../../../graphql/coefficient/coefficient.context";
 
@@ -172,7 +173,11 @@ const TableCoefficient: React.FC<TableCoefficientProps> = ({
               </TableCell>
 
               <TableCell scope="row" align="center">
-                {row.coefficient}
+                <CoefficientValue
+                  classeId={row.classe.id}
+                  value={row.coefficient || 0}
+                  disabled={row.status}
+                />
               </TableCell>
 
               <TableCell

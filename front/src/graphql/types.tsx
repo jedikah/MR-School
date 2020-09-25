@@ -42,6 +42,12 @@ export type Classification = {
   section: Section;
 };
 
+export type CoefficientInput = {
+  classeId: Scalars['Float'];
+  matiereId: Scalars['Float'];
+  value: Scalars['Float'];
+};
+
 export type CoefficientTable = {
   __typename?: 'CoefficientTable';
   classe: Classe;
@@ -183,6 +189,7 @@ export type Mutation = {
   login: TokenDto;
   removeMatiere: Scalars['Boolean'];
   setCoefficients: SetCoefficientsResult;
+  setCoefficientValue: Scalars['Boolean'];
   updateAnneeScolaire: AnneeScolaire;
   updateEleve: Eleve;
   updateMatiere: Matiere;
@@ -257,6 +264,11 @@ export type MutationRemoveMatiereArgs = {
 
 export type MutationSetCoefficientsArgs = {
   idCoefficient: IdCoefficient;
+};
+
+
+export type MutationSetCoefficientValueArgs = {
+  coefficientInput: CoefficientInput;
 };
 
 
