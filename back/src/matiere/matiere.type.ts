@@ -12,7 +12,7 @@ export class CoefficientTable {
   coefficient: number;
 
   @Field()
-  checked: boolean;
+  status: boolean;
 }
 
 // create matiere

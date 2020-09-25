@@ -29,9 +29,9 @@ type Classification {
 }
 
 type CoefficientTable {
-  checked: Boolean!
   classe: Classe!
   coefficient: Float
+  status: Boolean!
 }
 
 input CreateAnneeScolaireInput {

@@ -27,10 +27,10 @@ export class MatiereCoefficientFieldResolver {
       const coefficient = coefficients.find(c => c.classeId === classe.id);
       if (coefficient) {
         entry.coefficient = coefficient.valeur;
-        entry.checked = true;
+        entry.status = true;
       } else {
         entry.coefficient = null;
-        entry.checked = false;
+        entry.status = false;
       }
 
       return entry;
