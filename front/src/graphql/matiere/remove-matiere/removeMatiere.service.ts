@@ -24,6 +24,19 @@ export const useRemoveMatiere = () => {
     RemoveMatiereData,
     MutationRemoveMatiereArgs
   >(REMOVE_MATIERE, {
+    onError: () => {
+      enqueueSnackbar(
+        "Veuillez d'abord dissocier les classes liees a cette matiere",
+        {
+          variant: "warning",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "center",
+          },
+        }
+      );
+    },
+
     onCompleted: (data) => {
       if (data.removeMatiere) {
         let designationMatiereRemoved = "";
