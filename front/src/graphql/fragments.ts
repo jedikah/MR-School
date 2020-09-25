@@ -46,3 +46,21 @@ export const MATIERE_FRAG = gql`
     designation
   }
 `;
+
+export const CLASSE_FRAG = gql`
+  fragment ClasseFrag on Classe {
+    id
+    designation
+  }
+`;
+
+export const COEFFICIENT_TABLE_FRAG = gql`
+  fragment CoefficientTableFrag on CoefficientTable {
+    classe {
+      ...ClasseFrag
+    }
+    coefficient
+    status
+  }
+  ${CLASSE_FRAG}
+`;

@@ -150,6 +150,11 @@ export type FonctionInput = {
   designation: Scalars['String'];
 };
 
+export type IdCoefficient = {
+  idClasses: Array<Scalars['Float']>;
+  idMatiere: Scalars['Float'];
+};
+
 export type LoginInput = {
   contact: Scalars['String'];
   motDePasse: Scalars['String'];
@@ -177,6 +182,7 @@ export type Mutation = {
   createSection: Section;
   login: TokenDto;
   removeMatiere: Scalars['Boolean'];
+  setCoefficients: SetCoefficientsResult;
   updateAnneeScolaire: AnneeScolaire;
   updateEleve: Eleve;
   updateMatiere: Matiere;
@@ -246,6 +252,11 @@ export type MutationLoginArgs = {
 
 export type MutationRemoveMatiereArgs = {
   id: Scalars['Float'];
+};
+
+
+export type MutationSetCoefficientsArgs = {
+  idCoefficient: IdCoefficient;
 };
 
 
@@ -340,6 +351,12 @@ export type Section = {
   __typename?: 'Section';
   designation: Scalars['String'];
   id: Scalars['ID'];
+};
+
+export type SetCoefficientsResult = {
+  __typename?: 'SetCoefficientsResult';
+  coefficientTable: Array<CoefficientTable>;
+  matiereId: Scalars['Float'];
 };
 
 export type TokenDto = {
