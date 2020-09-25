@@ -21,7 +21,6 @@ import {
   IconButton,
   Button,
   ButtonGroup,
-  TablePagination,
   Chip
 } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -29,10 +28,6 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import user from '../../../../assets/user.png';
 import { TableRowSkeleton } from '../../../public-component/TableSkeleton';
-import {
-  CreateData,
-  generateDataTable
-} from '../../gestion-eleve/liste-eleve/DataCreator';
 import { UseResponsable } from '../../../../graphql/responsable/responsables/responsables.service';
 import { Responsable } from '../../../../graphql/types';
 

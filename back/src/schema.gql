@@ -137,6 +137,11 @@ input FonctionInput {
   designation: String!
 }
 
+input FonctionUpdateInput {
+  designation: String!
+  id: Float!
+}
+
 input LoginInput {
   contact: String!
   motDePasse: String!
@@ -164,6 +169,7 @@ type Mutation {
   updateAnneeScolaire(updateAnneeScolaireInput: UpdateAnneeScolaireInput!): AnneeScolaire!
   updateEleve(input: UpdateEleveInput!, matricule: String!): Eleve!
   updateMatiere(updateMatiereInput: UpdateMatiereInput!): Matiere!
+  updateResponsable(input: ResponsableUpdateInput!): Responsable!
   updateSection(updateSectionInput: UpdateSectionInput!): Section!
 }
 
@@ -223,6 +229,12 @@ input ResponsablesFilterInput {
   contact: String!
 }
 
+input ResponsableUpdateInput {
+  fonctions: [FonctionUpdateInput!]!
+  idResponsable: Float!
+  utilisateur: UtilisateurUpdateInput!
+}
+
 type Section {
   designation: String!
   id: ID!
@@ -268,6 +280,14 @@ input UtilisateurInput {
   adresse: String!
   contact: String!
   motDePasse: String!
+  nom: String!
+  photo: String
+  prenom: String!
+}
+
+input UtilisateurUpdateInput {
+  adresse: String!
+  contact: String!
   nom: String!
   photo: String
   prenom: String!

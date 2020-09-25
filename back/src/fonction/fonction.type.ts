@@ -1,4 +1,4 @@
-import { InputType, Field, PartialType, OmitType } from '@nestjs/graphql';
+import { InputType, Field, PartialType, OmitType, ID } from '@nestjs/graphql';
 
 import { Fonction } from './fonction.entity';
 
@@ -7,6 +7,15 @@ export class FonctionInput extends PartialType(
   OmitType(Fonction, ['id']),
   InputType,
 ) {
+  @Field()
+  designation: string;
+}
+
+@InputType()
+export class FonctionUpdateInput extends PartialType(Fonction, InputType) {
+  @Field()
+  id: number;
+
   @Field()
   designation: string;
 }

@@ -40,4 +40,13 @@ export class ResponsableService {
       },
     });
   }
+
+  responsableByUtilisateur(utilisateur: Utilisateur): Promise<Responsable> {
+    return this.responsableRepository.findOne({
+      relations: ['utilisateur'],
+      where: {
+        utilisateur,
+      },
+    });
+  }
 }

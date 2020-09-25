@@ -1,35 +1,25 @@
 import { Args, Resolver, Query } from '@nestjs/graphql';
 
-import { UtilisateurService } from '../../utilisateur/utilisateur.service';
 import { ResponsableService } from '../responsable.service';
-import { FonctionService } from '../../fonction/fonction.service';
-import { AvoirService } from '../../avoir/avoir.service';
 import { Responsable } from '../responsable.entity';
-import {
-  ResponsableResult,
-  ResponsablesFilterInput,
-} from '../responsable.type';
-import { PaginationInput } from '../../types';
-import { Utilisateur } from '../../utilisateur/utilisateur.entity';
+import { ResponsablesFilterInput } from '../responsable.type';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../../auth/jwt-auth.guard';
 
 @Resolver()
+@UseGuards(GqlAuthGuard)
 export class ResponsablesResolver {
-  constructor(
-    private utilisateurService: UtilisateurService,
-    private responsableService: ResponsableService,
-    private fonctionService: FonctionService,
-    private avoirService: AvoirService,
-  ) {}
+  constructor(private responsableService: ResponsableService) {}
 
   @Query(() => [Responsable])
   async responsables(
     @Args('responsablesFilterInput')
     responsablesFilterInput: ResponsablesFilterInput,
   ): Promise<Responsable[]> {
-    let responsables: Responsable[];
-
-    return await this.responsableService.searchResponsableByContact(
-      responsablesFilterInput.contact,
-    );
+    return (
+      await this.responsableService.searchResponsableByContact(
+        responsablesFilterInput.contact,
+      )
+    ).sort((a, b) => b.utilisateur.id - a.utilisateur.id);
   }
 }

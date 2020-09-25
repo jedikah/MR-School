@@ -1,17 +1,11 @@
-import {
-  PartialType,
-  InputType,
-  Field,
-  OmitType,
-  ObjectType,
-} from '@nestjs/graphql';
+import { PartialType, InputType, Field, OmitType } from '@nestjs/graphql';
 import { Responsable } from './responsable.entity';
 import {
   CreateUtilisateurInput_Responsable,
   UtilisateurInput,
+  UtilisateurUpdateInput,
 } from '../utilisateur/utilisateur.type';
-import { FonctionInput } from '../fonction/fonction.type';
-import { PaginationMeta } from '../types';
+import { FonctionInput, FonctionUpdateInput } from '../fonction/fonction.type';
 
 @InputType()
 export class ResponsableInput extends PartialType(
@@ -34,17 +28,20 @@ export class CreateResponsableInput {
   fonction: FonctionInput;
 }
 
-@ObjectType()
-export class ResponsableResult {
-  @Field(() => [Responsable])
-  responsables: Responsable[];
-
-  @Field(() => PaginationMeta)
-  paginationMeta: PaginationMeta;
-}
-
 @InputType()
 export class ResponsablesFilterInput {
   @Field()
   contact: string;
+}
+
+@InputType()
+export class ResponsableUpdateInput {
+  @Field()
+  idResponsable: number;
+
+  @Field(() => UtilisateurUpdateInput)
+  utilisateur: UtilisateurUpdateInput;
+
+  @Field(() => [FonctionUpdateInput])
+  fonctions: FonctionUpdateInput[];
 }

@@ -31,7 +31,7 @@ const SearchResponsables: React.FC<Omit<
   return (
     <InputBase
       value={responsableState.responsableFilter.contact}
-      placeholder="Recherche…"
+      placeholder="Recherche: Contact…"
       classes={{
         root: classes.inputRoot,
         input: classes.inputInput
