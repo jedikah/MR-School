@@ -16,7 +16,7 @@ import {
 import { grey } from "@material-ui/core/colors";
 
 import { CoefficientTable } from "../../../../../graphql/types";
-import { MatiereDispatch } from "../../../../../graphql/matiere/matiere.context";
+import { CoefficientDispatch } from "../../../../../graphql/coefficient/coefficient.context";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,14 +37,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface TableCoefficientProps {
   data: CoefficientTable[];
-  selectedClasses: readonly string[];
-  matiereDispatch: MatiereDispatch;
+  selectedClasses: readonly number[];
+  coefficientDispatch: CoefficientDispatch;
 }
 
 const TableCoefficient: React.FC<TableCoefficientProps> = ({
   data,
   selectedClasses,
-  matiereDispatch,
+  coefficientDispatch,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -52,9 +52,9 @@ const TableCoefficient: React.FC<TableCoefficientProps> = ({
   React.useEffect(() => {
     data.forEach((coe) => {
       if (coe.status) {
-        matiereDispatch({
+        coefficientDispatch({
           type: "TOOGLE_SELECT_CLASSE_COEFFICIENT",
-          classeId: String(coe.classe.id),
+          classeId: coe.classe.id,
         });
       }
     });
@@ -66,7 +66,7 @@ const TableCoefficient: React.FC<TableCoefficientProps> = ({
 
     let allChecked = true;
     data.forEach((coe) => {
-      if (!selectedClasses.includes(String(coe.classe.id))) {
+      if (!selectedClasses.includes(coe.classe.id)) {
         allChecked = false;
       }
     });
@@ -76,17 +76,17 @@ const TableCoefficient: React.FC<TableCoefficientProps> = ({
   const handleChangeCheckAll = () => {
     if (isAllChecked()) {
       data.forEach((coe) => {
-        matiereDispatch({
+        coefficientDispatch({
           type: "TOOGLE_SELECT_CLASSE_COEFFICIENT",
-          classeId: String(coe.classe.id),
+          classeId: coe.classe.id,
         });
       });
     } else {
       data.forEach((coe) => {
-        if (!selectedClasses.includes(String(coe.classe.id))) {
-          matiereDispatch({
+        if (!selectedClasses.includes(coe.classe.id)) {
+          coefficientDispatch({
             type: "TOOGLE_SELECT_CLASSE_COEFFICIENT",
-            classeId: String(coe.classe.id),
+            classeId: coe.classe.id,
           });
         }
       });
@@ -141,9 +141,7 @@ const TableCoefficient: React.FC<TableCoefficientProps> = ({
 
       <TableBody>
         {data.map((row, index) => {
-          const isItemSelected = selectedClasses.includes(
-            String(row.classe.id)
-          );
+          const isItemSelected = selectedClasses.includes(row.classe.id);
           const labelId = `enhanced-table-checkbox-${index}`;
 
           return (
@@ -161,9 +159,9 @@ const TableCoefficient: React.FC<TableCoefficientProps> = ({
                   checked={isItemSelected}
                   inputProps={{ "aria-labelledby": labelId }}
                   onChange={() => {
-                    matiereDispatch({
+                    coefficientDispatch({
                       type: "TOOGLE_SELECT_CLASSE_COEFFICIENT",
-                      classeId: String(row.classe.id),
+                      classeId: row.classe.id,
                     });
                   }}
                 />

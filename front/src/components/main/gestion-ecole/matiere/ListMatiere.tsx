@@ -22,6 +22,7 @@ import { Matiere, UpdateMatiereInput } from "../../../../graphql/types";
 import { useRemoveMatiere } from "../../../../graphql/matiere/remove-matiere/removeMatiere.service";
 import { filterOrderMatieres } from "./form-matiere/filterOrderMatieres";
 import ListEmpty from "./ListEmpty";
+import { useSetCoefficient } from "../../../../graphql/coefficient/set-coefficients/setCoefficients.service";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -60,6 +61,7 @@ const ListMatiere: React.FC = () => {
     matiereState,
     matiereDispatch,
   } = useMatieres();
+  const { coefficientDispatch } = useSetCoefficient();
   const { submitRemoveMatiere } = useRemoveMatiere();
 
   const handleListItemClick = (
@@ -67,6 +69,7 @@ const ListMatiere: React.FC = () => {
     updateMatiereInput: UpdateMatiereInput
   ) => {
     matiereDispatch({ type: "SET_TO_UPDATE_MATIERE", updateMatiereInput });
+    coefficientDispatch({ type: "CLEAR_SELECT_CLASSE_COEFFICIENT" });
   };
 
   const confirmMessage = () => {

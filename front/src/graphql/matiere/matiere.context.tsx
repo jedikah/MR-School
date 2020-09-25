@@ -51,11 +51,6 @@ interface ToogleTableMatiereAction {
   value: TableMatiereMode;
 }
 
-interface ToogleSelectClasseCoefficientAction {
-  type: "TOOGLE_SELECT_CLASSE_COEFFICIENT";
-  classeId: string;
-}
-
 type MatiereActions =
   | HandleChangeCreateMatiereVariablesAction
   | HandleChangeUpdateMatiereVariablesAction
@@ -64,8 +59,7 @@ type MatiereActions =
   | SetFormErrorAction
   | HandleChangeSearchMatieresAction
   | ToogleSortMatieresAction
-  | ToogleTableMatiereAction
-  | ToogleSelectClasseCoefficientAction;
+  | ToogleTableMatiereAction;
 export type MatiereDispatch = (action: MatiereActions) => void;
 
 // Context
@@ -78,7 +72,6 @@ export interface MatiereState {
   searchMatieres: string;
   sortMatieres: boolean;
   tableMatiere: TableMatiereMode;
-  coefficientSelectedClasses: readonly string[];
 }
 
 const initialState: MatiereState = {
@@ -99,7 +92,6 @@ const initialState: MatiereState = {
   searchMatieres: "",
   sortMatieres: false,
   tableMatiere: "enseigner",
-  coefficientSelectedClasses: [],
 };
 
 const matiereReducer = produce(
@@ -133,7 +125,6 @@ const matiereReducer = produce(
         }
         draft.createMatiereFormError = false;
         draft.updateMatiereFormError = false;
-        draft.coefficientSelectedClasses = [];
         break;
 
       case "SET_FORM_ERROR":
@@ -150,17 +141,6 @@ const matiereReducer = produce(
 
       case "TOOGLE_TABLE_MATIERE":
         draft.tableMatiere = action.value;
-        break;
-
-      case "TOOGLE_SELECT_CLASSE_COEFFICIENT":
-        if (draft.coefficientSelectedClasses.includes(action.classeId)) {
-          draft.coefficientSelectedClasses.splice(
-            draft.coefficientSelectedClasses.indexOf(action.classeId),
-            1
-          );
-        } else {
-          draft.coefficientSelectedClasses.push(action.classeId);
-        }
         break;
     }
   }

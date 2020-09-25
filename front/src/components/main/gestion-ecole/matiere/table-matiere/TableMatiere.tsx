@@ -8,6 +8,7 @@ import { TableMatiereMode } from "../../../../../graphql/matiere/matiere.context
 import TableToolbar from "./TableToolbar";
 import TableCoefficient from "./TableCoefficient";
 import TableEnseigner from "./TableEnseigner";
+import { useSetCoefficient } from "../../../../../graphql/coefficient/set-coefficients/setCoefficients.service";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function TableMatiere() {
   const classes = useStyles();
   const { matiereState, matiereDispatch, matieresData } = useMatieres();
+  const { coefficientState, coefficientDispatch } = useSetCoefficient();
   const [selected] = React.useState<string[]>(["1"]);
 
   const coefficientTableData = () => {
@@ -69,8 +71,8 @@ export default function TableMatiere() {
           {matiereState.tableMatiere === "coefficient" ? (
             <TableCoefficient
               data={coefficientTableData()}
-              selectedClasses={matiereState.coefficientSelectedClasses}
-              matiereDispatch={matiereDispatch}
+              selectedClasses={coefficientState.coefficientSelectedClasses}
+              coefficientDispatch={coefficientDispatch}
             />
           ) : (
             <TableEnseigner />
