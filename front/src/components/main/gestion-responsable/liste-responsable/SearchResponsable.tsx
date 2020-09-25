@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { InputBase, makeStyles } from '@material-ui/core';
 
-import { UseEleves } from '../../../../graphql/eleve/eleves/eleves.service';
+import { UseResponsable } from '../../../../graphql/responsable/responsables/responsables.service';
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
@@ -22,22 +22,27 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SearchResponsables: React.FC<UseEleves> = ({
-  elevesVariables,
-  changeElevesFilterInput
-}) => {
+const SearchResponsables: React.FC<Omit<
+  UseResponsable,
+  'responsableData' | 'loadingResponsable'
+>> = ({ responsableState, responsableDispatch }) => {
   const classes = useStyles();
 
   return (
     <InputBase
-      value={elevesVariables.elevesFilterInput.matricule}
+      value={responsableState.responsableFilter.contact}
       placeholder="Recherche…"
       classes={{
         root: classes.inputRoot,
         input: classes.inputInput
       }}
       inputProps={{ 'aria-label': 'search' }}
-      onChange={(e) => changeElevesFilterInput('matricule', e.target.value)}
+      onChange={(e) =>
+        responsableDispatch({
+          type: 'HANDLE_CHANGE_GET_RESPONSABLES',
+          value: e.target.value
+        })
+      }
     />
   );
 };

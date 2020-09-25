@@ -11,6 +11,11 @@ export interface HandleChangeCreateResponsable {
   value: string;
 }
 
+export interface HandleChangeGetResponsables {
+  type: 'HANDLE_CHANGE_GET_RESPONSABLES';
+  value: string;
+}
+
 export interface HandleChangeUpdateResponsable {
   type: 'HANDLE_CHANGE_UPDATE_RESPONSABLE';
   value: string;
@@ -25,6 +30,7 @@ export interface SetFormErrorAction {
 export type ResponsableAction =
   | HandleChangeCreateResponsable
   | HandleChangeUpdateResponsable
-  | SetFormErrorAction;
+  | SetFormErrorAction
+  | HandleChangeGetResponsables;
 
 export type ResponsableDispatch = (action: ResponsableAction) => void;

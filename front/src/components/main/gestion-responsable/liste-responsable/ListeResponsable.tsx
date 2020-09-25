@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-// import ElevesCtn from './Eleves.ctn';
 import CreatResponsableFormCtn from '../ResponsableForm.Ctn';
 import NavBar from './NavBar';
+import ResponsablesShowTableCtn from './ResponsablesShowTable.Ctn';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,9 +28,10 @@ const ResponsableList: React.FC = () => {
   return (
     <Grid container>
       <NavBar />
-
       <Grid item xs={8}>
-        <div className={classes.paper}>{/* <ElevesCtn /> */}</div>
+        <div className={classes.paper}>
+          <ResponsablesShowTableCtn />
+        </div>
       </Grid>
       <Grid item xs={4}>
         <CreatResponsableFormCtn />

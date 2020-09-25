@@ -23,19 +23,13 @@ export class ResponsablesResolver {
 
   @Query(() => [Responsable])
   async responsables(
-    @Args('responsablesFilterInput', { nullable: true })
+    @Args('responsablesFilterInput')
     responsablesFilterInput: ResponsablesFilterInput,
   ): Promise<Responsable[]> {
     let responsables: Responsable[];
 
-    if (responsablesFilterInput && responsablesFilterInput.contact) {
-      return await this.responsableService.searchResponsableByContact(
-        responsablesFilterInput.contact,
-      );
-    } else {
-      responsables = await this.responsableService.getAllResponsables();
-    }
-
-    return responsables;
+    return await this.responsableService.searchResponsableByContact(
+      responsablesFilterInput.contact,
+    );
   }
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import produce, { Draft } from 'immer';
 
-import { CreateResponsableInput } from '../types';
+import { CreateResponsableInput, ResponsablesFilterInput } from '../types';
 import { ResponsableAction, ResponsableDispatch } from './responsable.action';
 
 export interface ResponsableState {
   createResponsable: CreateResponsableInput;
   createResponsableFormError: boolean;
+  responsableFilter: ResponsablesFilterInput;
 }
 
 const initialState: ResponsableState = {
@@ -20,7 +21,10 @@ const initialState: ResponsableState = {
       photo: ''
     }
   },
-  createResponsableFormError: false
+  createResponsableFormError: false,
+  responsableFilter: {
+    contact: ''
+  }
 };
 
 const responsableReducer = produce(
@@ -40,9 +44,14 @@ const responsableReducer = produce(
         )
           draft.createResponsable[action.key1][action.key2] = action.value;
         break;
+
       case 'SET_FORM_ERROR':
         if (action.key === 'createResponsableFormError')
           draft[action.key] = action.value;
+        break;
+
+      case 'HANDLE_CHANGE_GET_RESPONSABLES':
+        draft.responsableFilter.contact = action.value;
         break;
     }
   }

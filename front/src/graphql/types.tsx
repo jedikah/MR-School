@@ -316,6 +316,7 @@ export type Query = {
   getAllNiveaux: Array<Niveau>;
   helloMrSchool: Scalars['String'];
   matieres: Array<Matiere>;
+  responsables: Array<Responsable>;
   WhoAmI: Utilisateur;
 };
 
@@ -330,10 +331,19 @@ export type QueryFonctionByDesignationArgs = {
   input: Scalars['String'];
 };
 
+
+export type QueryResponsablesArgs = {
+  responsablesFilterInput: ResponsablesFilterInput;
+};
+
 export type Responsable = {
   __typename?: 'Responsable';
   fonctions: Array<Fonction>;
   utilisateur: Utilisateur;
+};
+
+export type ResponsablesFilterInput = {
+  contact: Scalars['String'];
 };
 
 export type Section = {

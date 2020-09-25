@@ -45,6 +45,6 @@ export class ResponsableResult {
 
 @InputType()
 export class ResponsablesFilterInput {
-  @Field({ nullable: true })
+  @Field()
   contact: string;
 }

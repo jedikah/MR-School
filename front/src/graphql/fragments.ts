@@ -20,7 +20,12 @@ export const ELEVE_FRAG = gql`
 
 export const UTILISATEUR_FRAG = gql`
   fragment UtilisateurFrag on Utilisateur {
+    id
+    nom
     prenom
+    adresse
+    contact
+    photo
   }
 `;
 
