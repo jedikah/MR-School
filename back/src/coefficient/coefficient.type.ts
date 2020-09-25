@@ -22,3 +22,19 @@ export class SetCoefficientsResult {
 }
 
 // fin set coefficients
+
+// set coefficient value
+
+@InputType()
+export class CoefficientInput {
+  @Field()
+  matiereId: number;
+
+  @Field()
+  classeId: number;
+
+  @Field()
+  value: number;
+}
+
+// set coefficient value fin

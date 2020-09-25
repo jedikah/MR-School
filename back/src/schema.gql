@@ -28,6 +28,12 @@ type Classification {
   section: Section!
 }
 
+input CoefficientInput {
+  classeId: Float!
+  matiereId: Float!
+  value: Float!
+}
+
 type CoefficientTable {
   classe: Classe!
   coefficient: Float
@@ -166,6 +172,7 @@ type Mutation {
   login(input: LoginInput!): TokenDto!
   removeMatiere(id: Float!): Boolean!
   setCoefficients(idCoefficient: IdCoefficient!): SetCoefficientsResult!
+  setCoefficientValue(coefficientInput: CoefficientInput!): Boolean!
   updateAnneeScolaire(updateAnneeScolaireInput: UpdateAnneeScolaireInput!): AnneeScolaire!
   updateEleve(input: UpdateEleveInput!, matricule: String!): Eleve!
   updateMatiere(updateMatiereInput: UpdateMatiereInput!): Matiere!

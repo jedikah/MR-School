@@ -4,6 +4,7 @@ import { Repository, DeleteResult } from 'typeorm';
 
 import { Coefficient } from './coefficient.entity';
 import { Matiere } from '../matiere/matiere.entity';
+import { Classe } from '../classe/classe.entity';
 
 @Injectable()
 export class CoefficientService {
@@ -18,6 +19,18 @@ export class CoefficientService {
 
   getCoefficientsByMatiere(matiere: Matiere): Promise<Coefficient[]> {
     return this.coefficientRepository.find({ where: { matiere } });
+  }
+
+  getCoefficientByMatiereAndClasse(
+    matiere: Matiere,
+    classe: Classe,
+  ): Promise<Coefficient> {
+    return this.coefficientRepository.findOne({
+      where: {
+        matiere,
+        classe,
+      },
+    });
   }
 
   createOrUpdateCoefficient(coefficient: Coefficient): Promise<Coefficient> {
