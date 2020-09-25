@@ -28,6 +28,9 @@ export const useSetCoefficient = (): UseSetCoefficient => {
     MutationSetCoefficientsArgs
   >(SET_COEFFICIENTS, {
     onCompleted(data) {
+      data.setCoefficients.coefficientTable.forEach((coe) => {
+        console.log(coe.status);
+      });
       coefficientDispatch({ type: "CLEAR_SELECT_CLASSE_COEFFICIENT" });
       const prevMatieres = apollo.cache.readQuery<MatieresData>({
         query: MATIERES,

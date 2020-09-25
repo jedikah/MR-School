@@ -31,7 +31,7 @@ export class SetCoefficientResolver {
       matiere.id,
     );
 
-    const coefficients = await Promise.all(
+    await Promise.all(
       idCoefficient.idClasses.map(async idClasse => {
         const classe = await this.classeService.findOneClasseById(idClasse);
         const coefficient = new Coefficient();
@@ -40,9 +40,13 @@ export class SetCoefficientResolver {
         return this.coefficientService.createOrUpdateCoefficient(coefficient);
       }),
     );
+
+    const coefficientsByMatiere = await this.coefficientService.getCoefficientsByMatiere(
+      matiere,
+    );
     const coefficientTable = this.matiereUtilis.createCoefficientTable(
       classes,
-      coefficients,
+      coefficientsByMatiere,
     );
 
     const result = new SetCoefficientsResult();
