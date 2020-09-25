@@ -48,6 +48,8 @@ const TableToolbar = (props: TableToolbarProps) => {
   const classes = useToolbarStyles();
   const { numSelected, designationMatiere, tableMode, toogleTableMode } = props;
 
+  const plurial = numSelected > 1 ? "s" : "";
+
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -56,7 +58,7 @@ const TableToolbar = (props: TableToolbarProps) => {
     >
       <Typography color="inherit" variant="subtitle1" component="div">
         {designationMatiere || "???"}: {numSelected} classe
-        {numSelected > 0 ? "s" : ""} selectionnee
+        {plurial} selectionnee{plurial}
       </Typography>
 
       <ToggleButtonGroup

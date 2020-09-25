@@ -3,12 +3,14 @@ import { Matiere } from '../matiere.entity';
 import { CoefficientTable } from '../matiere.type';
 import { ClasseService } from '../../classe/classe.service';
 import { CoefficientService } from '../../coefficient/coefficient.service';
+import { MatiereUtils } from '../matiere.utils';
 
 @Resolver(() => Matiere)
 export class MatiereCoefficientFieldResolver {
   constructor(
     private classeService: ClasseService,
     private coefficientService: CoefficientService,
+    private matiereUtilis: MatiereUtils,
   ) {}
 
   @ResolveField(() => [CoefficientTable])
@@ -20,21 +22,10 @@ export class MatiereCoefficientFieldResolver {
       matiere,
     );
 
-    const coefficientTable: CoefficientTable[] = classes.map(classe => {
-      const entry = new CoefficientTable();
-      entry.classe = classe;
-
-      const coefficient = coefficients.find(c => c.classeId === classe.id);
-      if (coefficient) {
-        entry.coefficient = coefficient.valeur;
-        entry.status = true;
-      } else {
-        entry.coefficient = null;
-        entry.status = false;
-      }
-
-      return entry;
-    });
+    const coefficientTable: CoefficientTable[] = this.matiereUtilis.createCoefficientTable(
+      classes,
+      coefficients,
+    );
 
     return coefficientTable;
   }
