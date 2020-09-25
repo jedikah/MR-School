@@ -44,9 +44,9 @@ export type Classification = {
 
 export type CoefficientTable = {
   __typename?: 'CoefficientTable';
-  checked: Scalars['Boolean'];
   classe: Classe;
   coefficient?: Maybe<Scalars['Float']>;
+  status: Scalars['Boolean'];
 };
 
 export type CreateAnneeScolaireInput = {

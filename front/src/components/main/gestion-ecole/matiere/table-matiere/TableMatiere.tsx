@@ -67,7 +67,11 @@ export default function TableMatiere() {
         />
         <TableContainer className={classes.tableContainer}>
           {matiereState.tableMatiere === "coefficient" ? (
-            <TableCoefficient data={coefficientTableData()} />
+            <TableCoefficient
+              data={coefficientTableData()}
+              selectedClasses={matiereState.coefficientSelectedClasses}
+              matiereDispatch={matiereDispatch}
+            />
           ) : (
             <TableEnseigner />
           )}

@@ -17,7 +17,7 @@ export const MATIERES = gql`
           designation
         }
         coefficient
-        checked
+        status
       }
     }
   }
