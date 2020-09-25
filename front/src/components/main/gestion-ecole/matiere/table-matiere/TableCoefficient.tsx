@@ -51,7 +51,7 @@ const TableCoefficient: React.FC<TableCoefficientProps> = ({
 
   React.useEffect(() => {
     data.forEach((coe) => {
-      if (coe.status) {
+      if (coe.status && !selectedClasses.includes(coe.classe.id)) {
         coefficientDispatch({
           type: "TOOGLE_SELECT_CLASSE_COEFFICIENT",
           classeId: coe.classe.id,
