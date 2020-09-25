@@ -91,7 +91,7 @@ const initialState: MatiereState = {
   updateMatiereFormError: false,
   searchMatieres: "",
   sortMatieres: false,
-  tableMatiere: "enseigner",
+  tableMatiere: "coefficient",
 };
 
 const matiereReducer = produce(

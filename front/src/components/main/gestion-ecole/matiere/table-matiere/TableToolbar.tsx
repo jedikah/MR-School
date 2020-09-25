@@ -3,8 +3,6 @@ import clsx from "clsx";
 import {
   Toolbar,
   Typography,
-  Tooltip,
-  IconButton,
   makeStyles,
   Theme,
   createStyles,
@@ -12,9 +10,9 @@ import {
 } from "@material-ui/core";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import SaveAltIcon from "@material-ui/icons/SaveAlt";
 
 import { TableMatiereMode } from "../../../../../graphql/matiere/matiere.context";
+import SubmitCoefficient from "./SubmitCoefficient";
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,14 +84,7 @@ const TableToolbar = (props: TableToolbarProps) => {
         </ToggleButton>
       </ToggleButtonGroup>
 
-      <IconButton
-        disabled={designationMatiere ? false : true}
-        aria-label="delete"
-      >
-        <Tooltip title="Enregistrer">
-          <SaveAltIcon />
-        </Tooltip>
-      </IconButton>
+      <SubmitCoefficient />
     </Toolbar>
   );
 };
