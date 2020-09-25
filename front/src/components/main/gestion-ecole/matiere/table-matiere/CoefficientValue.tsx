@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InputBase, CircularProgress } from "@material-ui/core";
+import { InputBase, CircularProgress, Tooltip } from "@material-ui/core";
 import useSetCoefficientValue from "../../../../../graphql/coefficient/set-coefficient-value/setCoefficientValue.service";
 
 export interface CoefficientValueProps {
@@ -24,7 +24,28 @@ const CoefficientValue: React.FC<CoefficientValueProps> = ({
     e.preventDefault();
     submitSetCoefficientValue();
   };
-  console.log(disabled);
+
+  const input = (disabled: boolean) => (
+    <InputBase
+      disabled={disabled}
+      style={{
+        maxHeight: 25,
+        maxWidth: 50,
+        color: "grey",
+        fontWeight: "bold",
+      }}
+      inputProps={{ min: 0, style: { textAlign: "center" } }}
+      value={parseInt(String(coefficientValue), 10)}
+      placeholder="valeur"
+      type="number"
+      margin="dense"
+      onChange={(e) => {
+        const { value } = e.target;
+        handleChangeCoefficientInput(Number(value));
+      }}
+    />
+  );
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -36,24 +57,12 @@ const CoefficientValue: React.FC<CoefficientValueProps> = ({
         alignItems: "center",
       }}
     >
-      <InputBase
-        disabled={!disabled}
-        style={{
-          maxHeight: 25,
-          maxWidth: 50,
-          color: "grey",
-          fontWeight: "bold",
-        }}
-        inputProps={{ min: 0, style: { textAlign: "center" } }}
-        value={parseInt(String(coefficientValue), 10)}
-        placeholder="valeur"
-        type="number"
-        margin="dense"
-        onChange={(e) => {
-          const { value } = e.target;
-          handleChangeCoefficientInput(Number(value));
-        }}
-      />
+      {disabled ? (
+        input(false)
+      ) : (
+        <Tooltip title="Classe non selectionnee">{input(true)}</Tooltip>
+      )}
+
       {loadingCoefficientValue && (
         <CircularProgress
           style={{

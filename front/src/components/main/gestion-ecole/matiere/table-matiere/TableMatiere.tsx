@@ -36,7 +36,6 @@ export default function TableMatiere() {
   const classes = useStyles();
   const { matiereState, matiereDispatch, matieresData } = useMatieres();
   const { coefficientState, coefficientDispatch } = useSetCoefficient();
-  const [selected] = React.useState<string[]>(["1"]);
 
   const coefficientTableData = () => {
     if (
@@ -54,6 +53,21 @@ export default function TableMatiere() {
     return [];
   };
 
+  const nbClasseToDisplay = () => {
+    if (matiereState.tableMatiere === "coefficient") {
+      if (!matieresData) return 0;
+      const matiere = matieresData.matieres.find(
+        (m) =>
+          parseInt(m.id) ===
+          matiereState.updateMatiereVariables.updateMatiereInput.id
+      );
+      if (!matiere) return 0;
+      return matiere.coefficientTable.filter((coe) => coe.status).length;
+    } else {
+      return 0;
+    }
+  };
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper} elevation={4}>
@@ -62,11 +76,12 @@ export default function TableMatiere() {
           toogleTableMode={(value: TableMatiereMode) =>
             matiereDispatch({ type: "TOOGLE_TABLE_MATIERE", value })
           }
-          numSelected={selected.length}
+          numSelected={nbClasseToDisplay()}
           designationMatiere={
             matiereState.updateMatiereVariables.updateMatiereInput.designation
           }
         />
+
         <TableContainer className={classes.tableContainer}>
           {matiereState.tableMatiere === "coefficient" ? (
             <TableCoefficient
