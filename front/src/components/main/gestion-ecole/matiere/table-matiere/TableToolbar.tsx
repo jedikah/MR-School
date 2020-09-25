@@ -40,7 +40,7 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 interface TableToolbarProps {
   numSelected: number;
   designationMatiere: string;
-  tableMode: string;
+  tableMode: TableMatiereMode;
   toogleTableMode: (value: TableMatiereMode) => void;
 }
 
@@ -63,7 +63,9 @@ const TableToolbar = (props: TableToolbarProps) => {
         value={tableMode}
         exclusive
         onChange={(_, value: TableMatiereMode) => {
-          toogleTableMode(value);
+          if (value !== null) {
+            toogleTableMode(value);
+          }
         }}
         aria-label="text alignment"
       >
@@ -71,8 +73,9 @@ const TableToolbar = (props: TableToolbarProps) => {
           value={"enseigner" as TableMatiereMode}
           aria-label="left aligned"
         >
-          Enseigner
+          {"Enseigner"}
         </ToggleButton>
+
         <ToggleButton
           value={"coefficient" as TableMatiereMode}
           aria-label="centered"
