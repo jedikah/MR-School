@@ -2,6 +2,8 @@ import { createUnionType, ObjectType, Field, InputType } from '@nestjs/graphql';
 
 import { Matiere } from './matiere.entity';
 import { Classe } from '../classe/classe.entity';
+import { Section } from '../section/section.entity';
+import { Responsable } from '../responsable/responsable.entity';
 
 @ObjectType()
 export class CoefficientTable {
@@ -10,6 +12,21 @@ export class CoefficientTable {
 
   @Field({ nullable: true })
   coefficient: number;
+
+  @Field()
+  status: boolean;
+}
+
+@ObjectType()
+export class EnseignerTable {
+  @Field()
+  classe: Classe;
+
+  @Field()
+  section: Section;
+
+  @Field(() => [Responsable])
+  professeur: Responsable[];
 
   @Field()
   status: boolean;

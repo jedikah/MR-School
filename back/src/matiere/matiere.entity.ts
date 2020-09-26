@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { CoefficientTable } from './matiere.type';
+import { CoefficientTable, EnseignerTable } from './matiere.type';
 
 @Entity()
 @ObjectType()
@@ -15,4 +15,7 @@ export class Matiere {
 
   @Field(() => [CoefficientTable])
   coefficientTable: CoefficientTable[];
+
+  @Field(() => EnseignerTable)
+  enseignerTable: EnseignerTable[];
 }

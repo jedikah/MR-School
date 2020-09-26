@@ -1,3 +1,7 @@
-import { MatiereCoefficientFieldResolver } from './matiere-coefficient';
+import { CoefficientTableFieldResolver } from './coefficient-table';
+import { EnseignerTableFieldResolver } from './enseigner-table';
 
-export const MatiereResolverFields = [MatiereCoefficientFieldResolver];
+export const MatiereResolverFields = [
+  CoefficientTableFieldResolver,
+  EnseignerTableFieldResolver,
+];

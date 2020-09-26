@@ -132,6 +132,13 @@ type ElevesResult {
   paginationMeta: PaginationMeta!
 }
 
+type EnseignerTable {
+  classe: Classe!
+  professeur: [Responsable!]!
+  section: Section!
+  status: Boolean!
+}
+
 type Fonction {
   designation: String!
   id: ID!
@@ -154,6 +161,7 @@ input LoginInput {
 type Matiere {
   coefficientTable: [CoefficientTable!]!
   designation: String!
+  enseignerTable: EnseignerTable!
   id: ID!
 }
 

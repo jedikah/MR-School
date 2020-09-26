@@ -6,7 +6,7 @@ import { CoefficientService } from '../../coefficient/coefficient.service';
 import { MatiereUtils } from '../matiere.utils';
 
 @Resolver(() => Matiere)
-export class MatiereCoefficientFieldResolver {
+export class CoefficientTableFieldResolver {
   constructor(
     private classeService: ClasseService,
     private coefficientService: CoefficientService,
