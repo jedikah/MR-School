@@ -90,7 +90,7 @@ const initialState: MatiereState = {
   createMatiereFormError: false,
   updateMatiereFormError: false,
   searchMatieres: "",
-  sortMatieres: false,
+  sortMatieres: true,
   tableMatiere: "coefficient",
 };
 

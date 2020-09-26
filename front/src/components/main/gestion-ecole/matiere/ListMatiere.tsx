@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import FlipMove from "react-flip-move";
 
 import ConfirmationDialog from "../../../public-component/ConfirmationDialog";
 import HeadListMatiere from "./form-matiere/HeadListMatiere";
@@ -117,42 +118,44 @@ const ListMatiere: React.FC = () => {
 
         {!loadingMatiere && matieres.length > 0 && (
           <List component="nav" aria-label="main mailbox folders">
-            {matieres.map((matiere) => (
-              <ListItem
-                divider
-                key={matiere.id}
-                button
-                selected={
-                  matiereState.updateMatiereVariables.updateMatiereInput.id ===
-                  parseInt(matiere.id)
-                }
-                onClick={(event) =>
-                  handleListItemClick(event, {
-                    id: parseInt(matiere.id),
-                    designation: matiere.designation,
-                  })
-                }
-              >
-                <ListItemIcon>
-                  <Avatar>{matiere.designation[0].toUpperCase()}</Avatar>
-                </ListItemIcon>
-                <ListItemText primary={matiere.designation} />
+            <FlipMove>
+              {matieres.map((matiere) => (
+                <ListItem
+                  divider
+                  key={matiere.id}
+                  button
+                  selected={
+                    matiereState.updateMatiereVariables.updateMatiereInput
+                      .id === parseInt(matiere.id)
+                  }
+                  onClick={(event) =>
+                    handleListItemClick(event, {
+                      id: parseInt(matiere.id),
+                      designation: matiere.designation,
+                    })
+                  }
+                >
+                  <ListItemIcon>
+                    <Avatar>{matiere.designation[0].toUpperCase()}</Avatar>
+                  </ListItemIcon>
+                  <ListItemText primary={matiere.designation} />
 
-                <ListItemSecondaryAction>
-                  <IconButton
-                    disabled={
-                      matiereState.updateMatiereVariables.updateMatiereInput
-                        .id === parseInt(matiere.id)
-                    }
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() => selectMatiereToDelete(matiere)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      disabled={
+                        matiereState.updateMatiereVariables.updateMatiereInput
+                          .id === parseInt(matiere.id)
+                      }
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => selectMatiereToDelete(matiere)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))}
+            </FlipMove>
           </List>
         )}
 
