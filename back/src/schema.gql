@@ -161,7 +161,7 @@ input LoginInput {
 type Matiere {
   coefficientTable: [CoefficientTable!]!
   designation: String!
-  enseignerTable: EnseignerTable!
+  enseignerTable: [EnseignerTable!]!
   id: ID!
 }
 

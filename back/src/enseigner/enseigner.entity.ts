@@ -19,15 +19,15 @@ export class Enseigner {
   @RelationId((enseigner: Enseigner) => enseigner.classe)
   classeId: number;
 
-  @ManyToOne(() => Responsable, { primary: true })
-  @JoinColumn()
-  professeur: Responsable;
-  @RelationId((enseigner: Enseigner) => enseigner.professeur)
-  professeurId: number;
-
   @ManyToOne(() => Section, { primary: true })
   @JoinColumn()
   section: Section;
   @RelationId((enseigner: Enseigner) => enseigner.section)
   sectionId: number;
+
+  @ManyToOne(() => Responsable, { primary: true })
+  @JoinColumn()
+  professeur: Responsable;
+  @RelationId((enseigner: Enseigner) => enseigner.professeur)
+  professeurId: number;
 }

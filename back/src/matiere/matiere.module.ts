@@ -9,12 +9,14 @@ import { MatiereResolverFields } from './filed-resolvers';
 import { CoefficientModule } from '../coefficient/coefficient.module';
 import { MatiereUtils } from './matiere.utils';
 import { ClasseSectionModule } from '../classe-section/classe-section.module';
+import { EnseignerModule } from '../enseigner/enseigner.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Matiere]),
     ClasseModule,
     ClasseSectionModule,
+    EnseignerModule,
     forwardRef(() => CoefficientModule),
   ],
   providers: [

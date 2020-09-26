@@ -16,6 +16,6 @@ export class Matiere {
   @Field(() => [CoefficientTable])
   coefficientTable: CoefficientTable[];
 
-  @Field(() => EnseignerTable)
+  @Field(() => [EnseignerTable])
   enseignerTable: EnseignerTable[];
 }

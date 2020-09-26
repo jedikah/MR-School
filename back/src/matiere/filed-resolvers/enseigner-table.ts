@@ -4,10 +4,9 @@ import { EnseignerTable } from '../matiere.type';
 import { ClasseService } from '../../classe/classe.service';
 import { Matiere } from '../matiere.entity';
 import { ClasseSectionService } from '../../classe-section/classe-section.service';
-import { Classe } from '../../classe/classe.entity';
-import { Section } from '../../section/section.entity';
 import { ClasseSection } from '../../classe-section/classe-section.entity';
 import { SectionService } from '../../section/section.service';
+import { EnseignerService } from '../../enseigner/enseigner.service';
 
 @Resolver(() => Matiere)
 export class EnseignerTableFieldResolver {
@@ -15,6 +14,7 @@ export class EnseignerTableFieldResolver {
     private classeService: ClasseService,
     private sectionService: SectionService,
     private classeSectionService: ClasseSectionService,
+    private enseignerService: EnseignerService,
   ) {}
 
   @ResolveField(() => [EnseignerTable])
@@ -23,11 +23,21 @@ export class EnseignerTableFieldResolver {
 
     return Promise.all(
       classeSection.map(async cs => {
+        const classe = await this.classeService.findOneClasseById(cs.idClasse);
+        const section = await this.sectionService.findOneSection(cs.idSection);
+        const status = (await this.enseignerService.isClasseSectionIn(
+          classe,
+          section,
+          matiere,
+        ))
+          ? true
+          : false;
+
         return {
-          classe: await this.classeService.findOneClasseById(cs.idClasse),
-          section: await this.sectionService.findOneSection(cs.idSection),
-          professeur: [], // list de prof associer a la classe + section
-          status: true, // si la classe + section possede au moin un ou plusieur enseignant
+          classe,
+          section,
+          professeur: [],
+          status,
         } as EnseignerTable;
       }),
     );
