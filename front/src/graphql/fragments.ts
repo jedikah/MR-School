@@ -64,3 +64,23 @@ export const COEFFICIENT_TABLE_FRAG = gql`
   }
   ${CLASSE_FRAG}
 `;
+
+export const ENSEIGNER_TABLE_FRAG = gql`
+  fragment EnseignerTableFrag on EnseignerTable {
+    classe {
+      ...ClasseFrag
+    }
+    professeur {
+      utilisateur {
+        ...UtilisateurFrag
+      }
+    }
+    section {
+      id
+      designation
+    }
+    status
+  }
+  ${CLASSE_FRAG}
+  ${UTILISATEUR_FRAG}
+`;

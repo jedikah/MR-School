@@ -9,6 +9,7 @@ import TableToolbar from "./TableToolbar";
 import TableCoefficient from "./TableCoefficient";
 import TableEnseigner from "./TableEnseigner";
 import { useSetCoefficient } from "../../../../../graphql/coefficient/set-coefficients/setCoefficients.service";
+import { CoefficientTable, EnseignerTable } from "../../../../../graphql/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +38,7 @@ export default function TableMatiere() {
   const { matiereState, matiereDispatch, matieresData } = useMatieres();
   const { coefficientState, coefficientDispatch } = useSetCoefficient();
 
-  const coefficientTableData = () => {
+  const dataTable = (table: "coefficientTable" | "enseignerTable") => {
     if (
       matieresData &&
       matieresData.matieres &&
@@ -48,7 +49,7 @@ export default function TableMatiere() {
           parseInt(m.id) ===
           matiereState.updateMatiereVariables.updateMatiereInput.id
       );
-      return matiere ? matiere.coefficientTable : [];
+      return matiere ? matiere[table] : [];
     }
     return [];
   };
@@ -85,12 +86,14 @@ export default function TableMatiere() {
         <TableContainer className={classes.tableContainer}>
           {matiereState.tableMatiere === "coefficient" ? (
             <TableCoefficient
-              data={coefficientTableData()}
+              data={dataTable("coefficientTable") as CoefficientTable[]}
               selectedClasses={coefficientState.coefficientSelectedClasses}
               coefficientDispatch={coefficientDispatch}
             />
           ) : (
-            <TableEnseigner />
+            <TableEnseigner
+              data={dataTable("enseignerTable") as EnseignerTable[]}
+            />
           )}
         </TableContainer>
       </Paper>

@@ -146,6 +146,14 @@ export type ElevesResult = {
   paginationMeta: PaginationMeta;
 };
 
+export type EnseignerTable = {
+  __typename?: 'EnseignerTable';
+  classe: Classe;
+  professeur: Array<Responsable>;
+  section: Section;
+  status: Scalars['Boolean'];
+};
+
 export type Fonction = {
   __typename?: 'Fonction';
   designation: Scalars['String'];
@@ -170,6 +178,7 @@ export type Matiere = {
   __typename?: 'Matiere';
   coefficientTable: Array<CoefficientTable>;
   designation: Scalars['String'];
+  enseignerTable: Array<EnseignerTable>;
   id: Scalars['ID'];
 };
 

@@ -6,7 +6,6 @@ import {
   TableCell,
   Checkbox,
   TableHead,
-  Box,
 } from "@material-ui/core";
 import {
   makeStyles,

@@ -4,25 +4,19 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Checkbox,
   TableHead,
+  Button,
 } from "@material-ui/core";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  createStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
+import { grey } from "@material-ui/core/colors";
 
-interface Data {
-  classe: string;
-  section: string;
-}
-
-function createData(classe: string, section: string): Data {
-  return { classe, section };
-}
-
-const rows = [
-  createData("seconde", "A"),
-  createData("premiere", "B"),
-  createData("terminal", "C"),
-];
+import AffectProfesseur from "./AffectProfesseur";
+import { EnseignerTable } from "../../../../../graphql/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,8 +35,29 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const TableEnseigner: React.FC = () => {
+export interface TableEnseignerProps {
+  data: EnseignerTable[];
+}
+
+const TableEnseigner: React.FC<TableEnseignerProps> = ({ data }) => {
   const classes = useStyles();
+  const theme = useTheme();
+
+  const status = (status: boolean) => (
+    <div
+      style={{
+        backgroundColor: status ? theme.palette.success.light : grey["A100"],
+        color: "white",
+        maxWidth: theme.spacing(20),
+        minWidth: theme.spacing(20),
+        padding: theme.spacing(1),
+        borderRadius: theme.spacing(1),
+      }}
+    >
+      {status ? "Tenu par un professeur" : "Pas de professeur"}
+    </div>
+  );
+
   return (
     <Table
       className={classes.table}
@@ -52,48 +67,50 @@ const TableEnseigner: React.FC = () => {
     >
       <TableHead>
         <TableRow>
-          <TableCell padding="checkbox" scope="row">
-            <Checkbox checked={false} inputProps={{ "aria-labelledby": "0" }} />
-          </TableCell>
-
-          <TableCell scope="row" align="left" className={classes.columText}>
+          <TableCell scope="row" className={classes.columText}>
             Classe
           </TableCell>
 
-          <TableCell scope="row" align="center" className={classes.columText}>
+          <TableCell scope="row" align="left" className={classes.columText}>
             Section
+          </TableCell>
+
+          <TableCell scope="row" align="center" className={classes.columText}>
+            Status
+          </TableCell>
+
+          <TableCell scope="row" align="center" className={classes.columText}>
+            Professeur
           </TableCell>
         </TableRow>
       </TableHead>
 
       <TableBody>
-        {rows.map((row, index) => {
-          const isItemSelected = false;
-          const labelId = `enhanced-table-checkbox-${index}`;
-
+        {data.map((row) => {
           return (
             <TableRow
               hover
-              onClick={(event) => {}}
+              onClick={() => {}}
               role="checkbox"
-              aria-checked={isItemSelected}
               tabIndex={-1}
-              key={row.classe}
-              selected={isItemSelected}
+              key={`${row.classe.id}${row.section.id}`}
             >
-              <TableCell padding="checkbox">
-                <Checkbox
-                  checked={isItemSelected}
-                  inputProps={{ "aria-labelledby": labelId }}
-                />
-              </TableCell>
+              <TableCell padding="checkbox">{row.classe.designation}</TableCell>
 
               <TableCell scope="row" align="left">
-                {row.classe}
+                {row.section.designation}
+              </TableCell>
+
+              <TableCell
+                scope="row"
+                align="center"
+                style={{ justifyContent: "center", display: "flex" }}
+              >
+                {status(row.status)}
               </TableCell>
 
               <TableCell scope="row" align="center">
-                {row.section}
+                <AffectProfesseur />
               </TableCell>
             </TableRow>
           );
