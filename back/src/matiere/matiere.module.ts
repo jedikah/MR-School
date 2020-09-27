@@ -10,6 +10,7 @@ import { CoefficientModule } from '../coefficient/coefficient.module';
 import { MatiereUtils } from './matiere.utils';
 import { ClasseSectionModule } from '../classe-section/classe-section.module';
 import { EnseignerModule } from '../enseigner/enseigner.module';
+import { ResponsableModule } from '../responsable/responsable.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { EnseignerModule } from '../enseigner/enseigner.module';
     ClasseModule,
     ClasseSectionModule,
     EnseignerModule,
+    ResponsableModule,
     forwardRef(() => CoefficientModule),
   ],
   providers: [

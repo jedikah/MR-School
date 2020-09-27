@@ -23,5 +23,6 @@ import { resolverField } from './resolver-fields';
     FonctionService,
     AvoirService,
   ],
+  exports: [ResponsableService],
 })
 export class ResponsableModule {}

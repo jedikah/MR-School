@@ -7,6 +7,9 @@ import { ClasseSectionService } from '../../classe-section/classe-section.servic
 import { ClasseSection } from '../../classe-section/classe-section.entity';
 import { SectionService } from '../../section/section.service';
 import { EnseignerService } from '../../enseigner/enseigner.service';
+import { Enseigner } from '../../enseigner/enseigner.entity';
+import { ResponsableService } from '../../responsable/responsable.service';
+import { Utilisateur } from '../../utilisateur/utilisateur.entity';
 
 @Resolver(() => Matiere)
 export class EnseignerTableFieldResolver {
@@ -15,6 +18,7 @@ export class EnseignerTableFieldResolver {
     private sectionService: SectionService,
     private classeSectionService: ClasseSectionService,
     private enseignerService: EnseignerService,
+    private responsableService: ResponsableService,
   ) {}
 
   @ResolveField(() => [EnseignerTable])
@@ -25,19 +29,23 @@ export class EnseignerTableFieldResolver {
       classeSection.map(async cs => {
         const classe = await this.classeService.findOneClasseById(cs.idClasse);
         const section = await this.sectionService.findOneSection(cs.idSection);
-        const status = (await this.enseignerService.isClasseSectionIn(
+        const enseigners: Enseigner[] = await this.enseignerService.isClasseSectionIn(
           classe,
           section,
           matiere,
-        ))
-          ? true
-          : false;
+        );
 
         return {
           classe,
           section,
-          professeur: [],
-          status,
+          professeur: await Promise.all(
+            enseigners.map(async ens => {
+              const utilisateur = new Utilisateur();
+              utilisateur.id = ens.professeurId;
+              return this.responsableService.getResponsableById(utilisateur);
+            }),
+          ),
+          status: enseigners.length > 0,
         } as EnseignerTable;
       }),
     );

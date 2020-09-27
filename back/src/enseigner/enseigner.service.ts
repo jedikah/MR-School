@@ -17,8 +17,8 @@ export class EnseignerService {
     classe: Classe,
     section: Section,
     matiere: Matiere,
-  ): Promise<Enseigner> {
-    return this.enseignerRepository.findOne({
+  ): Promise<Enseigner[]> {
+    return this.enseignerRepository.find({
       where: {
         classe,
         section,
