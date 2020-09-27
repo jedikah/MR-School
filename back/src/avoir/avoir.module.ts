@@ -8,5 +8,6 @@ import { avoirResolvers } from './resolvers';
 @Module({
   imports: [TypeOrmModule.forFeature([Avoir])],
   providers: [Avoir, AvoirService, ...avoirResolvers],
+  exports: [AvoirService],
 })
 export class AvoirModule {}

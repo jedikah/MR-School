@@ -17,4 +17,14 @@ export class AvoirService {
   getResponsableFonctions(responsable: Responsable): Promise<Avoir[]> {
     return this.avoirRepository.find({ where: [{ responsable }] });
   }
+
+  getProfesseurs(): Promise<Avoir[]> {
+    return this.avoirRepository
+      .createQueryBuilder('avoir')
+      .innerJoin('avoir.fonction', 'fonction')
+      .where('fonction.designation = :designation', {
+        designation: 'professeur',
+      })
+      .getMany();
+  }
 }

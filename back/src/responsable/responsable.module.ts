@@ -10,10 +10,12 @@ import { UtilisateurService } from '../utilisateur/utilisateur.service';
 import { FonctionService } from '../fonction/fonction.service';
 import { AvoirService } from '../avoir/avoir.service';
 import { resolverField } from './resolver-fields';
+import { UtilisateurModule } from '../utilisateur/utilisateur.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Utilisateur, Responsable, Fonction, Avoir]),
+    UtilisateurModule,
   ],
   providers: [
     ResponsableService,

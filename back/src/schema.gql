@@ -230,6 +230,7 @@ type Query {
   getAllNiveaux: [Niveau!]!
   helloMrSchool: String!
   matieres: [Matiere!]!
+  professeurs: [Responsable!]!
   WhoAmI: Utilisateur!
 }
 
