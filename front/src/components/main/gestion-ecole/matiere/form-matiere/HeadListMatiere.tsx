@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
-import SearchMatiere from "./SearchMatiere";
+import SearchInput from "../../../../public-component/SearchInput";
 import {
   MatiereState,
   MatiereDispatch,
@@ -46,7 +46,7 @@ const HeadListMatiere: React.FC<HeadListMatiere> = ({
           )}
         </IconButton>
       </Box>
-      <SearchMatiere
+      <SearchInput
         input={matiereState.searchMatieres}
         onChange={(value) =>
           matiereDispatch({ type: "HANDLE_CHANGE_SEARCH_MATIERES", value })

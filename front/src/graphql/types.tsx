@@ -348,6 +348,7 @@ export type Query = {
   getAllNiveaux: Array<Niveau>;
   helloMrSchool: Scalars['String'];
   matieres: Array<Matiere>;
+  professeurs: Array<Responsable>;
   WhoAmI: Utilisateur;
 };
 

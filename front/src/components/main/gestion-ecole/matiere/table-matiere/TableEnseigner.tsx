@@ -16,6 +16,7 @@ import { grey } from "@material-ui/core/colors";
 
 import AffectProfesseur from "./AffectProfesseur";
 import { EnseignerTable } from "../../../../../graphql/types";
+import { useProfesseurs } from "../../../../../graphql/responsable/professeurs/professeurs.service";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,6 +40,7 @@ export interface TableEnseignerProps {
 }
 
 const TableEnseigner: React.FC<TableEnseignerProps> = ({ data }) => {
+  useProfesseurs();
   const classes = useStyles();
   const theme = useTheme();
 
@@ -109,7 +111,7 @@ const TableEnseigner: React.FC<TableEnseignerProps> = ({ data }) => {
               </TableCell>
 
               <TableCell scope="row" align="center">
-                <AffectProfesseur />
+                <AffectProfesseur classe={row.classe} section={row.section} />
               </TableCell>
             </TableRow>
           );

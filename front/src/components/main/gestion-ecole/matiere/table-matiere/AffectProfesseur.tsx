@@ -4,13 +4,40 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { useProfesseurs } from "../../../../../graphql/responsable/professeurs/professeurs.service";
+import {
+  FormControl,
+  FormLabel,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Box,
+} from "@material-ui/core";
 
-const useStyles = makeStyles((theme: Theme) => createStyles({}));
+import SearchInput from "../../../../public-component/SearchInput";
+import { Classe, Section } from "../../../../../graphql/types";
 
-const AffectProfesseur: React.FC = () => {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    formControl: {
+      margin: theme.spacing(3),
+    },
+  })
+);
+
+export interface AffectProfesseurProps {
+  classe: Classe;
+  section: Section;
+}
+
+const AffectProfesseur: React.FC<AffectProfesseurProps> = ({
+  classe,
+  section,
+}) => {
+  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const { professeurs } = useProfesseurs();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,13 +59,34 @@ const AffectProfesseur: React.FC = () => {
         onClose={handleClose}
         aria-labelledby="max-width-dialog-title"
       >
-        <DialogTitle id="max-width-dialog-title">Professeurs</DialogTitle>
+        <DialogTitle id="max-width-dialog-title">
+          {`Gerer les professeurs en charge de la classe ${classe.designation} ${section.designation}`}
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Gerer les professeurs en charge de la classe + section
-          </DialogContentText>
+          <Box display="flex" justifyContent="center">
+            <SearchInput input="" onChange={() => {}} />
+          </Box>
+
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">Assigner</FormLabel>
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox checked={false} onChange={() => {}} />}
+                label="Gilad Gray"
+              />
+
+              <FormControlLabel
+                control={<Checkbox checked={false} onChange={() => {}} />}
+                label="Gilad Green"
+              />
+            </FormGroup>
+          </FormControl>
         </DialogContent>
+
         <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Enregistrer
+          </Button>
           <Button onClick={handleClose} color="primary">
             Annuler
           </Button>

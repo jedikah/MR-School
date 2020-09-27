@@ -21,12 +21,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface SearchMatiereProps {
+interface SearchInputProps {
   input: string;
   onChange: (value: string) => void;
 }
 
-const SearchMatiere: React.FC<SearchMatiereProps> = ({ input, onChange }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ input, onChange }) => {
   const classes = useStyles();
 
   return (
@@ -46,4 +46,4 @@ const SearchMatiere: React.FC<SearchMatiereProps> = ({ input, onChange }) => {
   );
 };
 
-export default SearchMatiere;
+export default SearchInput;

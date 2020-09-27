@@ -44,7 +44,9 @@ const SubmitCoefficient: React.FC = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{ opacity: matiereState.tableMatiere === "coefficient" ? 1 : 0 }}
+    >
       <IconButton
         disabled={disabled()}
         aria-label="delete"
