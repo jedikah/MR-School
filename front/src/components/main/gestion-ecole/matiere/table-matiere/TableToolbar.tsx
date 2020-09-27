@@ -55,7 +55,7 @@ const TableToolbar = (props: TableToolbarProps) => {
       })}
     >
       <Typography color="inherit" variant="subtitle1" component="div">
-        {designationMatiere || "???"}: {numSelected} classe
+        {designationMatiere.toUpperCase() || "???"}: {numSelected} classe
         {plurial} selectionnee{plurial}
       </Typography>
 

@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 
 import SearchInput from "../../../../public-component/SearchInput";
+import AffectProfesseurTransfer from "./AffectProfesseurTransfer";
 import { Classe, Section } from "../../../../../graphql/types";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -67,20 +68,7 @@ const AffectProfesseur: React.FC<AffectProfesseurProps> = ({
             <SearchInput input="" onChange={() => {}} />
           </Box>
 
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Assigner</FormLabel>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox checked={false} onChange={() => {}} />}
-                label="Gilad Gray"
-              />
-
-              <FormControlLabel
-                control={<Checkbox checked={false} onChange={() => {}} />}
-                label="Gilad Green"
-              />
-            </FormGroup>
-          </FormControl>
+          <AffectProfesseurTransfer />
         </DialogContent>
 
         <DialogActions>
