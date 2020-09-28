@@ -25,6 +25,7 @@ const AffectProfesseur: React.FC<AffectProfesseurProps> = ({
   affected,
 }) => {
   const { professeurs } = useProfesseurs();
+  const [search, setSearch] = React.useState("");
   const checkedState = React.useState<number[]>([]);
   const leftState = React.useState<number[]>([]);
   const rightState = React.useState<number[]>([]);
@@ -61,7 +62,10 @@ const AffectProfesseur: React.FC<AffectProfesseurProps> = ({
         </DialogTitle>
         <DialogContent>
           <Box display="flex" justifyContent="center">
-            <SearchInput input="" onChange={() => {}} />
+            <SearchInput
+              input={search}
+              onChange={(value) => setSearch(value)}
+            />
           </Box>
 
           <AffectProfesseurTransfer
@@ -70,6 +74,7 @@ const AffectProfesseur: React.FC<AffectProfesseurProps> = ({
             checkedState={checkedState}
             leftState={leftState}
             rightState={rightState}
+            search={search}
           />
         </DialogContent>
 

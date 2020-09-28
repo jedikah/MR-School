@@ -10,6 +10,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import FlipMove from "react-flip-move";
+
 import { Responsable } from "../../../../../graphql/types";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -69,7 +71,14 @@ function extractLeftRight(
   };
 }
 
+function filterProfesseur(search: string, profs: Responsable[]) {
+  return profs.filter((p) =>
+    `${p.utilisateur.nom} ${p.utilisateur.prenom}`.includes(search)
+  );
+}
+
 export interface AffectProfesseurTransfer {
+  search: string;
   professeurs: Responsable[];
   affected: Responsable[];
   checkedState: [number[], React.Dispatch<React.SetStateAction<number[]>>];
@@ -83,6 +92,7 @@ const AffectProfesseurTransfer: React.FC<AffectProfesseurTransfer> = ({
   checkedState,
   leftState,
   rightState,
+  search,
 }) => {
   const classes = useStyles();
   const [checked, setChecked] = checkedState;
@@ -158,37 +168,41 @@ const AffectProfesseurTransfer: React.FC<AffectProfesseurTransfer> = ({
       />
       <Divider />
       <List className={classes.list} dense component="div" role="list">
-        {items.map((value: number) => {
-          const labelId = `transfer-list-all-item-${value}-label`;
-          const professeur = professeurs.find(
-            (p) => parseInt(p.utilisateur.id) === value
-          );
+        <FlipMove>
+          {filterProfesseur(
+            search,
+            items.map((value: number) => {
+              return professeurs[
+                professeurs.findIndex((p) => p.utilisateur.id === String(value))
+              ];
+            })
+          ).map((p) => {
+            const value = parseInt(p ? p.utilisateur.id : "0");
+            const labelId = `transfer-list-all-item-${value}-label`;
 
-          return (
-            <ListItem
-              key={value}
-              role="listitem"
-              button
-              onClick={handleToggle(value)}
-            >
-              <ListItemIcon>
-                <Checkbox
-                  checked={checked.indexOf(value) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ "aria-labelledby": labelId }}
+            return (
+              <ListItem
+                key={value}
+                role="listitem"
+                button
+                onClick={handleToggle(value)}
+              >
+                <ListItemIcon>
+                  <Checkbox
+                    checked={checked.indexOf(value) !== -1}
+                    tabIndex={-1}
+                    disableRipple
+                    inputProps={{ "aria-labelledby": labelId }}
+                  />
+                </ListItemIcon>
+                <ListItemText
+                  id={labelId}
+                  primary={p && `${p.utilisateur.nom} ${p.utilisateur.prenom}`}
                 />
-              </ListItemIcon>
-              <ListItemText
-                id={labelId}
-                primary={
-                  professeur &&
-                  `${professeur.utilisateur.nom} ${professeur.utilisateur.prenom}`
-                }
-              />
-            </ListItem>
-          );
-        })}
+              </ListItem>
+            );
+          })}
+        </FlipMove>
         <ListItem />
       </List>
     </Card>
