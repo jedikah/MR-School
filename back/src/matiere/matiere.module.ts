@@ -18,7 +18,7 @@ import { AvoirModule } from '../avoir/avoir.module';
     TypeOrmModule.forFeature([Matiere]),
     ClasseModule,
     ClasseSectionModule,
-    EnseignerModule,
+    forwardRef(() => EnseignerModule),
     ResponsableModule,
     AvoirModule,
     forwardRef(() => CoefficientModule),

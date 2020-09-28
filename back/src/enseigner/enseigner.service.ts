@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Enseigner } from './enseigner.entity';
-import { Repository } from 'typeorm';
+import { Repository, DeleteResult } from 'typeorm';
 import { Classe } from '../classe/classe.entity';
 import { Section } from '../section/section.entity';
 import { Matiere } from '../matiere/matiere.entity';
@@ -25,5 +25,19 @@ export class EnseignerService {
         matiere,
       },
     });
+  }
+
+  createOrUpdateEnseigner(enseigner: Enseigner): Promise<Enseigner> {
+    return this.enseignerRepository.save(enseigner);
+  }
+
+  removeEnseigner(ens: Enseigner): Promise<DeleteResult> {
+    return this.enseignerRepository
+      .createQueryBuilder()
+      .delete()
+      .where('matiere = :matiereId', { matiereId: ens.matiereId })
+      .andWhere('classe = :classeId', { classeId: ens.classeId })
+      .andWhere('section = :sectionId', { sectionId: ens.sectionId })
+      .execute();
   }
 }

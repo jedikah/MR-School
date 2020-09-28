@@ -181,6 +181,7 @@ type Mutation {
   removeMatiere(id: Float!): Boolean!
   setCoefficients(idCoefficient: IdCoefficient!): SetCoefficientsResult!
   setCoefficientValue(coefficientInput: CoefficientInput!): Boolean!
+  setEnseigner(setEnseignerInput: SetEnseignerInput!): SetEnseignerResult!
   updateAnneeScolaire(updateAnneeScolaireInput: UpdateAnneeScolaireInput!): AnneeScolaire!
   updateEleve(input: UpdateEleveInput!, matricule: String!): Eleve!
   updateMatiere(updateMatiereInput: UpdateMatiereInput!): Matiere!
@@ -247,6 +248,18 @@ type Section {
 type SetCoefficientsResult {
   coefficientTable: [CoefficientTable!]!
   matiereId: Float!
+}
+
+input SetEnseignerInput {
+  classeId: Float!
+  matiereId: Float!
+  professeurs: [Float!]!
+  sectionId: Float!
+}
+
+type SetEnseignerResult {
+  enseignerTable: [EnseignerTable!]!
+  matiere: Matiere!
 }
 
 type TokenDto {
