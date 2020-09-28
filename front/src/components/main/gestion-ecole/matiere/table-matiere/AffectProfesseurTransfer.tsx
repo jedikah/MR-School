@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
@@ -10,6 +10,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import { Responsable } from "../../../../../graphql/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,11 +44,50 @@ function union(a: number[], b: number[]) {
   return [...a, ...not(b, a)];
 }
 
-export default function AffectProfesseurTransfer() {
+function extractLeftRight(
+  professeurs: Responsable[],
+  affected: Responsable[]
+): {
+  left: number[];
+  right: number[];
+} {
+  const affectedNumber: number[] = affected.map((a) =>
+    parseInt(a.utilisateur.id)
+  );
+  const left: number[] = [];
+  const right: number[] = [];
+
+  professeurs.forEach((p) => {
+    const pNumber = parseInt(p.utilisateur.id);
+    if (affectedNumber.includes(pNumber)) right.push(pNumber);
+    else left.push(pNumber);
+  });
+
+  return {
+    left,
+    right,
+  };
+}
+
+export interface AffectProfesseurTransfer {
+  professeurs: Responsable[];
+  affected: Responsable[];
+}
+
+const AffectProfesseurTransfer: React.FC<AffectProfesseurTransfer> = ({
+  professeurs,
+  affected,
+}) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState<number[]>([]);
-  const [left, setLeft] = React.useState<number[]>([0, 1, 2, 3]);
-  const [right, setRight] = React.useState<number[]>([4, 5, 6, 7]);
+  const [left, setLeft] = React.useState<number[]>([]);
+  const [right, setRight] = React.useState<number[]>([]);
+
+  React.useEffect(() => {
+    const { left, right } = extractLeftRight(professeurs, affected);
+    setLeft(left);
+    setRight(right);
+  }, [professeurs, affected]);
 
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
@@ -107,12 +147,15 @@ export default function AffectProfesseurTransfer() {
           />
         }
         title={title}
-        subheader={`${numberOfChecked(items)}/${items.length} selected`}
+        subheader={`${numberOfChecked(items)}/${items.length} selectionne`}
       />
       <Divider />
       <List className={classes.list} dense component="div" role="list">
         {items.map((value: number) => {
           const labelId = `transfer-list-all-item-${value}-label`;
+          const professeur = professeurs.find(
+            (p) => parseInt(p.utilisateur.id) === value
+          );
 
           return (
             <ListItem
@@ -129,7 +172,13 @@ export default function AffectProfesseurTransfer() {
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`List item ${value + 1}`} />
+              <ListItemText
+                id={labelId}
+                primary={
+                  professeur &&
+                  `${professeur.utilisateur.nom} ${professeur.utilisateur.prenom}`
+                }
+              />
             </ListItem>
           );
         })}
@@ -146,7 +195,7 @@ export default function AffectProfesseurTransfer() {
       alignItems="center"
       className={classes.root}
     >
-      <Grid item>{customList("Choices", left)}</Grid>
+      <Grid item>{customList("Choix", left)}</Grid>
       <Grid item>
         <Grid container direction="column" alignItems="center">
           <Button
@@ -171,7 +220,9 @@ export default function AffectProfesseurTransfer() {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>{customList("Chosen", right)}</Grid>
+      <Grid item>{customList("Choisis", right)}</Grid>
     </Grid>
   );
-}
+};
+
+export default AffectProfesseurTransfer;

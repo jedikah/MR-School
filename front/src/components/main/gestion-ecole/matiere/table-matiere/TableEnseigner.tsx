@@ -111,7 +111,11 @@ const TableEnseigner: React.FC<TableEnseignerProps> = ({ data }) => {
               </TableCell>
 
               <TableCell scope="row" align="center">
-                <AffectProfesseur classe={row.classe} section={row.section} />
+                <AffectProfesseur
+                  classe={row.classe}
+                  section={row.section}
+                  affected={row.professeur}
+                />
               </TableCell>
             </TableRow>
           );
