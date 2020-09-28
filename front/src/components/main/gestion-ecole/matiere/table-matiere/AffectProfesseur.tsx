@@ -5,11 +5,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useProfesseurs } from "../../../../../graphql/responsable/professeurs/professeurs.service";
-import { Box } from "@material-ui/core";
+import { Box, CircularProgress } from "@material-ui/core";
 
 import SearchInput from "../../../../public-component/SearchInput";
 import AffectProfesseurTransfer from "./AffectProfesseurTransfer";
 import { Classe, Section, Responsable } from "../../../../../graphql/types";
+import { useSetEnseigner } from "../../../../../graphql/enseigner/set-enseigner/setEnseigner.service";
+import { useMatieres } from "../../../../../graphql/matiere/matieres/matieres.service";
 
 export interface AffectProfesseurProps {
   classe: Classe;
@@ -22,21 +24,30 @@ const AffectProfesseur: React.FC<AffectProfesseurProps> = ({
   section,
   affected,
 }) => {
-  const [open, setOpen] = React.useState(false);
   const { professeurs } = useProfesseurs();
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const checkedState = React.useState<number[]>([]);
+  const leftState = React.useState<number[]>([]);
+  const rightState = React.useState<number[]>([]);
+  const { matiereState } = useMatieres();
+  const {
+    loadingSetEnseigner,
+    submitSetEnseigner,
+    handleClickOpen,
+    handleClose,
+    open,
+  } = useSetEnseigner({
+    setEnseignerInput: {
+      matiereId: matiereState.updateMatiereVariables.updateMatiereInput.id,
+      classeId: classe.id,
+      sectionId: parseInt(section.id),
+      professeurs: rightState[0],
+    },
+  });
 
   return (
     <React.Fragment>
       <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        0
+        {affected.length}
       </Button>
       <Dialog
         fullWidth={true}
@@ -56,12 +67,19 @@ const AffectProfesseur: React.FC<AffectProfesseurProps> = ({
           <AffectProfesseurTransfer
             professeurs={professeurs}
             affected={affected}
+            checkedState={checkedState}
+            leftState={leftState}
+            rightState={rightState}
           />
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Enregistrer
+          <Button onClick={submitSetEnseigner} color="primary">
+            {loadingSetEnseigner ? (
+              <CircularProgress size={20} />
+            ) : (
+              "Enregistrer"
+            )}
           </Button>
           <Button onClick={handleClose} color="primary">
             Annuler

@@ -199,6 +199,7 @@ export type Mutation = {
   removeMatiere: Scalars['Boolean'];
   setCoefficients: SetCoefficientsResult;
   setCoefficientValue: Scalars['Boolean'];
+  setEnseigner: SetEnseignerResult;
   updateAnneeScolaire: AnneeScolaire;
   updateEleve: Eleve;
   updateMatiere: Matiere;
@@ -278,6 +279,11 @@ export type MutationSetCoefficientsArgs = {
 
 export type MutationSetCoefficientValueArgs = {
   coefficientInput: CoefficientInput;
+};
+
+
+export type MutationSetEnseignerArgs = {
+  setEnseignerInput: SetEnseignerInput;
 };
 
 
@@ -379,6 +385,19 @@ export type SetCoefficientsResult = {
   __typename?: 'SetCoefficientsResult';
   coefficientTable: Array<CoefficientTable>;
   matiereId: Scalars['Float'];
+};
+
+export type SetEnseignerInput = {
+  classeId: Scalars['Float'];
+  matiereId: Scalars['Float'];
+  professeurs: Array<Scalars['Float']>;
+  sectionId: Scalars['Float'];
+};
+
+export type SetEnseignerResult = {
+  __typename?: 'SetEnseignerResult';
+  enseignerTable: Array<EnseignerTable>;
+  matiere: Matiere;
 };
 
 export type TokenDto = {

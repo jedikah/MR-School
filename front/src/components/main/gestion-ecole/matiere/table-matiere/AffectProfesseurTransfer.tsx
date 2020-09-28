@@ -72,21 +72,28 @@ function extractLeftRight(
 export interface AffectProfesseurTransfer {
   professeurs: Responsable[];
   affected: Responsable[];
+  checkedState: [number[], React.Dispatch<React.SetStateAction<number[]>>];
+  leftState: [number[], React.Dispatch<React.SetStateAction<number[]>>];
+  rightState: [number[], React.Dispatch<React.SetStateAction<number[]>>];
 }
 
 const AffectProfesseurTransfer: React.FC<AffectProfesseurTransfer> = ({
   professeurs,
   affected,
+  checkedState,
+  leftState,
+  rightState,
 }) => {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState<number[]>([]);
-  const [left, setLeft] = React.useState<number[]>([]);
-  const [right, setRight] = React.useState<number[]>([]);
+  const [checked, setChecked] = checkedState;
+  const [left, setLeft] = leftState;
+  const [right, setRight] = rightState;
 
   React.useEffect(() => {
     const { left, right } = extractLeftRight(professeurs, affected);
     setLeft(left);
     setRight(right);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [professeurs, affected]);
 
   const leftChecked = intersection(checked, left);
