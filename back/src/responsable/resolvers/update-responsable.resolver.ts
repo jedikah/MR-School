@@ -45,34 +45,37 @@ export class UpdateResponsableResolver {
         setResponsableFonction.some(f => f.id === fonction.id) ? false : true,
       );
 
-      setResponsableFonction.forEach(async fonction => {
-        const isExist = await this.avoirService.checkAvoir(
-          fonction,
-          responsable,
-        );
+      await Promise.all(
+        unSetResponsableFonction.map(async fonction => {
+          const isExist = await this.avoirService.checkAvoir(
+            fonction,
+            responsable,
+          );
 
-        if (!isExist) {
-          const avoir = new Avoir();
-          avoir.fonction = fonction;
-          avoir.responsable = { utilisateur } as Responsable;
+          if (isExist)
+            await this.avoirService.deletAvoir(fonction, responsable);
+        }),
+      );
 
-          await this.avoirService.createAvoir(avoir);
-        }
-      });
+      await Promise.all(
+        setResponsableFonction.map(async fonction => {
+          const isExist = await this.avoirService.checkAvoir(
+            fonction,
+            responsable,
+          );
 
-      unSetResponsableFonction.forEach(async fonction => {
-        const isExist = await this.avoirService.checkAvoir(
-          fonction,
-          responsable,
-        );
+          if (!isExist) {
+            const avoir = new Avoir();
+            avoir.fonction = fonction;
+            avoir.responsable = { utilisateur } as Responsable;
 
-        if (isExist) await this.avoirService.deletAvoir(fonction, responsable);
-      });
+            await this.avoirService.createAvoir(avoir);
+          }
+        }),
+      );
     }
 
-    console.log({ responsable });
-
-    // misy retard ny retoure ny fonctions[] am responsable
+    responsable.fonctions = input.fonctions;
 
     return responsable;
   }

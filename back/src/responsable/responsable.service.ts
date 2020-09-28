@@ -49,4 +49,8 @@ export class ResponsableService {
       },
     });
   }
+
+  updateResponsable(newResponsable: Responsable): Promise<Responsable> {
+    return this.responsableRepository.save(newResponsable);
+  }
 }
