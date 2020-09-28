@@ -88,6 +88,8 @@ const TableEnseigner: React.FC<TableEnseignerProps> = ({ data }) => {
 
       <TableBody>
         {data.map((row) => {
+          const isSelected = row.professeur.length > 0;
+
           return (
             <TableRow
               hover
@@ -95,6 +97,7 @@ const TableEnseigner: React.FC<TableEnseignerProps> = ({ data }) => {
               role="checkbox"
               tabIndex={-1}
               key={`${row.classe.id}${row.section.id}`}
+              selected={isSelected}
             >
               <TableCell padding="checkbox">{row.classe.designation}</TableCell>
 

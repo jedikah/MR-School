@@ -55,17 +55,18 @@ export default function TableMatiere() {
   };
 
   const nbClasseToDisplay = () => {
+    if (!matieresData) return 0;
+    const matiere = matieresData.matieres.find(
+      (m) =>
+        parseInt(m.id) ===
+        matiereState.updateMatiereVariables.updateMatiereInput.id
+    );
+    if (!matiere) return 0;
     if (matiereState.tableMatiere === "coefficient") {
-      if (!matieresData) return 0;
-      const matiere = matieresData.matieres.find(
-        (m) =>
-          parseInt(m.id) ===
-          matiereState.updateMatiereVariables.updateMatiereInput.id
-      );
-      if (!matiere) return 0;
       return matiere.coefficientTable.filter((coe) => coe.status).length;
     } else {
-      return 0;
+      return matiere.enseignerTable.filter((ens) => ens.professeur.length > 0)
+        .length;
     }
   };
 
